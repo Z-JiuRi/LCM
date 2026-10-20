@@ -1,0 +1,13 @@
+paper_id	repository	destination	branch	evidence_type	license_status
+P07	jwentong/WirelessAgent_R1	P07_WirelessAgent_R1	main	Official paper repository linked from preprint	GitHub has no SPDX license detected
+P08	jwentong/WirelessAgent-R2	P08_WirelessAgent_R2	main	Official WirelessAgent++ repository; README describes method and benchmark	MIT
+P10	wineslab/agentran	P10_AgentRAN	main	Official paper repository; README cites AgentRAN paper	MIT
+P10	wineslab/oai-release-agentRAN	P10_AgentRAN_OAI	dl-lua-scheduler	Companion OAI fork named by official AgentRAN README	GitHub API reports NOASSERTION; README refers to upstream OAI Public v1.1
+P18	haoyuwang99/AgentSpec	P18_AgentSpec	master	Paper project repository linked from preprint	GitHub has no SPDX license detected
+P21	SyNSec-den/INVARAN	P21_InvaRAN	main	Official USENIX artifact linked from paper page	GitHub has no SPDX license detected
+P22	sydney222/Python_CsiNet	P22_CsiNet_community	master	Public implementation titled for CsiNet; maintainer relation to authors unverified	GitHub has no SPDX license detected
+P29	wineslab/deepbeam	P29_DeepBeam	master	Official paper code and dataset repository; README names DeepBeam paper	MIT
+P30	DeepSense6G/Multi-Modal-V2V-Beam-Prediction-Challenge-2023-Baseline	P30_DeepSense_V2V_baseline	main	Official DeepSense6G challenge baseline, related dataset code rather than original dataset-paper code	GitHub has no SPDX license detected
+P30	ITU-AI-ML-in-5G-Challenge/DeepSense6G_TII	P30_DeepSense_TII_challenge	main	Public ITU AI/ML in 5G challenge solution using DeepSense6G	MIT
+P33	IIP-Group/neural-positioning-transformer	P33_Neural_positioning_transformer	main	Author-group repository explicitly linked to the spatial/temporal generalization paper	GitHub has no SPDX license detected
+P34	G-ALI007/DeepRx-OFDM-PyTorch	P34_DeepRx_community	main	Public third-party PyTorch implementation; not linked as the paper authors’ artifact	GitHub has no SPDX license detected

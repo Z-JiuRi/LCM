@@ -1,0 +1,13 @@
+STOP: asu_campus_3p5 <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)>
+{
+  "probed_scenes": 30,
+  "required_scenes": 36,
+  "complete_inventory": false,
+  "archive_bytes_known": 1027407069,
+  "selected_compressed_bytes_known": 660548,
+  "selected_uncompressed_bytes_known": 6112454,
+  "full_uncompressed_bytes_known": 0,
+  "full_uncompressed_inventory_complete": false,
+  "local_preview_bytes": 1652433
+}
+Report: /Users/z-jiuri/workspace/LCM/scene-studio/data/deepmimo-scenes/source/city-4km-official/download-plan.json

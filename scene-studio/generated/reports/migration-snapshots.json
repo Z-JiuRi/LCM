@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-26",
+  "scope": "Scene snapshots and test results retained during consolidation. Code relocation tracked separately.",
+  "files": [
+    {
+      "path": "web/public/scenes/verified-street.json",
+      "sha256": "614d4c5180dac4cbb9be54f8385540273869c6a032c422cd0c22139d1a4d3549"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/assembled-city.scene.json.gz",
+      "sha256": "5bc8392d2939a12635bd2a0843f2d2a89e3fd5dc4d4ff2567dc3529410e3fb95"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/assembled-city-manifest.json",
+      "sha256": "eacffd185fc74a77933ae2c0580b60dd9d2c7c6a7aeb8184e297883ced3769b1"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/assembled-city.view.json",
+      "sha256": "5faa622f381020389172ed9f50507ac6e5b5bc3f7af5822a13e8d98761e87314"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/city-topview.png",
+      "sha256": "2db67de5176e8b8c5b2a20fe0250c786148c4d93bc4ac0e18490de4ae8a2fbef"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/city-topview-clean.png",
+      "sha256": "3493d038c4da8e85658fd07b524fbf1f7d59a4ea8a7abdec81e28e4eda8cf4c4"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-1km/city-topview-preview.png",
+      "sha256": "65aa5ab750cfb17a9d8c8cb7764114cefcbe9c3205a5e83cce720a94e90acbc4"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/assembled-city.scene.json.gz",
+      "sha256": "0197091a89ba33944e34abd7429e2eca25b63353e2cce13c6afac9549196d49f"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/assembled-city-manifest.json",
+      "sha256": "c62a76adfec159f6792336610e303f58ac1aa9b5874d4f6ee7be321a8fb65f0b"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/assembled-city.view.json",
+      "sha256": "70b4bdaebb74e73ff5876acb3b56a7fa4171d037db278403846306225d2acbf0"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/city-topview.png",
+      "sha256": "14264ab8517573f6d20a90a9c7e8a626a3a8af53a4ca4cea5eb6c808c988ff47"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/city-topview-clean.png",
+      "sha256": "23abfc1290a34cacdaa4a59a889d0dc2596c15fc2600505f754da8d54462c4ae"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-2km/city-topview-preview.png",
+      "sha256": "2140706c7e6970c346a92f99f37e477669c034d039d590aeb6b03c30a0ed02f4"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/assembled-city.scene.json.gz",
+      "sha256": "6dc4b4d278c0e971e41d8323292fc4e2ca843f21f698cafd37df9b31020a4cc8"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/assembled-city-manifest.json",
+      "sha256": "5f0b26f1ad1ef45381b8b6d1dd592b3a27f2848f2a15f0d69520614bdc78540b"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/assembled-city.view.json",
+      "sha256": "cfefb7e5e9517dc2fee525591585766f2c594549868194069197ab08f7712bde"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-topview.png",
+      "sha256": "f3ed6dd566a352c4ac3072dc739fb241695d40d0c9ae089b84566d0e9d8f081f"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-topview-clean.png",
+      "sha256": "76df7b32cadb3d4529c3a5fbd0dd5b20926f5363b8d9904e91b7b7bb86efc2af"
+    },
+    {
+      "path": "data/deepmimo-scenes/city-design/city-topview-preview.png",
+      "sha256": "37038ccab3ebdf5efc3bdbe37fe1f72cfa51f101de6d12f693983567b9f71be5"
+    },
+    {
+      "path": "data/scenes/test-4buildings/samples.npz",
+      "sha256": "0eb510220c4bcaa32baa8bbfbbe33685af17b826a64bfdafc526c3f87e81dcea"
+    },
+    {
+      "path": "data/scenes/test-4buildings/results.json",
+      "sha256": "fe33da2645bad0d855e37f4ca1693ad2749b5af9a93bf4e3537cbb3b18d2a82d"
+    }
+  ]
+}

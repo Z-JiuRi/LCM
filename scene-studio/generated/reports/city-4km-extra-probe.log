@@ -1,0 +1,13 @@
+STOP: city_19_oklahoma_3p5 File is not a zip file
+{
+  "probed_scenes": 0,
+  "required_scenes": 5,
+  "complete_inventory": false,
+  "archive_bytes_known": 0,
+  "selected_compressed_bytes_known": 0,
+  "selected_uncompressed_bytes_known": 0,
+  "full_uncompressed_bytes_known": 0,
+  "full_uncompressed_inventory_complete": false,
+  "local_preview_bytes": 1675919
+}
+Report: /Users/z-jiuri/workspace/LCM/scene-studio/data/deepmimo-scenes/source/city-4km-official/download-plan.json

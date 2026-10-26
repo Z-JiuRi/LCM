@@ -1,0 +1,40 @@
+boston5g_3p5 probed ZIP 35525650 geometry packed/unpacked 22612 161110
+city_0_newyork_3p5 probed ZIP 33510091 geometry packed/unpacked 24916 233040
+city_100_bogotá_3p5 probed ZIP 81531439 geometry packed/unpacked 8049 48497
+city_102_huanggang_3p5 probed ZIP 94684177 geometry packed/unpacked 3700 19339
+city_10_austin_3p5 probed ZIP 59066855 geometry packed/unpacked 16412 150747
+city_11_santaclara_3p5 probed ZIP 56349085 geometry packed/unpacked 19732 179057
+city_14_charlotte_3p5 probed ZIP 79471982 geometry packed/unpacked 17314 150569
+city_15_indianapolis_3p5 probed ZIP 67525985 geometry packed/unpacked 12669 115745
+city_17_seattle_3p5 probed ZIP 39283780 geometry packed/unpacked 14174 140313
+city_18_denver_3p5 probed ZIP 51342134 geometry packed/unpacked 40693 417652
+city_1_losangeles_3p5 probed ZIP 33753034 geometry packed/unpacked 17302 148267
+city_21_taito_city_3p5 probed ZIP 1159359 geometry packed/unpacked 67381 682987
+city_24_cairo_3p5 probed ZIP 4567774 geometry packed/unpacked 20537 184800
+city_27_rio_de_janeiro_3p5 probed ZIP 2353129 geometry packed/unpacked 20429 179119
+city_28_mumbai_3p5 probed ZIP 2926666 geometry packed/unpacked 16381 146409
+city_2_chicago_3p5 probed ZIP 14592820 geometry packed/unpacked 9562 87843
+city_30_singapore_3p5 probed ZIP 3293113 geometry packed/unpacked 33615 342706
+city_38_toronto_3p5 probed ZIP 5092679 geometry packed/unpacked 37353 344117
+city_41_kyoto_3p5 probed ZIP 3342885 geometry packed/unpacked 38810 369245
+city_43_cape_town_3p5 probed ZIP 2919052 geometry packed/unpacked 17525 156264
+city_50_edinburgh_3p5 probed ZIP 898296 geometry packed/unpacked 40496 421444
+city_53_sankt-peterburg_3p5 probed ZIP 638766 geometry packed/unpacked 21052 195430
+city_55_madrid_3p5 probed ZIP 2885324 geometry packed/unpacked 26806 249519
+city_56_montreal_3p5 probed ZIP 1067495 geometry packed/unpacked 30062 296210
+city_69_warszawa_3p5 probed ZIP 2033514 geometry packed/unpacked 31505 314219
+city_6_miami_3p5 probed ZIP 46315297 geometry packed/unpacked 15660 139205
+city_8_dallas_3p5 probed ZIP 58561889 geometry packed/unpacked 12912 106973
+city_92_sãopaulo_3p5 probed ZIP 73224004 geometry packed/unpacked 9492 54143
+city_98_guangzhou_3p5 probed ZIP 87347045 geometry packed/unpacked 6502 38680
+city_99_shanghai_3p5 probed ZIP 82143750 geometry packed/unpacked 6895 38805
+{
+  "probed_scenes": 30,
+  "required_scenes": 30,
+  "complete_inventory": true,
+  "archive_bytes_known": 1027407069,
+  "selected_compressed_bytes_known": 660548,
+  "selected_uncompressed_bytes_known": 6112454,
+  "local_preview_bytes": 0
+}
+Report: /Users/z-jiuri/workspace/LCM/scene-studio/data/deepmimo-scenes/source/city-1km-official/download-plan.json

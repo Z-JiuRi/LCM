@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-26",
+  "seed": 26102601,
+  "units": "m",
+  "extent_m": [
+    0,
+    0,
+    1000,
+    1000
+  ],
+  "coordinate_system": "local Cartesian; X east, Y north, Z up",
+  "status": "Synthetic city design from preview-derived geometry, not validated RT.",
+  "reference": "../README.md; original 4 km city retained unchanged",
+  "layout": "Independent metric road/park/parcel design; source buildings are not scaled.",
+  "transform": "world_xyz = Rz(rotation_z_deg) @ asset_local_xyz + position_m; no scaling",
+  "source_snapshot_date": "2026-10-25",
+  "source_license_status": "Original terms apply; full reuse/redistribution audit pending.",
+  "synthetic_components": [
+    "roads",
+    "parks",
+    "ground",
+    "parcels",
+    "instance placement"
+  ],
+  "excluded_components": [
+    "source terrain",
+    "source materials",
+    "TX/RX",
+    "channels"
+  ],
+  "asset_count": 435,
+  "instance_count": 665,
+  "source_usage": {
+    "city_1_losangeles_3p5": 58,
+    "city_18_denver_3p5": 65,
+    "city_38_toronto_3p5": 19,
+    "city_11_santaclara_3p5": 19,
+    "city_21_taito_city_3p5": 44,
+    "city_14_charlotte_3p5": 10,
+    "city_41_kyoto_3p5": 12,
+    "city_6_miami_3p5": 12,
+    "city_8_dallas_3p5": 12,
+    "city_0_newyork_3p5": 39,
+    "city_43_cape_town_3p5": 15,
+    "city_55_madrid_3p5": 41,
+    "city_100_bogotá_3p5": 43,
+    "city_27_rio_de_janeiro_3p5": 31,
+    "city_28_mumbai_3p5": 31,
+    "city_24_cairo_3p5": 13,
+    "city_98_guangzhou_3p5": 32,
+    "city_10_austin_3p5": 62,
+    "city_2_chicago_3p5": 3,
+    "city_50_edinburgh_3p5": 6,
+    "city_56_montreal_3p5": 3,
+    "city_15_indianapolis_3p5": 28,
+    "city_69_warszawa_3p5": 31,
+    "city_53_sankt-peterburg_3p5": 8,
+    "city_17_seattle_3p5": 2,
+    "city_102_huanggang_3p5": 5,
+    "city_99_shanghai_3p5": 6,
+    "city_30_singapore_3p5": 2,
+    "city_92_sãopaulo_3p5": 2,
+    "boston5g_3p5": 11
+  },
+  "placement_counts": {
+    "source-neighborhood": 404,
+    "recomposed-infill": 250,
+    "preserved-source-group": 11
+  },
+  "rejected_source_objects": {
+    "size_gate": 146,
+    "duplicate_source_object": 1449,
+    "non_single_valid_footprint": 18
+  },
+  "preserved_groups": [
+    {
+      "source": "boston5g_3p5",
+      "source_center_m": [
+        154.31565856933594,
+        37.867835998535156
+      ],
+      "target_center_m": [
+        570,
+        550
+      ],
+      "rotation_z_deg": -12,
+      "overlapping_source_objects_excluded": [
+        52,
+        20,
+        41,
+        16,
+        25,
+        50,
+        65,
+        34,
+        55,
+        35,
+        38
+      ],
+      "selection_note": "Whole-building compact subset within target window [400,395,750,705] m; not the full Boston group.",
+      "retained_object_count": 11
+    }
+  ],
+  "validation": {
+    "building_overlap_pairs": 0,
+    "outside_parcel_buildings": 0,
+    "buildings_intersecting_road_carriageways": 0,
+    "buildings_intersecting_parks": 0,
+    "building_footprint_area_km2": 0.1678,
+    "road_carriageway_union_km2": 0.1808,
+    "large_park_area_excluding_carriageways_km2": 0.0806,
+    "role_areas": {
+      "lowrise": {
+        "parcel_area_km2": 0.04746004509836687,
+        "building_area_km2": 0.011258701989508802,
+        "parcels": 5
+      },
+      "mixed": {
+        "parcel_area_km2": 0.09904087112553545,
+        "building_area_km2": 0.024027803568907498,
+        "parcels": 11
+      },
+      "midrise": {
+        "parcel_area_km2": 0.2522773367376998,
+        "building_area_km2": 0.055730108472803276,
+        "parcels": 27
+      },
+      "fine": {
+        "parcel_area_km2": 0.08599270853342068,
+        "building_area_km2": 0.023968897884135493,
+        "parcels": 12
+      },
+      "towers": {
+        "parcel_area_km2": 0.07517947179869566,
+        "building_area_km2": 0.01775314780957736,
+        "parcels": 5
+      },
+      "core": {
+        "parcel_area_km2": 0.07653425326511423,
+        "building_area_km2": 0.03504532264877247,
+        "parcels": 1
+      }
+    },
+    "scope": "2D complete-footprint placement and overlap checks only; no RT, watertight mesh, road routing or electromagnetic validation.",
+    "outside_city_buildings": 0
+  }
+}

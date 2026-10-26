@@ -1,0 +1,66 @@
+{
+  "source_count": 36,
+  "downloaded_bytes": 7073019,
+  "cities": [
+    {
+      "city_size_m": 1000,
+      "matched_assets": 435,
+      "instances": 665,
+      "source_count": 30,
+      "material_count": 30,
+      "max_footprint_area_difference_m2": 0.08131621539610745,
+      "layout_instances_unchanged": true,
+      "synthetic_layout_unchanged": true,
+      "validation": {
+        "instance_count": 665,
+        "building_overlap_pairs": 0,
+        "outside_city_buildings": 0,
+        "outside_parcel_buildings": 0,
+        "buildings_intersecting_road_carriageways": 0,
+        "buildings_intersecting_parks": 0,
+        "scope": "Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification."
+      },
+      "scope": "Geometry matching and source face-material association; not source license approval, RT material conversion or new channel calculation."
+    },
+    {
+      "city_size_m": 2000,
+      "matched_assets": 890,
+      "instances": 2306,
+      "source_count": 32,
+      "material_count": 32,
+      "max_footprint_area_difference_m2": 0.11009529901212206,
+      "layout_instances_unchanged": true,
+      "synthetic_layout_unchanged": true,
+      "validation": {
+        "instance_count": 2306,
+        "building_overlap_pairs": 0,
+        "outside_city_buildings": 0,
+        "outside_parcel_buildings": 0,
+        "buildings_intersecting_road_carriageways": 0,
+        "buildings_intersecting_parks": 0,
+        "scope": "Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification."
+      },
+      "scope": "Geometry matching and source face-material association; not source license approval, RT material conversion or new channel calculation."
+    },
+    {
+      "city_size_m": 4000,
+      "matched_assets": 1317,
+      "instances": 13838,
+      "source_count": 36,
+      "material_count": 36,
+      "max_footprint_area_difference_m2": 0.11009529901212206,
+      "layout_instances_unchanged": true,
+      "synthetic_layout_unchanged": true,
+      "validation": {
+        "instance_count": 13838,
+        "building_overlap_pairs": 0,
+        "outside_city_buildings": 0,
+        "outside_parcel_buildings": 0,
+        "buildings_intersecting_road_carriageways": 0,
+        "buildings_intersecting_parks": 0,
+        "scope": "Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification."
+      },
+      "scope": "Geometry matching and source face-material association; not source license approval, RT material conversion or new channel calculation."
+    }
+  ]
+}

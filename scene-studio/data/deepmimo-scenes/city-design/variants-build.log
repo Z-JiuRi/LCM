@@ -1,0 +1,13 @@
+Building 1000 m design: 61 parcels
+Parcels 0/61; buildings 16
+Preserved boston5g_3p5: 11 objects
+Traceback (most recent call last):
+  File "/Users/z-jiuri/workspace/LCM/output/deepmimo-scenes/city-design/design_city_variants.py", line 194, in <module>
+    main()
+    ~~~~^^
+  File "/Users/z-jiuri/workspace/LCM/output/deepmimo-scenes/city-design/design_city_variants.py", line 190, in main
+    build(size,assets,source_assets,rejected)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/z-jiuri/workspace/LCM/output/deepmimo-scenes/city-design/design_city_variants.py", line 178, in build
+    from render_city_variants import render_city
+ModuleNotFoundError: No module named 'render_city_variants'

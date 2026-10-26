@@ -1,0 +1,69 @@
+[
+  {
+    "id": "test-4buildings",
+    "title": "四建筑接缝测试",
+    "extent_m": [
+      -40,
+      -25,
+      40,
+      25
+    ],
+    "instance_count": 4,
+    "asset_count": 4,
+    "source_count": 0,
+    "data_url": "/scenes/verified-street.json",
+    "kind": "verified",
+    "status": "已有小规模RT/CSI测试结果"
+  },
+  {
+    "id": "city-1km",
+    "title": "一公里紧凑混合城区",
+    "extent_m": [
+      0,
+      0,
+      1000,
+      1000
+    ],
+    "instance_count": 665,
+    "asset_count": 435,
+    "source_count": 30,
+    "data_url": "/scenes/city-1km.json",
+    "kind": "city",
+    "resource_kind": "official-integrated",
+    "status": "正式几何与源材料已整合；未重算信道"
+  },
+  {
+    "id": "city-2km",
+    "title": "两公里大学与商务城区",
+    "extent_m": [
+      0,
+      0,
+      2000,
+      2000
+    ],
+    "instance_count": 2306,
+    "asset_count": 890,
+    "source_count": 32,
+    "data_url": "/scenes/city-2km.json",
+    "kind": "city",
+    "resource_kind": "official-integrated",
+    "status": "正式几何与源材料已整合；未重算信道"
+  },
+  {
+    "id": "city-4km",
+    "title": "四公里完整混合城区",
+    "extent_m": [
+      0,
+      0,
+      4000,
+      4000
+    ],
+    "instance_count": 13838,
+    "asset_count": 1317,
+    "source_count": 36,
+    "data_url": "/scenes/city-4km.json",
+    "kind": "city",
+    "resource_kind": "official-integrated",
+    "status": "正式几何与源材料已整合；未重算信道"
+  }
+]

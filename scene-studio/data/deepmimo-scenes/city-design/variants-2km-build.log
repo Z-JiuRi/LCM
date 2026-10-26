@@ -1,0 +1,63 @@
+Building 2000 m design: 200 parcels
+Parcels 0/200; buildings 28
+Parcels 100/200; buildings 1325
+Preserved boston5g_3p5: 53 objects
+Preserved asu_campus_3p5: 31 objects
+{
+  "size": 2000,
+  "instances": 2306,
+  "sources": 32,
+  "validation": {
+    "building_overlap_pairs": 0,
+    "outside_parcel_buildings": 0,
+    "buildings_intersecting_road_carriageways": 0,
+    "buildings_intersecting_parks": 0,
+    "building_footprint_area_km2": 0.7829,
+    "road_carriageway_union_km2": 0.7051,
+    "large_park_area_excluding_carriageways_km2": 0.349,
+    "role_areas": {
+      "lowrise": {
+        "parcel_area_km2": 0.14245185129374335,
+        "building_area_km2": 0.03662515572141017,
+        "parcels": 14
+      },
+      "mixed": {
+        "parcel_area_km2": 0.17601474918920934,
+        "building_area_km2": 0.04105517160830334,
+        "parcels": 19
+      },
+      "towers": {
+        "parcel_area_km2": 0.31774213514329075,
+        "building_area_km2": 0.08187095167458852,
+        "parcels": 19
+      },
+      "midrise": {
+        "parcel_area_km2": 0.6834443401213246,
+        "building_area_km2": 0.17448737443564277,
+        "parcels": 74
+      },
+      "fine": {
+        "parcel_area_km2": 0.257532552394081,
+        "building_area_km2": 0.06665851090823595,
+        "parcels": 39
+      },
+      "secondary": {
+        "parcel_area_km2": 0.14680884612101322,
+        "building_area_km2": 0.038851294464707864,
+        "parcels": 12
+      },
+      "campus": {
+        "parcel_area_km2": 0.5186340227960098,
+        "building_area_km2": 0.1714289636379929,
+        "parcels": 22
+      },
+      "core": {
+        "parcel_area_km2": 0.40062274670607956,
+        "building_area_km2": 0.17190580246363457,
+        "parcels": 1
+      }
+    },
+    "scope": "2D complete-footprint placement and overlap checks only; no RT, watertight mesh, road routing or electromagnetic validation.",
+    "outside_city_buildings": 0
+  }
+}

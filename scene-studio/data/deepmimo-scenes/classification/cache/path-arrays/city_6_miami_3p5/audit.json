@@ -1,0 +1,36 @@
+{
+  "name": "city_6_miami_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_6_miami_3p5.zip",
+  "status": "verified",
+  "raw_tx_positions_m": [
+    [
+      -7.962759971618652,
+      62.290401458740234,
+      6.0
+    ]
+  ],
+  "tx_sha256": "f7e46299f96dcd00db5d32cf7ff6f539188483cc727bc5d4c4be0882fb8b6625",
+  "member": "inter_t001_tx000_r000.mat",
+  "selection": "按预览默认 set 数字优先匹配；旧版编号不保证同义，以原始成员名和 TX 坐标为准；多快照包取字典序首快照",
+  "counts": {
+    "los": 6739,
+    "nlos": 20322,
+    "no_recorded_path": 15923,
+    "total_receiver_positions": 42984
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 浮点矩阵：非有限值为缺失路径；非负有限交互码为有效路径",
+  "inter_sha256": "a15252e9cc77160f7b41dc25169ecb19a8e7fc64799c74fd6f26f13b5f7f68ac",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    42984,
+    25
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/city_6_miami_3p5/inter_t001_tx000_r000.mat",
+  "archive_size_bytes": 46315297,
+  "interpretation": "原始路径交互记录，不是重新仿真；有无直达记录受原始追踪与路径截断设置影响；统计只对应所列成员，不覆盖其他 TX/RX set 或其他快照"
+}

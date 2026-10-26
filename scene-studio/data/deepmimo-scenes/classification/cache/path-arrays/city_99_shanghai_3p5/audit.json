@@ -1,0 +1,28 @@
+{
+  "name": "city_99_shanghai_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_99_shanghai_3p5.zip",
+  "status": "verified",
+  "member": "inter_t001_tx000_r000.npz",
+  "selection": "先前已按 ZIP Range 读取并核对 CRC 的 TX1/RX0 原始文件；离线复核，不新增下载",
+  "counts": {
+    "los": 55519,
+    "nlos": 20960,
+    "no_recorded_path": 19881,
+    "total_receiver_positions": 96360
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 有限非负值；已与原始 power 有限值掩码逐元素交叉核对",
+  "inter_sha256": "1bce9c5af6d3caa8d84239eaef4379370b8aa65508979e194f983ad5a132c384",
+  "power_sha256": "821dc0f28645c714aeaf3bd722152eb2c80855d5e571224693cc019bd643aa3c",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    96360,
+    10
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/city_99_shanghai_3p5/inter_t001_tx000_r000.npz",
+  "interpretation": "只对应所列 TX/RX 网格；原始路径不是新的仿真结果"
+}

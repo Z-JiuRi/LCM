@@ -1,0 +1,36 @@
+{
+  "name": "city_15_indianapolis_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_15_indianapolis_3p5.zip",
+  "status": "verified",
+  "raw_tx_positions_m": [
+    [
+      42.232398986816406,
+      57.3307991027832,
+      6.0
+    ]
+  ],
+  "tx_sha256": "74f3da644cf519db5708cd0ff2ba74e35e0d2dc46460b4133c99e9266cc65fe6",
+  "member": "inter_t001_tx000_r000.mat",
+  "selection": "按预览默认 set 数字优先匹配；旧版编号不保证同义，以原始成员名和 TX 坐标为准；多快照包取字典序首快照",
+  "counts": {
+    "los": 12983,
+    "nlos": 15076,
+    "no_recorded_path": 11141,
+    "total_receiver_positions": 39200
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 浮点矩阵：非有限值为缺失路径；非负有限交互码为有效路径",
+  "inter_sha256": "f6a9aecf2afa0ef3738c798e33323fe342dbf9db13825afedccd3c13ab5e0e5d",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    39200,
+    25
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/city_15_indianapolis_3p5/inter_t001_tx000_r000.mat",
+  "archive_size_bytes": 67525985,
+  "interpretation": "原始路径交互记录，不是重新仿真；有无直达记录受原始追踪与路径截断设置影响；统计只对应所列成员，不覆盖其他 TX/RX set 或其他快照"
+}

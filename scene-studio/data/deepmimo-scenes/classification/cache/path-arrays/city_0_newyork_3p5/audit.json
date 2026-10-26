@@ -1,0 +1,36 @@
+{
+  "name": "city_0_newyork_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_0_newyork_3p5.zip",
+  "status": "verified",
+  "raw_tx_positions_m": [
+    [
+      12.497300148010254,
+      5.825920104980469,
+      6.0
+    ]
+  ],
+  "tx_sha256": "cc5841aed3a1f23fd405ddfd0be770cc4aa201bb708f3b99ebc2cb1c168a4e91",
+  "member": "inter_t001_tx000_r000.mat",
+  "selection": "按预览默认 set 数字优先匹配；旧版编号不保证同义，以原始成员名和 TX 坐标为准；多快照包取字典序首快照",
+  "counts": {
+    "los": 4467,
+    "nlos": 11836,
+    "no_recorded_path": 15416,
+    "total_receiver_positions": 31719
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 浮点矩阵：非有限值为缺失路径；非负有限交互码为有效路径",
+  "inter_sha256": "f937a05b1cffa7b68ed97a0279e36b380ab67e41b23e2e7d11805eaa41bc1c34",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    31719,
+    25
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/city_0_newyork_3p5/inter_t001_tx000_r000.mat",
+  "archive_size_bytes": 33510091,
+  "interpretation": "原始路径交互记录，不是重新仿真；有无直达记录受原始追踪与路径截断设置影响；统计只对应所列成员，不覆盖其他 TX/RX set 或其他快照"
+}

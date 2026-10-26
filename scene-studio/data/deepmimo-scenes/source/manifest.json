@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net",
+  "licenseNote": "Third-party DeepMIMO scene assets; original terms apply. Local research visualization, no ownership or license reassignment.",
+  "files": {
+    "city_99_shanghai_3p5-preview.json": "31903be17830e89c7b92b51452c56387a7444372305806d24747d40ee6cae85d",
+    "catalog.json": "fab7fa73aca4e8a7fddb8cfb9f083fa886efb1f3f6c392055bf796a9579ec0b2",
+    "asu_campus_3p5-preview.json": "cb5d43dcfa8ce0b7241774feaa7ce0d02c4680a3a987e24ede8d22464c641ba7",
+    "boston5g_3p5-preview.json": "88691379ae87dfea78df6a3f0db78d79fb48a7d84922fcb3e82f0c731e107cc1",
+    "asu_campus_3p5_dyn/archive-index.json": "4b1e1304ddc975349ecbe377fc1f6b88c15f6cf2e8dd7939dc2e49ae9e971b38",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/rx_pos_t002_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/vertices.npz": "da42d0289adf8aff7c053003305f5a353980d56cb217fa64be2efa8eb96ec80a",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/rx_pos_t001_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/params.json": "9d97d99628d2e50f553b528b176251cfb296b162baf4e812f1ffcbf586846527",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/tx_pos_t001_tx000_r000.npz": "4acbd76b07422a72b3f073eb24e244516b8fdcc976c3858004225f44af215e82",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/tx_pos_t002_tx000_r000.npz": "e53812588e5f39c4ed15f769ae0c0cd9848eb80fdd1953a377fd2024e9fc0a50",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_174325/objects.json": "8b314747af7b391470d96cb090fa07b62a1abf40c01770c5d04e67953857b888",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/rx_pos_t002_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/vertices.npz": "da42d0289adf8aff7c053003305f5a353980d56cb217fa64be2efa8eb96ec80a",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/rx_pos_t001_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/params.json": "9d97d99628d2e50f553b528b176251cfb296b162baf4e812f1ffcbf586846527",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/tx_pos_t001_tx000_r000.npz": "6e313799a228883d3709bab24b3b10c1c3ce1386a08f250fafe73e285b9f367d",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/tx_pos_t002_tx000_r000.npz": "e53812588e5f39c4ed15f769ae0c0cd9848eb80fdd1953a377fd2024e9fc0a50",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s_20250713_223603/objects.json": "8b314747af7b391470d96cb090fa07b62a1abf40c01770c5d04e67953857b888",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/rx_pos_t002_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/vertices.npz": "da42d0289adf8aff7c053003305f5a353980d56cb217fa64be2efa8eb96ec80a",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/rx_pos_t001_tx000_r000.npz": "888fa51c29b186768d4255dde6593c9572d983c48b33a35e329ca716203883bc",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/params.json": "9d97d99628d2e50f553b528b176251cfb296b162baf4e812f1ffcbf586846527",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/tx_pos_t001_tx000_r000.npz": "e595be65a5b19f31aae35bd0f918b1f59f41c77b656b999354acb6d9a8b1edcf",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/tx_pos_t002_tx000_r000.npz": "e53812588e5f39c4ed15f769ae0c0cd9848eb80fdd1953a377fd2024e9fc0a50",
+    "asu_campus_3p5_dyn/insite_3.5ghz_5r_1d_0s/objects.json": "8b314747af7b391470d96cb090fa07b62a1abf40c01770c5d04e67953857b888"
+  }
+}

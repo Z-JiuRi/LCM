@@ -1,0 +1,71 @@
+10 / 228 Office Floor 1 InH-like 
+20 / 228 San Francisco UMi-like 
+30 / 228 Oklahoma UMi-like 
+40 / 228 city_6_miami_3p5 UMi-like 
+50 / 228 city_16_sanfrancisco_3p5 UMi-like 
+53 / 228 i1_2p5 InH-like HTTPError: HTTP Error 500: Internal Server Error
+60 / 228 city_4_phoenix_28 UMi-like 
+70 / 228 city_14_charlotte_28 UMi-like 
+75 / 228 o1_3p5 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+77 / 228 o1_3p4 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+78 / 228 o1b_3p5 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+79 / 228 o1b_28 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+80 / 228 o1_drone_200 空地/RIS 
+81 / 228 o1_140 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+82 / 228 i1_2p4 InH-like HTTPError: HTTP Error 500: Internal Server Error
+83 / 228 o1_60 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+84 / 228 o1_28 UMi-like候选 HTTPError: HTTP Error 500: Internal Server Error
+90 / 228 city_24_cairo_3p5 UMi-like 
+100 / 228 city_33_hong_kong_3p5 UMi-like 
+110 / 228 city_47_chicago_3p5 UMi-like 
+118 / 228 city_36_bangkok_3p5 城市几何/部署待定 URLError: <urlopen error _ssl.c:1112: The handshake operation timed out>
+120 / 228 city_54_north_jakarta_3p5 UMi-like 
+130 / 228 city_65_granada_3p5 UMi-like 
+140 / 228 city_19_oklahoma_3p5_s 城市几何/部署待定 
+150 / 228 city_7_sandiego_3p5_s 城市几何/部署待定 
+160 / 228 city_12_fortworth_3p5_s 城市几何/部署待定 
+170 / 228 city_11_santaclara_3p5_lwm UMi-like 
+180 / 228 city_01_villas_florida 低层住宅/待定 HTTPError: HTTP Error 500: Internal Server Error
+182 / 228 asu_campus_3p5_10cm UMa-like候选 HTTPError: HTTP Error 500: Internal Server Error
+183 / 228 asu_campus_3p5_dyn 混合部署 HTTPError: HTTP Error 500: Internal Server Error
+189 / 228 city_83_tempe_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+190 / 228 city_10_florida_villa_8gp_1758135830233 低层住宅/待定 
+191 / 228 tempe2_1758180768765 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+197 / 228 city_81_seoul_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+198 / 228 city_80_philadelphia_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+199 / 228 city_79_parow_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+200 / 228 city_10_florida_villa_7gp_1758026450854 低层住宅/待定 
+201 / 228 city_78_newtaipei_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+202 / 228 city_77_melbourne_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+203 / 228 city_76_houston_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+204 / 228 city_72_capetown_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+205 / 228 city_73_casablanca_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+206 / 228 city_75_dongcheng_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+207 / 228 city_74_chiyoda_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+208 / 228 city_82_shibuya_3p5 城市几何/部署待定 HTTPError: HTTP Error 500: Internal Server Error
+210 / 228 city_85_fuyang_3p5 UMi-like 
+220 / 228 city_95_delhi_3p5 UMi-like 
+{
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/scenarios",
+  "catalog_sha256": "fab7fa73aca4e8a7fddb8cfb9f083fa886efb1f3f6c392055bf796a9579ec0b2",
+  "raw_catalog_records": 233,
+  "unique_catalog_entries": 228,
+  "audited_entries": 228,
+  "preview_spacing_indices": [
+    30,
+    30
+  ],
+  "classification_is_project_heuristic_not_standard_certification": true,
+  "category_counts": {
+    "UMi-like": 160,
+    "空地/RIS": 2,
+    "InH-like": 9,
+    "UMa-like": 3,
+    "UMi-like候选": 7,
+    "城市几何/部署待定": 34,
+    "低层住宅/待定": 11,
+    "UMa-like候选": 1,
+    "混合部署": 1
+  }
+}

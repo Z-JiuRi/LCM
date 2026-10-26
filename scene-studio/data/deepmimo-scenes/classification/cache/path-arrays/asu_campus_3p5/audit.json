@@ -1,0 +1,36 @@
+{
+  "name": "asu_campus_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=asu_campus_3p5.zip",
+  "status": "verified",
+  "raw_tx_positions_m": [
+    [
+      166.0,
+      104.0,
+      22.0
+    ]
+  ],
+  "tx_sha256": "3a8434a2847d0f825b0a5ce58f8bc648afaaaf2760cf07ae460177d49a2bc174",
+  "member": "inter_t001_tx000_r000.mat",
+  "selection": "按预览默认 set 数字优先匹配；旧版编号不保证同义，以原始成员名和 TX 坐标为准；多快照包取字典序首快照",
+  "counts": {
+    "los": 25998,
+    "nlos": 59159,
+    "no_recorded_path": 46774,
+    "total_receiver_positions": 131931
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 浮点矩阵：非有限值为缺失路径；非负有限交互码为有效路径",
+  "inter_sha256": "a4bd824c7b003eb8a968c88e16cd7ff71baf443e94401d426531779f50d71e7b",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    131931,
+    10
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/asu_campus_3p5/inter_t001_tx000_r000.mat",
+  "archive_size_bytes": 30558838,
+  "interpretation": "原始路径交互记录，不是重新仿真；有无直达记录受原始追踪与路径截断设置影响；统计只对应所列成员，不覆盖其他 TX/RX set 或其他快照"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "city_21_taito_city_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_21_taito_city_3p5.zip",
+  "status": "unavailable",
+  "error": "ValueError: No supported inter_*.npz member in archive"
+}

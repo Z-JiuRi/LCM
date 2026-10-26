@@ -1,0 +1,36 @@
+{
+  "name": "city_4_phoenix_3p5",
+  "date": "2026-10-25",
+  "source": "https://www.deepmimo.net/api/download/secure?filename=city_4_phoenix_3p5.zip",
+  "status": "verified",
+  "raw_tx_positions_m": [
+    [
+      3.4705400466918945,
+      72.9083023071289,
+      6.0
+    ]
+  ],
+  "tx_sha256": "3725c8f44d5f9f4d732e3941d2cf201a970c5ea0c833b7aae770d8f3a227d0f4",
+  "member": "inter_t001_tx000_r000.mat",
+  "selection": "按预览默认 set 数字优先匹配；旧版编号不保证同义，以原始成员名和 TX 坐标为准；多快照包取字典序首快照",
+  "counts": {
+    "los": 2227,
+    "nlos": 11262,
+    "no_recorded_path": 28883,
+    "total_receiver_positions": 42372
+  },
+  "observed_states": [
+    "LoS",
+    "NLoS"
+  ],
+  "mask_source": "inter 浮点矩阵：非有限值为缺失路径；非负有限交互码为有效路径",
+  "inter_sha256": "1d039cf290ccdf6879ee8e3928c728e7b15cc085b5214a2c176d405b14fb8a10",
+  "inter_dtype": "float32",
+  "inter_shape": [
+    42372,
+    25
+  ],
+  "raw_cache": "output/deepmimo-scenes/classification/cache/path-arrays/city_4_phoenix_3p5/inter_t001_tx000_r000.mat",
+  "archive_size_bytes": 37845947,
+  "interpretation": "原始路径交互记录，不是重新仿真；有无直达记录受原始追踪与路径截断设置影响；统计只对应所列成员，不覆盖其他 TX/RX set 或其他快照"
+}

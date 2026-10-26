@@ -36,6 +36,16 @@ def prepare():
                             source_count=len(manifest['source_usage']), data_url=f'/scenes/city-{km}km.json',
                             kind='city', resource_kind=manifest.get('resource_kind','preview'),
                              status='正式几何与源材料已整合；未重算信道' if resource_folder==integrated else '预览来源合成几何；未计算信道'))
+        enhanced = DATA / f'scenes/environment-cities/city-{km}km'
+        if (enhanced/'assembled-city.scene.json.gz').is_file():
+            (PUBLIC/f'city-{km}km-baseline.json').write_text(json.dumps(scene,ensure_ascii=False,separators=(',',':'))+'\n')
+            env=json.loads(gzip.decompress((enhanced/'assembled-city.scene.json.gz').read_bytes()))
+            env['labels']=view['labels']
+            (PUBLIC/f'city-{km}km-environment.json').write_text(json.dumps(env,ensure_ascii=False,separators=(',',':'))+'\n')
+            catalog[-1].update(data_url=f'/scenes/city-{km}km-environment.json',resource_kind='environment-enhanced',
+                status='环境增强：平地分区＋源植被体／合成树；未重算信道',
+                variants=[{'id':'environment','title':'环境增强版','data_url':f'/scenes/city-{km}km-environment.json'},
+                          {'id':'baseline','title':'正式建筑基线','data_url':f'/scenes/city-{km}km-baseline.json'}])
         for name in ['assembled-city.scene.json.gz','assembled-city-manifest.json','assembled-city.view.json']:
             path = folder/name
             inventory.append(dict(path=str(path.relative_to(STUDIO)), sha256=hashlib.sha256(path.read_bytes()).hexdigest()))

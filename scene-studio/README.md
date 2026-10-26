@@ -47,11 +47,21 @@ python -m pip install -e './scene-studio[rt]' playwright
 | 场景 | 实例数 | 独立源资产 | 当前数据状态 |
 |---|---:|---:|---|
 | 四建筑接缝测试，80×50 m | 4 | 4 | 小规模真实RT/CSI及波束摘要 |
-| 一公里，1×1 km | 665 | 435 | 正式几何与源材料记录整合；未重算本版本信道 |
-| 两公里，2×2 km | 2,306 | 890 | 正式几何与源材料记录整合；未重算本版本信道 |
-| 四公里，4×4 km | 13,838 | 1,317 | 正式几何与源材料记录整合；未重算本版本信道 |
+| 一公里，1×1 km | 665 | 435 | 默认环境增强：平地分区、5源植被体＋155合成树；可切换正式基线；未重算信道 |
+| 两公里，2×2 km | 2,306 | 890 | 环境增强：7源植被体＋827合成树；可切换正式基线；未重算信道 |
+| 四公里，4×4 km | 13,838 | 1,317 | 环境增强：7源植被体＋2,893合成树；可切换正式基线；未重算信道 |
 
 三个城市现在默认加载正式下载几何匹配版本，保留原预览快照和完全相同的布局。每个资产保存正式三维面、源对象ID及面材料键；每个实例位置、旋转保持不变。地面为合成平地，不引入源地形或TX/RX/信道。源材料参数已关联，但尚未转换并验证为RT后端材质；显示颜色仅作示意。详情见[正式资源整合说明](OFFICIAL_INTEGRATION.md)。
+
+三种城市均有[环境增强版](ENVIRONMENT_CITIES.md)，[一公里详细说明](ENVIRONMENT_1KM.md)保留。36个下载terrain均为Z=0，没有凭空生成源坡地；增加地表分区及明确来源/合成标记的植被，RT禁用以待正确的植被传播适配。15项单元测试覆盖三尺度环境，三城市环境/基线切换与PNG下载均通过。
+
+```sh
+conda activate lcm
+python scene-studio/run.py enhance-environment --size 1000
+python scene-studio/run.py enhance-environment --size 2000
+python scene-studio/run.py enhance-environment --size 4000
+python scene-studio/run.py build
+```
 
 ## 操作
 

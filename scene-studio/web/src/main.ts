@@ -64,7 +64,7 @@ async function start() {
       <div class="notice" id="notice"></div>
     </aside>
   </main>
-  <footer class="statusbar"><span><i></i> <span id="save-status">内置场景已加载</span></span><span>拖动旋转 <em>·</em> 滚轮缩放 <em>·</em> 右键平移</span><span>坐标 X / Y / Z ↑ <em>·</em> Three.js</span></footer>
+  <footer class="statusbar"><span><i></i> <span id="save-status">内置场景已加载</span></span><span>拖动旋转 <em>·</em> 滚轮缩放 <em>·</em> 中键或右键平移</span><span>坐标 X / Y / Z ↑ <em>·</em> Three.js</span></footer>
   <input id="file-input" type="file" accept=".json,application/json" hidden>
   <div id="toast" role="status" aria-live="polite"></div>
   <dialog id="help-dialog"><div class="dialog-heading"><span class="brand-mark">${icon('cube')}</span><h2>关于这个工作台</h2><button class="icon-button" id="close-help" aria-label="关闭说明">${icon('close')}</button></div>

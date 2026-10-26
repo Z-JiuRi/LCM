@@ -27,10 +27,22 @@
     "instance_count": 665,
     "asset_count": 435,
     "source_count": 30,
-    "data_url": "/scenes/city-1km.json",
+    "data_url": "/scenes/city-1km-environment.json",
     "kind": "city",
-    "resource_kind": "official-integrated",
-    "status": "正式几何与源材料已整合；未重算信道"
+    "resource_kind": "environment-enhanced",
+    "status": "环境增强：平地分区＋源植被体／合成树；未重算信道",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境增强版",
+        "data_url": "/scenes/city-1km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-1km-baseline.json"
+      }
+    ]
   },
   {
     "id": "city-2km",
@@ -44,10 +56,22 @@
     "instance_count": 2306,
     "asset_count": 890,
     "source_count": 32,
-    "data_url": "/scenes/city-2km.json",
+    "data_url": "/scenes/city-2km-environment.json",
     "kind": "city",
-    "resource_kind": "official-integrated",
-    "status": "正式几何与源材料已整合；未重算信道"
+    "resource_kind": "environment-enhanced",
+    "status": "环境增强：平地分区＋源植被体／合成树；未重算信道",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境增强版",
+        "data_url": "/scenes/city-2km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-2km-baseline.json"
+      }
+    ]
   },
   {
     "id": "city-4km",
@@ -61,9 +85,21 @@
     "instance_count": 13838,
     "asset_count": 1317,
     "source_count": 36,
-    "data_url": "/scenes/city-4km.json",
+    "data_url": "/scenes/city-4km-environment.json",
     "kind": "city",
-    "resource_kind": "official-integrated",
-    "status": "正式几何与源材料已整合；未重算信道"
+    "resource_kind": "environment-enhanced",
+    "status": "环境增强：平地分区＋源植被体／合成树；未重算信道",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境增强版",
+        "data_url": "/scenes/city-4km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-4km-baseline.json"
+      }
+    ]
   }
 ]

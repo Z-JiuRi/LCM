@@ -49,7 +49,7 @@ export class Viewport {
     this.scene.add(this.objects,this.grid,this.mobile,this.pathGroup,this.connection);
     this.controls = new OrbitControls(this.camera,this.renderer.domElement);
     this.controls.enableDamping=true;this.controls.dampingFactor=0.09;this.controls.minDistance=3;this.controls.maxDistance=5000;this.controls.maxPolarAngle=Math.PI/2-0.025;
-    this.controls.mouseButtons = {LEFT:THREE.MOUSE.ROTATE,MIDDLE:THREE.MOUSE.DOLLY,RIGHT:THREE.MOUSE.PAN};
+    this.controls.mouseButtons = {LEFT:THREE.MOUSE.ROTATE,MIDDLE:THREE.MOUSE.PAN,RIGHT:THREE.MOUSE.PAN};
     this.renderer.domElement.addEventListener('pointerdown',e=>this.down=[e.clientX,e.clientY]);
     this.renderer.domElement.addEventListener('pointerup', e => {
       if(e.button!==0 || Math.hypot(e.clientX-this.down[0],e.clientY-this.down[1])>5)return;

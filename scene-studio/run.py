@@ -37,7 +37,16 @@ def main():
         finally:
             sys.argv=old
         return
-    parser = argparse.ArgumentParser(description='LCM 四场景工作台；几何下载：download-city --help；正式整合：integrate-city --help')
+    if len(sys.argv)>1 and sys.argv[1]=='enhance-environment':
+        from lcm_scene.city.enhance_environment import main as enhance_main
+        old=sys.argv
+        try:
+            sys.argv=[old[0],*old[2:]]
+            enhance_main()
+        finally:
+            sys.argv=old
+        return
+    parser = argparse.ArgumentParser(description='LCM 四场景工作台；download-city / integrate-city / enhance-environment --help')
     subs = parser.add_subparsers(dest='command',required=True)
     serve = subs.add_parser('serve',help='提供已构建网页，不重建城市或计算信道')
     serve.add_argument('--port',type=int,default=8766)

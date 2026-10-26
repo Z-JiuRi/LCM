@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-26",
+  "note": "本地下载的第三方公开代码仓库在本日移除了各自的 .git 元数据；下表保存原来源与提交号，便于按原版本重新获取。代码内容本身未删除。第三方代码的许可与使用条件仍以各仓库原文为准，本项目不对其重新授权。",
+  "repositories": [
+    {"name": "P07_WirelessAgent_R1", "url": "https://github.com/jwentong/WirelessAgent_R1.git", "commit": "c3005a03ab5bd918798bdb336f908ac7ea37905a"},
+    {"name": "P08_WirelessAgent_R2", "url": "https://github.com/jwentong/WirelessAgent-R2.git", "commit": "2535f580054be11615fa839387ccc5505a30b270"},
+    {"name": "P10_AgentRAN", "url": "https://github.com/wineslab/agentran.git", "commit": "f770423fc821d1cc468ac924f66a8a4ca8d051a5"},
+    {"name": "P10_AgentRAN_OAI", "url": "https://github.com/wineslab/oai-release-agentRAN.git", "commit": "ba020a18f672ab62c2050c73c91974c4fa5ac51d"},
+    {"name": "P18_AgentSpec", "url": "https://github.com/haoyuwang99/AgentSpec.git", "commit": "e6fa3902e2cfb9681f454b355691b771f70543f8"},
+    {"name": "P21_InvaRAN", "url": "https://github.com/SyNSec-den/INVARAN.git", "commit": "a45acbc2fe054890add8ebd182c1931179a0417f"},
+    {"name": "P22_CsiNet_community", "url": "https://github.com/sydney222/Python_CsiNet.git", "commit": "9b921a9098594b0eeec102e83055e0da500d1834"},
+    {"name": "P29_DeepBeam", "url": "https://github.com/wineslab/deepbeam.git", "commit": "6c348b1cf2357b949f213e5608b282a0d8b57e6d"},
+    {"name": "P30_DeepSense_TII_challenge", "url": "https://github.com/ITU-AI-ML-in-5G-Challenge/DeepSense6G_TII.git", "commit": "ac227d286574a4c4b987dd035e33e8f3da99fb55"},
+    {"name": "P30_DeepSense_V2V_baseline", "url": "https://github.com/DeepSense6G/Multi-Modal-V2V-Beam-Prediction-Challenge-2023-Baseline.git", "commit": "cb33b36d1953da1a63ab9da470d886abe2eaf324"},
+    {"name": "P33_Neural_positioning_transformer", "url": "https://github.com/IIP-Group/neural-positioning-transformer.git", "commit": "a776a042c531ef004ae7f1d558793948844af7f6"},
+    {"name": "P34_DeepRx_community", "url": "https://github.com/G-ALI007/DeepRx-OFDM-PyTorch.git", "commit": "0c22c582b5b76d2e341dac59719b38de5ce25325"}
+  ]
+}

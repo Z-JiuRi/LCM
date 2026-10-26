@@ -1,0 +1,11 @@
+# Run from scene-studio: conda env create -f environment.yml
+# The editable package path is relative to the command's working directory.
+name: lcm
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -e .[rt]
+      - playwright

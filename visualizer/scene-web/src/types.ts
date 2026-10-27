@@ -24,6 +24,46 @@ export interface CatalogEntry {
   ue_sampling?: UESampling;
 }
 
+/** Display-only exports from an already completed, explicitly scoped RT run. */
+export interface RTRay {
+  sector_id: string | number;
+  ue_index: number;
+  power_gain_db: number | null;
+  points: Vec3[];
+  /** One code for each interior point: 1 reflection, 2 scatter, 4 transmit, 8 diffraction. */
+  interactions: number[];
+}
+
+export interface RTBatch {
+  rays: RTRay[];
+  tx_position: Vec3;
+  rx_positions: Vec3[];
+}
+
+export interface RTCoverage {
+  positions: Vec3[];
+  gain_db: (number | null)[];
+  metric: 'Serving path gain (dB)';
+  note: string;
+}
+
+export interface AvailableRTManifest {
+  available: true;
+  run_label: string;
+  scope: string;
+  ue_count: number;
+  sector_count: number;
+  batches: { sector_id: string | number; batch_index: number; url: string }[];
+  coverage: RTCoverage;
+  notes: string[];
+}
+
+export type RTManifest = AvailableRTManifest | {
+  available: false;
+  reason?: string;
+  notes?: string[];
+};
+
 export interface SourceMaterial {
   name?: string;
   id?: string | number;

@@ -1,0 +1,199 @@
+{
+  "sector": {
+    "id": "BS-1K-001-S2",
+    "site_id": "BS-1K-001",
+    "position_m": [
+      224.5,
+      337.0,
+      25.0
+    ],
+    "azimuth_deg": 162.06841,
+    "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+    "downtilt_deg": 10,
+    "antenna_model": "planned-sector-not-yet-RT",
+    "carrier_frequency_hz": 3500000000.0,
+    "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+  },
+  "solver_options": {
+    "samples_per_src": 2000,
+    "max_depth": 7,
+    "max_num_paths_per_src": 20000,
+    "los": true,
+    "specular_reflection": true,
+    "diffuse_reflection": true,
+    "diffraction": true,
+    "edge_diffraction": false,
+    "diffraction_lit_region": true,
+    "refraction": false,
+    "synthetic_array": true,
+    "seed": 43
+  },
+  "orientation_rad": [
+    2.828627367972103,
+    0.17453292519943295,
+    0.0
+  ],
+  "config": {
+    "chunk": 2,
+    "samples_per_src": 2000,
+    "workers": 1,
+    "gpus": null,
+    "cpu_sets": null,
+    "raw_compression": "compressed",
+    "async_write": true,
+    "flush_batches": 8,
+    "export_chunk": 128,
+    "disk_reserve_gib": 1.0,
+    "propagation_profile": "source-informed",
+    "max_depth": 7,
+    "max_num_paths_per_src": 20000,
+    "terrain_scattering": "off",
+    "allow_unverified_topology": false,
+    "num_antennas": 32,
+    "n_fft": 1024,
+    "n_sc": 64,
+    "carrier_hz": 3500000000.0,
+    "bandwidth_hz": 20000000.0,
+    "tx_power_dbm": 44.0,
+    "tx_pattern": "tr38901",
+    "variant": "metal_ad_mono_polarized",
+    "diffraction": true,
+    "edge_diffraction": false,
+    "diffuse_reflection": true,
+    "refraction": false,
+    "significant_db": 25.0,
+    "seed": 42,
+    "convention": "centered",
+    "coefficient_mode": "physical-baseband",
+    "normalization": "unit",
+    "delay_window": "none",
+    "check_native_cfr": true,
+    "native_cfr_nmse_tolerance": 1e-06,
+    "split_mode": "spatial",
+    "block_m": 100.0,
+    "synthetic_array": true
+  },
+  "batches": [
+    {
+      "file": "paths-0000000-0000002.npz",
+      "start": 0,
+      "stop": 2,
+      "path_slots": 2,
+      "diagnostics": {
+        "returned_valid_paths": 2,
+        "max_paths_per_ue": 2,
+        "returned_to_source_cap_ratio": 0.0001,
+        "candidate_saturation": "unknown: final valid paths do not expose discarded candidate occupancy",
+        "interaction_code_counts": {
+          "1": 3,
+          "8": 2
+        },
+        "mean_rms_delay_spread_s": 4.908566544162101e-08,
+        "no_path_ues": 1
+      },
+      "native_cfr_check": {
+        "relative_squared_error": 4.465456076851555e-12,
+        "max_absolute_error": 3.887366231865308e-14,
+        "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+      },
+      "sha256": "625bda5b88c0d2cd261273e2ab165213cbe58e775d8839734b0a7ed6336ff167"
+    },
+    {
+      "file": "paths-0000002-0000004.npz",
+      "start": 2,
+      "stop": 4,
+      "path_slots": 5,
+      "diagnostics": {
+        "returned_valid_paths": 10,
+        "max_paths_per_ue": 5,
+        "returned_to_source_cap_ratio": 0.0005,
+        "candidate_saturation": "unknown: final valid paths do not expose discarded candidate occupancy",
+        "interaction_code_counts": {
+          "1": 5,
+          "2": 1,
+          "8": 3
+        },
+        "mean_rms_delay_spread_s": 3.7011562640023554e-08,
+        "no_path_ues": 0
+      },
+      "native_cfr_check": {
+        "relative_squared_error": 5.053932620366633e-13,
+        "max_absolute_error": 3.9689937447739965e-10,
+        "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+      },
+      "sha256": "b2cc9945403b57f8485fdebda9f12816b817192e841e52f74224691c0b89cd73"
+    },
+    {
+      "file": "paths-0000004-0000006.npz",
+      "start": 4,
+      "stop": 6,
+      "path_slots": 0,
+      "diagnostics": {
+        "returned_valid_paths": 0,
+        "max_paths_per_ue": 0,
+        "returned_to_source_cap_ratio": 0.0,
+        "candidate_saturation": "unknown: final valid paths do not expose discarded candidate occupancy",
+        "interaction_code_counts": {},
+        "mean_rms_delay_spread_s": null,
+        "no_path_ues": 2
+      },
+      "native_cfr_check": {
+        "relative_squared_error": 0.0,
+        "max_absolute_error": 0.0,
+        "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+      },
+      "sha256": "977be5aa453a6cde6a7684510ee4f58ce142f5caa405f323d6ffe61e577bdfe6"
+    },
+    {
+      "file": "paths-0000006-0000008.npz",
+      "start": 6,
+      "stop": 8,
+      "path_slots": 0,
+      "diagnostics": {
+        "returned_valid_paths": 0,
+        "max_paths_per_ue": 0,
+        "returned_to_source_cap_ratio": 0.0,
+        "candidate_saturation": "unknown: final valid paths do not expose discarded candidate occupancy",
+        "interaction_code_counts": {},
+        "mean_rms_delay_spread_s": null,
+        "no_path_ues": 2
+      },
+      "native_cfr_check": {
+        "relative_squared_error": 0.0,
+        "max_absolute_error": 0.0,
+        "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+      },
+      "sha256": "9b2c1a022329fb3cef542a136193d7bdff4b7b75cf0cecd59ff663a506d90fd5"
+    }
+  ],
+  "versions": {
+    "sionna_rt": "2.2.0",
+    "mitsuba": "3.9.1"
+  },
+  "seconds": 0.5550625409814529,
+  "timings": {
+    "rtsetup": 0.011206750001292676,
+    "solve": 0.504628541006241,
+    "transfer": 0.02231387302163057,
+    "stats": 0.00028237499645911157,
+    "synthesis": 0.011132750019896775,
+    "write": 0.013762122951447964,
+    "hash": 0.0008947090245783329,
+    "total": 0.5550625409814529
+  },
+  "timing_note": "Host wall times; async write overlaps compute, lazy device work may be charged to transfer. Total excludes metadata JSON and cleanup.",
+  "execution": {
+    "pid": 5880,
+    "cuda_visible_devices": null,
+    "variant": "metal_ad_mono_polarized",
+    "scene_cache_hit": true,
+    "cpu_affinity": null
+  },
+  "csi_axes": [
+    "ue",
+    "rx_ant",
+    "tx_ant",
+    "frequency"
+  ],
+  "csi_sha256": "45480bc23cb855504bc3181bfce1283abbbb1f2c72efc18b2e0d1e06122457e6"
+}

@@ -1,6 +1,31 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import type { Vec3, XY, Footprint, CatalogEntry, CityData, Instance, Environment, VegetationInstance, SourceMaterial, InspectObject, Layer } from './types';
+import type { Vec3, XY, Footprint, CatalogEntry, CityData, Instance, Environment, VegetationInstance, SourceMaterial, InspectObject, Layer, RTBatch, RTCoverage } from './types';
+
+// Match the reference mechanisms without assigning a mixed path to only one bounce.
+const rtColors: Record<number, number> = { 1: 0xe53935, 2: 0x1976ed, 4: 0x9755ca, 8: 0xf48b16 };
+const rtNeutral = 0x526674;
+const rtTX = 0xc32391;
+const rtRX = 0x008b66;
+const validRTPoint = (p: unknown): p is Vec3 => Array.isArray(p) && p.length === 3 && p.every(v => typeof v === 'number' && Number.isFinite(v));
+const rtCoverageColor = (t: number) => new THREE.Color(`hsl(${(1 - t) * 240}, 88%, 50%)`);
+
+/** Validate before drawing; never quietly skip malformed or weak paths. */
+export function measureRTBatch(batch: RTBatch) {
+    if (!Array.isArray(batch.rays) || !validRTPoint(batch.tx_position) || !Array.isArray(batch.rx_positions) || !batch.rx_positions.every(validRTPoint))
+        throw new Error('RT 批次的 TX / RX 坐标或路径数组无效');
+    let segments = 0, interactions = 0;
+    for (const ray of batch.rays) {
+        if (!Array.isArray(ray.points) || ray.points.length < 2 || !ray.points.every(validRTPoint) || !Array.isArray(ray.interactions) || ray.interactions.length !== ray.points.length - 2 || !ray.interactions.every(v => Number.isSafeInteger(v) && v >= 0))
+            throw new Error('RT 路径坐标 / 交互点不匹配；该批次未绘制');
+        segments += ray.points.length - 1;
+        interactions += ray.interactions.length;
+    }
+    // Conservative display estimate: CPU + GPU attributes and marker bookkeeping.
+    const displayBytes = (segments * 48 + interactions * 24 + (batch.rx_positions.length + 1) * 128) * 2;
+    return { segments, interactions, displayBytes };
+}
+
 const outer = (p: Footprint) => Array.isArray(p) ? p : p.outer;
 const holes = (p: Footprint) => Array.isArray(p) ? [] : p.holes ?? [];
 const point = ([x, y, z]: Vec3) => new THREE.Vector3(x, z, -y);
@@ -101,6 +126,18 @@ export class CityViewport {
         at: THREE.Vector3;
         el: HTMLElement;
     }[] = [];
+    private rtRoot = new THREE.Group();
+    private rtCoverageRoot = new THREE.Group();
+    private rtPathCount = 0;
+    private rtSegmentCount = 0;
+    private rtInteractionCount = 0;
+    private rtBatchCount = 0;
+    private rtBatchTotal = 0;
+    private rtCoverageCount = 0;
+    private rtCoverageRange: [number, number] | null = null;
+    private rtCoverageFiniteCount = 0;
+    private rtTXPositions = new Set<string>();
+    private rtRXPositions = new Set<string>();
     private top = false;
     onSelect: (object: InspectObject | null) => void = () => {
     };
@@ -119,6 +156,9 @@ export class CityViewport {
         this.labelHost = document.createElement('div');
         this.labelHost.className = 'city-labels';
         host.append(this.labelHost);
+        this.rtRoot.name = 'RT paths';
+        this.rtCoverageRoot.name = 'RT sampled power coverage';
+        this.root.add(this.rtRoot, this.rtCoverageRoot);
         this.scene.add(this.root, new THREE.HemisphereLight(0xf6fbff, 0x879793, 2.5));
         const light = new THREE.DirectionalLight(0xfff6e8, 2.6);
         light.position.set(-300, 600, 200);
@@ -202,7 +242,22 @@ export class CityViewport {
         this.uePointCount = 0;
         this.uePositionsSample = [];
         this.picks = [];
+        this.rtPathCount = 0;
+        this.rtSegmentCount = 0;
+        this.rtInteractionCount = 0;
+        this.rtBatchCount = 0;
+        this.rtBatchTotal = 0;
+        this.rtCoverageCount = 0;
+        this.rtCoverageFiniteCount = 0;
+        this.rtCoverageRange = null;
+        this.rtTXPositions.clear();
+        this.rtRXPositions.clear();
         this.root.clear();
+        this.rtRoot = new THREE.Group();
+        this.rtRoot.name = 'RT paths';
+        this.rtCoverageRoot = new THREE.Group();
+        this.rtCoverageRoot.name = 'RT sampled power coverage';
+        this.root.add(this.rtRoot, this.rtCoverageRoot);
         this.labelHost.replaceChildren();
         this.labels = [];
         for (const layer of Object.keys(this.layerState) as Layer[]) {
@@ -358,6 +413,162 @@ export class CityViewport {
         for (const [east, north, text] of data.labels ?? [])
             this.label(text, [east, north, z + .5]);
         this.finish(extent);
+    }
+    private rtGeometry(coords: Float32Array) {
+        const geometry = this.geometry(new THREE.BufferGeometry());
+        geometry.setAttribute('position', new THREE.BufferAttribute(coords, 3));
+        geometry.computeBoundingSphere();
+        return geometry;
+    }
+    private rtPoints(coords: Float32Array, color: number, size: number, shape: 'square' | 'diamond' | 'ring', name: string, group = this.rtRoot) {
+        if (!coords.length) return;
+        const material = this.material(new THREE.PointsMaterial({ color, size, sizeAttenuation: false, transparent: true, depthTest: false, depthWrite: false, toneMapped: false }));
+        const clip = shape === 'diamond' ? 'if (abs(gl_PointCoord.x - 0.5) + abs(gl_PointCoord.y - 0.5) > 0.5) discard;' : shape === 'ring' ? 'float r = length(gl_PointCoord - vec2(0.5)); if (r > 0.5 || r < 0.28) discard;' : '';
+        material.onBeforeCompile = shader => {
+            shader.fragmentShader = shader.fragmentShader.replace('#include <clipping_planes_fragment>', `#include <clipping_planes_fragment>\n${clip}`);
+        };
+        material.customProgramCacheKey = () => `rt-${shape}`;
+        const points = new THREE.Points(this.rtGeometry(coords), material);
+        points.name = name;
+        points.renderOrder = 4;
+        points.raycast = () => {};
+        group.add(points);
+    }
+    /** Append all stored rays, batched by mechanism rather than one draw call per ray. */
+    appendRTBatch(batch: RTBatch) {
+        const measured = measureRTBatch(batch);
+        const pathCounts = new Map<number, number>(), markerCounts = new Map<number, number>();
+        const pathCode = (interactions: number[]) => interactions.length === 0 ? 0 : interactions.every(code => code === interactions[0]) ? interactions[0] : -1;
+        for (const ray of batch.rays) {
+            const code = pathCode(ray.interactions);
+            pathCounts.set(code, (pathCounts.get(code) ?? 0) + (ray.points.length - 1) * 6);
+            for (const bounce of ray.interactions) markerCounts.set(bounce, (markerCounts.get(bounce) ?? 0) + 3);
+        }
+        const allocate = (counts: Map<number, number>) => new Map([...counts].map(([code, length]) => [code, { coords: new Float32Array(length), offset: 0 }]));
+        const paths = allocate(pathCounts), markers = allocate(markerCounts);
+        const put = (target: { coords: Float32Array; offset: number }, p: Vec3) => {
+            target.coords[target.offset++] = p[0];
+            target.coords[target.offset++] = p[2];
+            target.coords[target.offset++] = -p[1];
+        };
+        for (const ray of batch.rays) {
+            const target = paths.get(pathCode(ray.interactions))!;
+            for (let i = 1; i < ray.points.length; i++) {
+                put(target, ray.points[i - 1]);
+                put(target, ray.points[i]);
+            }
+            ray.interactions.forEach((code, i) => put(markers.get(code)!, ray.points[i + 1]));
+        }
+        for (const [code, { coords }] of paths) {
+            // Mixed-mechanism paths stay neutral; their individual bounce colors
+            // retain the actual sequence instead of pretending the path has one type.
+            const material = this.material(new THREE.LineBasicMaterial({ color: rtColors[code] ?? rtNeutral, transparent: true, opacity: .86, depthWrite: false, toneMapped: false }));
+            const line = new THREE.LineSegments(this.rtGeometry(coords), material);
+            line.name = `RT paths mechanism ${code}`;
+            line.renderOrder = 2;
+            this.rtRoot.add(line);
+        }
+        for (const [code, { coords }] of markers)
+            this.rtPoints(coords, rtColors[code] ?? rtNeutral, 6, 'square', `RT interaction ${code}`);
+        const coordinates = (positions: Vec3[], seen: Set<string>) => {
+            const fresh = positions.filter(p => {
+                const key = p.join(',');
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+            const target = { coords: new Float32Array(fresh.length * 3), offset: 0 };
+            fresh.forEach(p => put(target, p));
+            return target.coords;
+        };
+        this.rtPoints(coordinates([batch.tx_position], this.rtTXPositions), rtTX, 16, 'diamond', 'RT TX markers');
+        this.rtPoints(coordinates(batch.rx_positions, this.rtRXPositions), rtRX, 13, 'ring', 'RT RX sample markers');
+        this.rtPathCount += batch.rays.length;
+        this.rtSegmentCount += measured.segments;
+        this.rtInteractionCount += measured.interactions;
+        this.rtBatchCount++;
+        this.invalidate();
+    }
+    setRTBatchTotal(total: number) {
+        this.rtBatchTotal = total;
+    }
+    private clearRTGroup(group: THREE.Group) {
+        group.traverse(object => {
+            if (object instanceof THREE.LineSegments || object instanceof THREE.Points) {
+                object.geometry.dispose();
+                this.geometries.delete(object.geometry);
+                const materials = Array.isArray(object.material) ? object.material : [object.material];
+                for (const material of materials) {
+                    material.dispose();
+                    this.materials.delete(material);
+                }
+            }
+        });
+        group.clear();
+    }
+    clearRTPaths() {
+        this.clearRTGroup(this.rtRoot);
+        this.rtPathCount = this.rtSegmentCount = this.rtInteractionCount = this.rtBatchCount = this.rtBatchTotal = 0;
+        this.rtTXPositions.clear();
+        this.rtRXPositions.clear();
+        this.invalidate();
+    }
+    clearRTCoverage() {
+        this.clearRTGroup(this.rtCoverageRoot);
+        this.rtCoverageCount = this.rtCoverageFiniteCount = 0;
+        this.rtCoverageRange = null;
+        this.invalidate();
+    }
+    clearRT() {
+        this.clearRTPaths();
+        this.clearRTCoverage();
+    }
+    setRTCoverage(coverage: RTCoverage) {
+        this.clearRTCoverage();
+        if (!Array.isArray(coverage.positions) || !Array.isArray(coverage.gain_db) || coverage.positions.length !== coverage.gain_db.length || !coverage.positions.every(validRTPoint))
+            throw new Error('RT 覆盖采样位置与增益不匹配');
+        let min = Infinity, max = -Infinity;
+        for (const gain of coverage.gain_db) {
+            if (gain === null) continue;
+            if (typeof gain !== 'number' || !Number.isFinite(gain)) throw new Error('RT 采样增益无效');
+            min = Math.min(min, gain);
+            max = Math.max(max, gain);
+            this.rtCoverageFiniteCount++;
+        }
+        this.rtCoverageCount = coverage.positions.length;
+        if (this.rtCoverageFiniteCount) this.rtCoverageRange = [min, max];
+        const coords = new Float32Array(coverage.positions.length * 3), colors = new Float32Array(coords.length);
+        coverage.positions.forEach((p, i) => {
+            coords.set([p[0], p[2], -p[1]], i * 3);
+            const gain = coverage.gain_db[i];
+            const color = gain === null ? new THREE.Color(0x7d8890) : rtCoverageColor(max === min ? .5 : (gain - min) / (max - min));
+            colors.set([color.r, color.g, color.b], i * 3);
+        });
+        if (coords.length) {
+            const geometry = this.rtGeometry(coords);
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            const points = new THREE.Points(geometry, this.material(new THREE.PointsMaterial({ size: 9, sizeAttenuation: false, vertexColors: true, transparent: true, depthTest: false, depthWrite: false, toneMapped: false })));
+            points.name = 'RT sample-only serving path gain';
+            points.renderOrder = 3;
+            points.raycast = () => {};
+            this.rtCoverageRoot.add(points);
+        }
+        this.invalidate();
+    }
+    focusRT() {
+        const box = new THREE.Box3().setFromObject(this.rtRoot);
+        box.union(new THREE.Box3().setFromObject(this.rtCoverageRoot));
+        if (!box.isEmpty()) this.frame(box, this.top);
+    }
+    rtDiagnostics() {
+        return {
+            rtPathCount: this.rtPathCount, rtSegmentCount: this.rtSegmentCount,
+            rtInteractionCount: this.rtInteractionCount,
+            rtBatchCount: this.rtBatchCount, rtBatchTotal: this.rtBatchTotal,
+            rtCoverageCount: this.rtCoverageCount, rtCoverageFiniteCount: this.rtCoverageFiniteCount,
+            rtCoverageRange: this.rtCoverageRange ? [...this.rtCoverageRange] : null,
+            rtTXCount: this.rtTXPositions.size, rtRXCount: this.rtRXPositions.size,
+        };
     }
     private ueSamples(positions: Float32Array) {
         // Render-only overlay: retain every candidate, without creating scene RX/subscribers.
@@ -687,6 +898,7 @@ export class CityViewport {
             uePointCount: this.uePointCount,
             ueVisible: this.uePointCount > 0 && !!this.groups.ue?.visible,
             uePositionsSample: this.uePositionsSample.map(p => [...p]),
+            ...this.rtDiagnostics(),
             vegetationCount: this.vegetationMeshes.filter(m => !m.userData.isBS).reduce((n, m) => n + m.count, 0),
             labelCount: this.labels.length,
             render: {

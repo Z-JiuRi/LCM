@@ -18,6 +18,89 @@ class ChannelTests(unittest.TestCase):
                     convention='deepmimo',num_antennas=32,significant_db=25.,
                     split_mode='random',block_m=100.)
 
+    def test_gpu_allocation_and_disk_guard(self):
+        import os
+        from types import SimpleNamespace
+        with patch.dict(os.environ,{'CUDA_VISIBLE_DEVICES':'GPU-a,GPU-b'}):
+            self.assertEqual(G.selected_devices(['GPU-b']),['GPU-b'])
+            with self.assertRaises(ValueError):G.selected_devices(['GPU-c'])
+            with self.assertRaises(ValueError):G.selected_devices(['GPU-a','GPU-a'])
+            self.assertIsNone(G.selected_devices(None))
+        with tempfile.TemporaryDirectory() as d:
+            target=Path(d)/'new'
+            with patch.object(G.shutil,'disk_usage',return_value=SimpleNamespace(free=1024)):
+                self.assertEqual(G.require_disk_space(target,1000,0),1024)
+                with self.assertRaises(ValueError):G.require_disk_space(target,1025,0)
+            self.assertFalse(target.exists())
+        self.assertEqual(G.parse_cpu_set('0-2,5'),{0,1,2,5})
+        with self.assertRaises(ValueError):G.parse_cpu_set('4-2')
+        estimate=G.storage_estimate(100,3,32,64)
+        self.assertEqual(estimate['sector_cfr_bytes'],100*3*32*64*8)
+        self.assertGreater(estimate['known_output_estimate_bytes'],estimate['sector_cfr_bytes'])
+
+    def test_pinned_scheduler_without_rt(self):
+        from concurrent.futures import Future
+        devices=[]
+        class FakeExecutor:
+            def __init__(self,**kwargs):self.device=kwargs['initargs'][0];devices.append(self.device)
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def submit(self,function,task):
+                future=Future();future.set_result({'index':task['index'],'device':self.device});return future
+        tasks=[{'index':i} for i in range(9)]
+        with patch.object(G,'ProcessPoolExecutor',FakeExecutor):
+            results=G.run_sector_tasks(tasks,1,['GPU-a','GPU-b','GPU-c'])
+        self.assertEqual(devices,['GPU-a','GPU-b','GPU-c'])
+        self.assertEqual(sorted(r['index'] for r in results),list(range(9)))
+        self.assertEqual({r['device'] for r in results},set(devices))
+
+    def test_blocked_statistics_matches_dense(self):
+        rng=np.random.default_rng(9)
+        a=(rng.normal(size=(3,1,32,259))+1j*rng.normal(size=(3,1,32,259))).astype(np.complex64)
+        tau=np.tile(np.arange(259)*1e-9,(3,1));valid=rng.random((3,259))>.3
+        gain,refs,counts=G.path_statistics(a,tau,valid)
+        powers=np.where(valid,np.mean(abs(a.astype(np.complex128))**2,axis=(1,2)),0)
+        np.testing.assert_array_equal(gain,powers.sum(axis=1))
+        np.testing.assert_array_equal(counts,valid.sum(axis=1))
+
+    def test_explicit_channel_contract_and_physical_extraction(self):
+        from types import SimpleNamespace
+        raw=np.ones((1,1,1,2,2),np.complex64)*(1+1j)
+        tau=np.array([[[1e-7,2.5e-7]]],np.float32);valid=np.ones_like(tau,bool)
+        cir=raw*np.exp(-2j*np.pi*3.5e9*tau.astype(np.float64))[:,None,:,None,:]
+        calls=[]
+        def get_cir(**kwargs):calls.append(kwargs);return cir[...,None],tau.copy()
+        paths=SimpleNamespace(a=(raw.real,raw.imag),tau=tau,valid=valid,cir=get_cir)
+        raw_out,a,t,v=G.extract_coefficients(paths)
+        self.assertEqual(calls,[dict(normalize_delays=False,num_time_steps=1,out_type='numpy')])
+        np.testing.assert_array_equal(raw_out,raw[:,:,0]);np.testing.assert_array_equal(a,cir[:,:,0])
+        f=np.array([-1e6,0,1e6])
+        h,clipped=G.synthesize_cfr(a,t,v,f,convention='deepmimo',normalization='unit',delay_window='none')
+        expected=sum(a[...,p,None]*np.exp(-2j*np.pi*t[:,p,None,None,None]*f) for p in range(2))
+        np.testing.assert_allclose(h,expected,rtol=1e-6,atol=1e-7)
+        scaled,_=G.synthesize_cfr(a,t,v,f,convention='centered',normalization='ofdm',delay_window='none')
+        np.testing.assert_allclose(scaled,h/32,rtol=1e-6)
+        a=np.ones((1,1,1,1),np.complex64);t=np.array([[1e-3]]);v=np.ones((1,1),bool)
+        retained,_=G.synthesize_cfr(a,t,v,[0],normalization='unit',delay_window='none')
+        dropped,count=G.synthesize_cfr(a,t,v,[0],normalization='unit',delay_window='fft')
+        self.assertEqual(retained.item(),1);self.assertEqual(dropped.item(),0);self.assertEqual(count.item(),1)
+
+    def test_interaction_diagnostics_exclude_padding(self):
+        a=np.ones((2,1,1,2),np.complex64);tau=np.ones((2,2))*1e-7
+        valid=np.array([[True,False],[False,False]])
+        interactions=np.array([[[[1,8]],[[8,8]]],[[[0,2]],[[2,2]]]],dtype=np.uint32)
+        result=G.path_diagnostics(a,tau,valid,interactions,100)
+        self.assertEqual(result['interaction_code_counts'],{'1':1})
+        self.assertEqual(result['returned_valid_paths'],1)
+        self.assertIn('unknown',result['candidate_saturation'])
+
+    def test_default_diffraction_rejects_old_topology(self):
+        with tempfile.TemporaryDirectory() as d:
+            geo=Path(d)/'geo';geo.mkdir()
+            G.write_json(geo/'geometry-manifest.json',dict(groups=[],materials=[],source_names=[]))
+            with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit):G.main(['--geometry',str(geo),'--dry-run'])
+
     def test_frequencies(self):
         bins,f=G.frequency_plan()
         np.testing.assert_array_equal(bins,np.arange(0,1024,16))
@@ -76,16 +159,20 @@ class ChannelTests(unittest.TestCase):
         self.assertTrue(opts['diffraction']);self.assertTrue(opts['diffuse_reflection'])
         self.assertEqual(opts['seed'],44)
 
-    def test_spatial_split_keeps_blocks_together(self):
-        xy=np.array([[x*100+v,y*100+v,1.5] for y in range(10) for x in range(10) for v in [10,20]])
-        split=G.split_indices(xy)
-        np.testing.assert_array_equal(split[::2],split[1::2])
-        np.testing.assert_array_equal(split,G.split_indices(xy))
-        self.assertEqual(np.sum(split==0),160);self.assertEqual(np.sum(split==1),20)
+    def test_actual_parcel_boundary_and_outside_membership(self):
+        from parcel_groups import assign_parcels,parcel_records
+        records=parcel_records({'parcels':[
+            {'footprint':[[0,0],[10,0],[10,10],[0,10]],'role':'a'},
+            {'footprint':[[10,0],[20,0],[20,10],[10,10]],'role':'b'}]})
+        positions=np.array([[1,1,1.5],[10,5,1.5],[19,5,1.5],[25,5,1.5]])
+        labels,catalog=assign_parcels(positions,records)
+        np.testing.assert_array_equal(labels,[0,0,1,2])
+        self.assertEqual(catalog['multiple_membership_ues'],1)
+        self.assertEqual(sum(p['ue_count'] for p in catalog['groups']),4)
 
     def test_serving_association_and_output_dimensions(self):
         with tempfile.TemporaryDirectory() as d:
-            output=Path(d);config=self.config();config['n_sc']=4;config['n_fft']=8
+            output=Path(d);config=self.config();config['n_sc']=4;config['n_fft']=8;config['export_chunk']=1
             positions=np.array([[10+i*10,20,1.5] for i in range(10)])
             results=[];raws=[]
             for j in range(2):
@@ -93,12 +180,17 @@ class ChannelTests(unittest.TestCase):
                 H=np.ones((10,1,32,4),np.complex64)*(j+1)*(1+1j)
                 # Selection deliberately disagrees with CFR magnitude.
                 power=np.array([3 if i%2==j else 1 for i in range(10)],float)
+                power[0]=3  # Exact positive tie must keep the first sector.
                 power[-1]=0;H[-1]=0
                 refs=np.ones(10)*1e-7*(j+1);refs[-1]=np.nan
                 np.save(folder/'csi.npy',H);raws.append(H)
                 np.savez(folder/'link_stats.npz',path_gain_linear=power,tau_ref_s=refs,
                          path_counts=np.ones(10,np.int32),delay_window_clipped=np.zeros(10,np.int32),no_path_found=np.zeros(10,bool))
                 results.append(dict(folder=str(folder),sector={'id':f'S{j}'}))
+            from parcel_groups import assign_parcels,parcel_records
+            records=parcel_records({'parcels':[{'footprint':[[0,0],[55,0],[55,50],[0,50]],'role':'one'}]})
+            labels,catalog=assign_parcels(positions,records)
+            np.save(output/'ue_parcel_index.npy',labels);G.write_json(output/'parcel-catalog.json',catalog)
             summary=G.export_feedback(output,results,positions,config)
             self.assertEqual(summary['feedback_samples'],9);self.assertEqual(summary['no_path_found_all_sectors'],0)
             self.assertEqual(summary['zero_power_despite_valid_paths'],1)
@@ -107,38 +199,52 @@ class ChannelTests(unittest.TestCase):
                 np.testing.assert_array_equal(z['serving_sector_index'],[0,1,0,1,0,1,0,1,0,-1])
                 self.assertFalse(z['no_path_found_all_sectors'].any())
                 self.assertTrue(z['zero_power_despite_valid_paths'][-1])
-                for name in ['train','val','test']:
-                    data=np.load(output/f'{name}.npy')
+                scores=np.load(output/'sector_scores.npy',mmap_mode='r')
+                self.assertIsInstance(scores,np.memmap)
+                self.assertEqual(scores.shape,(2,10));self.assertEqual(scores.dtype,np.float64)
+                np.testing.assert_array_equal(scores,z['sector_scores_watt_equivalent'])
+                seen=[]
+                for name in ['parcel-0000','outside-parcels']:
+                    folder=output/'parcels'/name;data=np.load(folder/'csi.npy')
                     self.assertEqual(data.dtype,np.float32);self.assertEqual(data.shape[1:],(2,32,4))
-                    with np.load(output/f'{name}_aux.npz') as aux:
-                        reconstructed=(data[:,0]+1j*data[:,1])*aux['rms'][:,None,None]
-                        reconstructed*=np.exp(-2j*np.pi*aux['tau_ref_s'][:,None,None]*z['frequencies_hz'])
-                        expected=np.array([raws[s][u,0] for u,s in zip(aux['ue_indices'],aux['serving_sector_index'])]).reshape(-1,32,4)
+                    with np.load(folder/'ue.npz') as aux:
+                        keep=aux['feedback_usable'];seen.extend(aux['ue_indices'].tolist())
+                        self.assertTrue(np.all(data[~keep]==0))
+                        reconstructed=(data[keep,0]+1j*data[keep,1])*aux['rms'][keep,None,None]
+                        reconstructed*=np.exp(-2j*np.pi*aux['tau_ref_s'][keep,None,None]*z['frequencies_hz'])
+                        expected=np.array([raws[s][u,0] for u,s in zip(aux['ue_indices'][keep],aux['serving_sector_index'][keep])]).reshape(-1,32,4)
                         np.testing.assert_allclose(reconstructed,expected,rtol=1e-5,atol=1e-7)
                         self.assertEqual(len(aux['ue_positions_m']),len(data))
-            self.assertEqual(sum(v['count'] for v in summary['splits'].values()),9)
+                self.assertEqual(sorted(seen),list(range(10)))
+                self.assertNotIn('split_label',z.files)
+            self.assertEqual(sum(v['count'] for v in summary['parcel_groups'].values()),10)
+            self.assertFalse((output/'train.npy').exists())
 
     def test_dry_run_never_imports_rt_or_creates_output(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);geometry=root/'geo';geometry.mkdir()
             (geometry/'one.obj').write_text('v 0 0 0\n')
-            G.write_json(geometry/'geometry-manifest.json',dict(groups=[{'obj':'one.obj'}],materials=[]))
+            G.write_json(geometry/'geometry-manifest.json',dict(groups=[{'obj':'one.obj'}],materials=[],source_names=[],parcels=[]))
             np.save(geometry/'ue_candidates.npy',np.array([[10,20,1.5],[30,40,1.5]]))
             dep=root/'dep.json';G.write_json(dep,dict(sectors=[dict(id='S',position_m=[20,30,25],azimuth_deg=0,downtilt_deg=10)]))
             target=root/'output'
             with patch.object(G,'_worker',side_effect=AssertionError('RT must not run')),contextlib.redirect_stdout(io.StringIO()):
-                self.assertEqual(G.main(['--geometry',str(geometry),'--deployment',str(dep),'--output',str(target),'--dry-run']),0)
+                self.assertEqual(G.main(['--geometry',str(geometry),'--deployment',str(dep),'--output',str(target),'--propagation-profile','legacy','--dry-run']),0)
             self.assertFalse(target.exists())
 
     def test_mocked_worker_batches_and_complete_export(self):
         """Exercise real worker/main control flow with fake APIs, never import RT."""
         import sys
         from types import ModuleType, SimpleNamespace
-        scene=SimpleNamespace(receivers={})
+        scene=SimpleNamespace(receivers={},transmitters={})
         def add(items):
-            if isinstance(items,list):
-                for item in items:scene.receivers[item.name]=item.position
-        scene.add=add;scene.remove=lambda name:scene.receivers.pop(name)
+            for item in items if isinstance(items,list) else [items]:
+                if item.name=='tx':scene.transmitters[item.name]=item
+                else:scene.receivers[item.name]=item.position
+        def remove(items):
+            for name in items if isinstance(items,list) else [items]:
+                scene.receivers.pop(name,None);scene.transmitters.pop(name,None)
+        scene.add=add;scene.remove=remove
         calls=[]
         class FakeSolver:
             def __init__(self,deterministic):self.deterministic=deterministic
@@ -161,7 +267,9 @@ class ChannelTests(unittest.TestCase):
                     a=(a_re,a_im), tau=tau, valid=valid,
                     theta_t=angle,phi_t=angle,theta_r=angle,phi_r=angle,
                     interactions=interactions,vertices=np.zeros((1,n,1,2,3)))
-        mi=ModuleType('mitsuba');mi.set_variant=lambda variant:None;mi.__version__='fake'
+        mi=ModuleType('mitsuba');mi._variant=None
+        mi.set_variant=lambda variant:setattr(mi,'_variant',variant)
+        mi.variant=lambda:mi._variant;mi.__version__='fake'
         rt=ModuleType('sionna.rt');rt.__version__='fake';rt.PathSolver=FakeSolver
         rt.Receiver=lambda name,position:SimpleNamespace(name=name,position=position)
         rt.Transmitter=lambda *args,**kwargs:SimpleNamespace(name='tx')
@@ -169,14 +277,16 @@ class ChannelTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);geo=root/'geo';geo.mkdir()
             (geo/'one.obj').write_text('v 0 0 0\n')
-            G.write_json(geo/'geometry-manifest.json',dict(groups=[{'obj':'one.obj'}],materials=[]))
+            G.write_json(geo/'geometry-manifest.json',dict(groups=[{'obj':'one.obj'}],materials=[],source_names=[],parcels=[]))
             np.save(geo/'ue_candidates.npy',np.array([[10.,20.,1.5],[20.,20.,1.5],[30.,20.,1.5]]))
             dep=root/'dep.json';G.write_json(dep,dict(sectors=[dict(id='S',position_m=[0,0,25],azimuth_deg=0,downtilt_deg=10)]))
             target=root/'out'
             argv=['--geometry',str(geo),'--deployment',str(dep),'--output',str(target),
-                  '--workers','1','--chunk','2','--split-mode','random','--samples-per-src','1234']
+                  '--workers','1','--chunk','2','--samples-per-src','1234',
+                  '--propagation-profile','legacy','--coefficient-mode','raw-passband']
             with patch.dict(sys.modules,{'mitsuba':mi,'sionna':parent,'sionna.rt':rt}),\
-                 patch.object(G,'build_scene',return_value=scene),contextlib.redirect_stdout(io.StringIO()):
+                 patch.object(G,'build_scene',return_value=scene),patch.object(G,'_SCENE_CACHE',None),\
+                 contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(G.main(argv),0)
             self.assertEqual([n for n,_ in calls],[2,1])
             self.assertTrue(all(opt['samples_per_src']==1234 for _,opt in calls))
@@ -192,6 +302,83 @@ class ChannelTests(unittest.TestCase):
                     self.assertIn('interactions',z.files);self.assertIn('vertices_m',z.files)
             with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
                 with self.assertRaises(SystemExit):G.main(argv)
+
+    def test_worker_scene_cache_async_arrays_and_failure_cleanup(self):
+        """Mock RT only: cache lifecycle and bounded writer preserve all arrays."""
+        import sys
+        from types import ModuleType, SimpleNamespace
+        scenes=[]; calls=[]
+        class Device:
+            def __init__(self,name,position,**kwargs):self.name=name;self.position=position
+        class Tx(Device):pass
+        class Rx(Device):pass
+        class Scene:
+            def __init__(self):self.transmitters={};self.receivers={};self.fail_add=False
+            def add(self,items):
+                for item in items if isinstance(items,list) else [items]:
+                    devices=self.transmitters if isinstance(item,Tx) else self.receivers
+                    if item.name in devices:raise RuntimeError('Duplicate device')
+                    devices[item.name]=item
+                    if self.fail_add and isinstance(item,Rx):raise RuntimeError('Partial receiver add')
+            def remove(self,items):
+                for name in items if isinstance(items,list) else [items]:
+                    self.transmitters.pop(name,None);self.receivers.pop(name,None)
+        def build(*args):
+            scene=Scene();scenes.append(scene);return scene
+        class Solver:
+            def __init__(self,deterministic):self.deterministic=deterministic
+            def __call__(self,scene,**options):
+                self_test.assertTrue(self.deterministic)
+                self_test.assertEqual(len(scene.transmitters),1)
+                calls.append(options.copy());n=len(scene.receivers)
+                a=np.arange(n*2*3,dtype=np.float32).reshape(n,1,1,2,3)+1
+                tau=np.broadcast_to(np.array([1e-8,3e-8,9e-8]),(n,1,3)).copy()
+                valid=np.ones((n,1,3),bool);valid[:,:,-1]=False
+                return SimpleNamespace(a=(a,a*.125),tau=tau,valid=valid,
+                    theta_t=tau,phi_t=tau,theta_r=tau,phi_r=tau,
+                    interactions=valid.astype(np.uint32),vertices=np.zeros((n,1,3,3)))
+        self_test=self
+        mi=ModuleType('mitsuba');mi.variant=lambda:'mock';mi.__version__='mock'
+        rt=ModuleType('sionna.rt');rt.__version__='mock';rt.PathSolver=Solver
+        rt.Transmitter=Tx;rt.Receiver=Rx
+        parent=ModuleType('sionna');parent.rt=rt
+        with tempfile.TemporaryDirectory() as d,\
+             patch.dict(sys.modules,{'mitsuba':mi,'sionna':parent,'sionna.rt':rt}),\
+             patch.object(G,'_SCENE_CACHE',None),patch.object(G,'build_scene',side_effect=build),\
+             contextlib.redirect_stdout(io.StringIO()):
+            root=Path(d);geo=root/'geo';geo.mkdir()
+            G.write_json(geo/'geometry-manifest.json',{})
+            def task(index,**overrides):
+                output=root/f'out{index}';output.mkdir();np.save(output/'ue_positions.npy',np.zeros((5,3)))
+                config=dict(self.config(),variant='mock',carrier_hz=3.5e9,tx_pattern='iso',
+                            num_antennas=2,n_fft=16,n_sc=4,chunk=2)
+                config.update(overrides)
+                return dict(index=index,geometry=str(geo),output=str(output),config=config,
+                            sector=dict(id=f'S{index}',position_m=[0,0,25],azimuth_deg=20,downtilt_deg=5))
+            first=G._worker(task(0));second=G._worker(task(1,async_write=True,raw_compression='stored',flush_batches=2))
+            self.assertEqual(len(scenes),1)
+            self.assertFalse(first['execution']['scene_cache_hit']);self.assertTrue(second['execution']['scene_cache_hit'])
+            self.assertFalse(scenes[0].transmitters);self.assertFalse(scenes[0].receivers)
+            left=Path(first['folder']);right=Path(second['folder'])
+            np.testing.assert_array_equal(np.load(left/'csi.npy'),np.load(right/'csi.npy'))
+            metadata=json.loads((right/'metadata.json').read_text())
+            self.assertEqual([(r['start'],r['stop']) for r in metadata['batches']],[(0,2),(2,4),(4,5)])
+            for record in metadata['batches']:
+                self.assertEqual(record['sha256'],G.sha256(right/record['file']))
+                with np.load(left/record['file']) as a,np.load(right/record['file']) as b:
+                    self.assertEqual(a.files,b.files)
+                    for key in a.files:np.testing.assert_array_equal(a[key],b[key])
+            self.assertEqual([c['seed'] for c in calls],[42]*3+[43]*3)
+            self.assertTrue(all(np.isfinite(v) and v>=0 for v in second['timings'].values()))
+            G._worker(task(2,carrier_hz=2.4e9));self.assertEqual(len(scenes),2)
+            scenes[-1].fail_add=True
+            with self.assertRaisesRegex(RuntimeError,'Partial receiver add'):G._worker(task(3,carrier_hz=2.4e9))
+            self.assertIsNone(G._SCENE_CACHE)
+            self.assertFalse(scenes[-1].transmitters);self.assertFalse(scenes[-1].receivers)
+            with patch.object(G,'_save_path_batch',side_effect=OSError('Injected writer failure')):
+                with self.assertRaisesRegex(OSError,'Injected writer failure'):G._worker(task(4,async_write=True))
+            self.assertIsNone(G._SCENE_CACHE)
+            self.assertFalse(scenes[-1].transmitters);self.assertFalse(scenes[-1].receivers)
 
 
 class GeometryTests(unittest.TestCase):

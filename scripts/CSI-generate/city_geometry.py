@@ -154,63 +154,208 @@ def _safe_name(key: str) -> str:
     return (label.strip("_.") or "unnamed")[:100] + "_" + hashlib.sha256(key.encode()).hexdigest()[:16]
 
 
-def export_buildings(scene: dict, out_dir: Path, group_by_material: bool = True) -> list[dict]:
-    """Export each face with its own material; never collapse mixed bindings."""
+_TOPOLOGY_COUNTS = (
+    "vertices", "triangles", "edges", "boundary_edges", "boundary_edges_world_z0",
+    "interior_edges", "nonmanifold_edges", "winding_conflict_edges",
+    "coplanar_interior_edges", "noncoplanar_interior_edges",
+    "source_face_internal_edges", "cross_material_edges",
+    "cross_material_coplanar_edges", "cross_material_noncoplanar_edges",
+    "cross_group_edges", "cross_group_coplanar_edges", "cross_group_noncoplanar_edges",
+    "degenerate_triangles", "near_degenerate_triangle_count",
+    "upward_triangles", "downward_triangles", "vertical_triangles",
+)
+_NEAR_DEGENERATE_AREA_M2 = 1e-6  # Diagnostic only; never delete or move a source triangle.
+
+
+def _sum_topology(records: Iterable[dict]) -> dict:
+    total = dict.fromkeys(_TOPOLOGY_COUNTS, 0)
+    minimum_areas = []
+    for record in records:
+        for key in _TOPOLOGY_COUNTS:
+            total[key] += record[key]
+        if record["min_triangle_area_m2"] is not None:
+            minimum_areas.append(record["min_triangle_area_m2"])
+    total["min_triangle_area_m2"] = min(minimum_areas) if minimum_areas else None
+    return total
+
+
+def mesh_topology(vertices: np.ndarray, triangles: np.ndarray,
+                  material_keys: list[str] | None = None,
+                  group_keys: list | None = None, source_faces: list | None = None) -> dict:
+    """Diagnose indexed adjacency; never move vertices or change triangle winding.
+
+    Coplanarity uses |dot(n0,n1)| >= 1-1e-10 (also for reversed winding).
+    It is a diagnostic angular tolerance, NOT a coordinate welding tolerance.
+    Cross-material/group counts concern physical shared edges with exactly two
+    incident triangles; nonmanifold edges are counted separately and fail gates.
+    Independent building instances must be indexed separately before this call.
+    """
+    vertices = np.asarray(vertices, dtype=float).reshape(-1, 3)
+    triangles = np.asarray(triangles, dtype=np.int64).reshape(-1, 3)
+    result = dict.fromkeys(_TOPOLOGY_COUNTS, 0)
+    result.update(vertices=len(vertices), triangles=len(triangles), min_triangle_area_m2=None)
+    if not len(triangles):
+        return result
+    points = vertices[triangles]
+    normals = np.cross(points[:, 1] - points[:, 0], points[:, 2] - points[:, 0])
+    lengths = np.linalg.norm(normals, axis=1)
+    valid = lengths > 1e-12
+    normals[valid] /= lengths[valid, None]
+    result["degenerate_triangles"] = int(np.count_nonzero(~valid))
+    result["near_degenerate_triangle_count"] = int(np.count_nonzero(lengths / 2 <= _NEAR_DEGENERATE_AREA_M2))
+    result["min_triangle_area_m2"] = float(np.min(lengths) / 2)
+    result["upward_triangles"] = int(np.count_nonzero(valid & (normals[:, 2] > 1e-10)))
+    result["downward_triangles"] = int(np.count_nonzero(valid & (normals[:, 2] < -1e-10)))
+    result["vertical_triangles"] = int(np.count_nonzero(valid & (np.abs(normals[:, 2]) <= 1e-10)))
+    edges = {}
+    for face, indices in enumerate(triangles):
+        for a, b in zip(indices, np.roll(indices, -1)):
+            a, b = int(a), int(b)
+            edges.setdefault((min(a, b), max(a, b)), []).append((face, a < b))
+    result["edges"] = len(edges)
+    for (a, b), incident in edges.items():
+        if len(incident) == 1:
+            result["boundary_edges"] += 1
+            result["boundary_edges_world_z0"] += int(vertices[a, 2] == vertices[b, 2] == 0.0)
+        elif len(incident) > 2:
+            result["nonmanifold_edges"] += 1
+        else:
+            (f0, forward0), (f1, forward1) = incident
+            result["interior_edges"] += 1
+            result["winding_conflict_edges"] += int(forward0 == forward1)
+            coplanar = abs(float(np.dot(normals[f0], normals[f1]))) >= 1.0 - 1e-10
+            suffix = "coplanar_edges" if coplanar else "noncoplanar_edges"
+            result["coplanar_interior_edges" if coplanar else "noncoplanar_interior_edges"] += 1
+            if source_faces is not None and source_faces[f0] == source_faces[f1]:
+                result["source_face_internal_edges"] += 1
+            if material_keys is not None and material_keys[f0] != material_keys[f1]:
+                result["cross_material_edges"] += 1
+                result["cross_material_" + suffix] += 1
+            if group_keys is not None and group_keys[f0] != group_keys[f1]:
+                result["cross_group_edges"] += 1
+                result["cross_group_" + suffix] += 1
+    return result
+
+
+def _indexed_asset(asset: dict) -> tuple[np.ndarray, np.ndarray, list[str], list[int]]:
+    """Index exact local coordinates once; no tolerance weld or winding repair."""
+    faces, keys = asset["faces"], asset.get("face_material_keys")
+    if keys is None or len(keys) != len(faces):
+        raise ValueError(f"Missing/mismatched face material keys for {asset['id']}")
+    vertices, triangles, materials, source_faces = [], [], [], []
+    index = {}
+    for face_index, (raw, key) in enumerate(zip(faces, keys)):
+        if not isinstance(key, str) or not key:
+            raise ValueError("Material keys must be nonempty strings")
+        try:
+            face_triangles = _triangulate_face(raw)
+        except ValueError as error:
+            raise ValueError(f"{asset['id']} face {face_index}: {error}") from error
+        for triangle in face_triangles:
+            indices = []
+            for vertex in triangle:
+                coordinate = tuple(vertex)
+                if coordinate not in index:
+                    index[coordinate] = len(vertices)
+                    vertices.append(vertex)
+                indices.append(index[coordinate])
+            triangles.append(indices)
+            materials.append(key)
+            source_faces.append(face_index)
+    return (np.asarray(vertices, dtype=float).reshape(-1, 3),
+            np.asarray(triangles, dtype=np.int64).reshape(-1, 3), materials, source_faces)
+
+
+def export_buildings(scene: dict, out_dir: Path, group_by_material: bool = True,
+                     *, diagnostics: dict | None = None) -> list[dict]:
+    """Share exact vertices per INSTANCE and material, never across buildings.
+
+    OBJ files may contain multiple instances of one material, but each instance
+    has a disjoint index range even when its coordinates coincide with another.
+    Physical adjacency is diagnosed before material partitioning; unsupported
+    cross-material wedges remain explicit, not silently assigned one material.
+    """
     if not group_by_material:
         raise ValueError("Disabling per-face material grouping is unsupported")
     assets = {a["id"]: a for a in scene["assets"]}
-    buckets = {}
-    omitted = 0
+    indexed_assets, buckets, physical = {}, {}, []
+    omitted = mixed = affected = 0
+    issues = []
     for instance_index, instance in enumerate(scene["instances"]):
         asset = assets[instance["asset"]]
-        faces = asset["faces"]
-        material_keys = asset.get("face_material_keys")
-        if material_keys is None:
-            raise ValueError(f"Missing face material keys for {asset['id']}; use explicit assumed:concrete")
-        if len(material_keys) != len(faces):
-            raise ValueError(f"Face/material count mismatch for {asset['id']}")
+        if asset["id"] not in indexed_assets:
+            indexed_assets[asset["id"]] = _indexed_asset(asset)
+        local_vertices, all_triangles, all_materials, all_faces = indexed_assets[asset["id"]]
         theta = math.radians(float(instance.get("rotation_z_deg", 0.0)))
         rotation = np.array([[math.cos(theta), -math.sin(theta), 0.0],
                              [math.sin(theta), math.cos(theta), 0.0], [0.0, 0.0, 1.0]])
         position = np.asarray(instance["position_m"], dtype=float)
         if position.shape != (3,) or not np.isfinite(position).all() or not np.isfinite(rotation).all():
             raise ValueError("Invalid building transform")
-        for face_index, (raw, key) in enumerate(zip(faces, material_keys)):
-            if not isinstance(key, str) or not key:
-                raise ValueError("Material keys must be nonempty strings")
-            # Validate BEFORE the only permitted omission. Local-z0 faces of
-            # elevated instances remain in the exported scene.
-            try:
-                local = _triangulate_face(raw)
-            except ValueError as error:
-                raise ValueError(f"{asset['id']} face {face_index}: {error}") from error
-            world = [tri @ rotation.T + position for tri in local]
-            if all(np.all(tri[:, 2] == 0.0) for tri in world):
-                omitted += 1
-                continue
-            bucket = buckets.setdefault(key, {"vertices": [], "triangles": [], "instances": set(), "faces": 0})
-            for tri in world:
-                offset = len(bucket["vertices"])
-                bucket["vertices"].extend(tri)
-                bucket["triangles"].append([offset, offset + 1, offset + 2])
-            bucket["instances"].add(instance_index)
-            bucket["faces"] += 1
+        world_vertices = local_vertices @ rotation.T + position
+        # Omission is by complete source FACE, not triangle: near-planar faces
+        # accepted by the numeric planarity tolerance must not be partly removed.
+        triangle_at_z0 = np.all(world_vertices[all_triangles, 2] == 0.0, axis=1)
+        face_at_z0 = {}
+        for face, at_z0 in zip(all_faces, triangle_at_z0):
+            face_at_z0[face] = face_at_z0.get(face, True) and bool(at_z0)
+        omitted_faces = {face for face, at_z0 in face_at_z0.items() if at_z0}
+        keep = np.asarray([face not in omitted_faces for face in all_faces], dtype=bool)
+        omitted += len(omitted_faces)
+        triangles = all_triangles[keep]
+        materials = [all_materials[i] for i in np.flatnonzero(keep)]
+        source_faces = [all_faces[i] for i in np.flatnonzero(keep)]
+        mixed += int(len(set(materials)) > 1)
+        used, inverse = np.unique(triangles, return_inverse=True)
+        topology = mesh_topology(world_vertices[used], inverse.reshape(-1, 3), materials,
+                                 materials, source_faces)
+        physical.append(topology)
+        if any(topology[k] for k in ("nonmanifold_edges", "winding_conflict_edges",
+                                    "cross_material_edges", "degenerate_triangles")):
+            affected += 1
+            if len(issues) < 20:
+                issues.append({"instance_index": instance_index, "asset_id": asset["id"],
+                               "source_name": asset.get("source"), "topology": topology})
+        for key in sorted(set(materials)):
+            selection = [i for i, material in enumerate(materials) if material == key]
+            used, inverse = np.unique(triangles[selection], return_inverse=True)
+            bucket = buckets.setdefault(key, {"vertices": [], "triangles": [], "faces": 0,
+                                              "source_faces": [], "instance_ranges": []})
+            vertex_start, triangle_start = len(bucket["vertices"]), len(bucket["triangles"])
+            bucket["vertices"].extend(world_vertices[used])
+            bucket["triangles"].extend(inverse.reshape(-1, 3) + vertex_start)
+            bucket["source_faces"].extend((instance_index, source_faces[i]) for i in selection)
+            bucket["faces"] += len({source_faces[i] for i in selection})
+            bucket["instance_ranges"].append({"instance_index": instance_index,
+                "asset_id": asset["id"], "vertex_start": vertex_start, "vertex_count": len(used),
+                "triangle_start": triangle_start, "triangle_count": len(selection)})
     groups = []
     for key, bucket in sorted(buckets.items()):
         name = _safe_name(key)
         obj_path = out_dir / f"group_building_{name}.obj"
-        triangles = np.asarray(bucket["triangles"], dtype=np.int64)
-        _write_obj(obj_path, np.asarray(bucket["vertices"]), triangles)
+        vertices, triangles = np.asarray(bucket["vertices"]), np.asarray(bucket["triangles"], dtype=np.int64)
+        _write_obj(obj_path, vertices, triangles)
         groups.append({"material_key": key, "material_name": name, "obj": obj_path.name,
-                       "triangles": len(triangles), "instances": len(bucket["instances"]),
-                       "faces": bucket["faces"], "world_z0_faces_omitted_total": omitted})
+                       "role": "building", "vertices": len(vertices), "triangles": len(triangles),
+                       "instances": len(bucket["instance_ranges"]), "faces": bucket["faces"],
+                       "instance_ranges": bucket["instance_ranges"],
+                       "topology": mesh_topology(vertices, triangles, source_faces=bucket["source_faces"]),
+                       "world_z0_faces_omitted_total": omitted})
+    if diagnostics is not None:
+        diagnostics.update(building_physical=_sum_topology(physical),
+                           building_exported=_sum_topology(g["topology"] for g in groups),
+                           mixed_material_building_instances=mixed,
+                           building_instances_with_topology_issues=affected,
+                           building_issue_examples=issues, world_z0_faces_omitted=omitted)
     return groups
 
 
-def export_terrain(scene: dict, out_dir: Path) -> list[dict]:
-    """Validate source triangle indices and their complete role/material binding."""
+def export_terrain(scene: dict, out_dir: Path, *, diagnostics: dict | None = None) -> list[dict]:
+    """Keep source indexing and diagnose physical edges BEFORE role/material splits."""
     terrain = scene.get("environment", {}).get("terrain")
     if not terrain:
+        if diagnostics is not None:
+            diagnostics.update(terrain_physical=_sum_topology([]), terrain_exported=_sum_topology([]))
         return []
     vertices = np.asarray(terrain["vertices"], dtype=float)
     raw_triangles = np.asarray(terrain["triangles"])
@@ -241,10 +386,82 @@ def export_terrain(scene: dict, out_dir: Path) -> list[dict]:
         used, inverse = np.unique(local_triangles, return_inverse=True)
         name = _safe_name(key)
         obj_path = out_dir / f"group_terrain_{_safe_name(role)}_{name}.obj"
-        _write_obj(obj_path, vertices[used], inverse.reshape(-1, 3))
+        indexed = inverse.reshape(-1, 3)
+        _write_obj(obj_path, vertices[used], indexed)
         groups.append({"material_key": key, "material_name": name, "terrain_role": role,
-                       "obj": obj_path.name, "triangles": len(local_triangles)})
+                       "role": "terrain", "obj": obj_path.name, "vertices": len(used),
+                       "triangles": len(local_triangles),
+                       "topology": mesh_topology(vertices[used], indexed)})
+    if diagnostics is not None:
+        diagnostics.update(terrain_physical=mesh_topology(vertices, triangles, material_keys,
+                                                         list(zip(roles, material_keys))),
+                           terrain_exported=_sum_topology(g["topology"] for g in groups))
     return groups
+
+
+def _topology_gate(diagnostics: dict) -> dict:
+    """Conservative diffraction gate; an export is diagnostic, not RT approval.
+
+    Boundaries alone do not fail ordinary wedge diffraction (world-z0 building
+    bottoms are deliberately open). Split coplanar seams do fail free-edge
+    diffraction because native per-shape adjacency sees them as screen edges.
+    """
+    failures, edge_failures, warnings = [], [], []
+    for role in ("building", "terrain"):
+        physical = diagnostics[role + "_physical"]
+        for count in ("nonmanifold_edges", "winding_conflict_edges", "degenerate_triangles"):
+            if physical[count]:
+                failures.append(f"{role}_{count}")
+        if physical["cross_group_noncoplanar_edges"]:
+            failures.append(f"{role}_unsupported_cross_group_wedges")
+        if physical["boundary_edges"]:
+            warnings.append(f"{role}_physical_open_boundaries")
+        if physical["cross_group_coplanar_edges"]:
+            edge_failures.append(f"{role}_split_coplanar_seams_are_false_free_edges")
+        if physical["near_degenerate_triangle_count"]:
+            warnings.append(f"{role}_source_near_degenerate_triangles_preserved")
+        if role == "terrain" and physical["downward_triangles"]:
+            warnings.append("terrain_source_downward_triangles_preserved")
+    diagnostics.update(
+        diffraction_ready=not failures, strict_gate_failures=failures,
+        edge_diffraction_ready=not (failures or edge_failures),
+        edge_diffraction_gate_failures=failures + edge_failures, warnings=warnings,
+        unsupported_cross_material_wedges=sum(diagnostics[r + "_physical"]["cross_material_noncoplanar_edges"]
+                                              for r in ("building", "terrain")),
+        indexing="Exact source coordinates within each building instance/material; disjoint indices across instances. Terrain retains source vertex indexing.",
+        coplanar_normal_dot_tolerance=1e-10,
+        near_degenerate_area_threshold_m2=_NEAR_DEGENERATE_AREA_M2,
+        numerical_precision_warning="Topology and areas are computed from source float64 coordinates. Mitsuba/Sionna typically loads float32 vertices; near-collinear slivers may change normal direction or collapse there. No automatic removal, upward flip, coordinate rounding or outward-normal repair is applied.",
+        scope="Exported triangles after world-z0 omission. Physical building adjacency is checked within each instance before material splitting. No inter-building, building/terrain intersection, T-junction, self-intersection or outward-normal proof.",
+        native_material_limitation="Sionna 2.2 uses one RadioMaterialBase BSDF per mesh; built-in RadioMaterial uses the same material for both wedge faces. Cross-shape wedges are unsupported; no material averaging or custom heterogeneous diffraction is applied.",
+    )
+    return diagnostics
+
+
+def source_frequency_warnings(scene: dict, materials: list[MaterialSpec]) -> list[dict]:
+    """Report source-reference mismatch/unknowns without rescaling any material."""
+    frequencies = sorted({float(sector["carrier_frequency_hz"])
+                          for sector in scene.get("radio_deployment", {}).get("sectors", [])
+                          if isinstance(sector.get("carrier_frequency_hz"), (int, float))
+                          and math.isfinite(sector["carrier_frequency_hz"])
+                          and sector["carrier_frequency_hz"] > 0})
+    warnings = []
+    for material in materials:
+        reference = material.reference_frequency_hz
+        if reference is None:
+            code = "missing_source_reference_frequency"
+            message = "Source reference frequency is unspecified; frequency equivalence is unverified."
+        elif not frequencies:
+            code = "target_frequency_not_specified"
+            message = "Exporter has no target carrier; compare source reference frequency with the requested RT carrier."
+        elif any(f != reference for f in frequencies):
+            code = "source_target_frequency_mismatch"
+            message = "Source material reference differs from scene deployment carrier(s); parameters are retained, not rescaled."
+        else:
+            continue
+        warnings.append({"material_key": material.key, "reference_frequency_hz": reference,
+                         "scene_carrier_frequencies_hz": frequencies, "code": code, "message": message})
+    return warnings
 
 
 def _number(record: dict, name: str, minimum: float, maximum: float | None = None) -> float:
@@ -385,7 +602,10 @@ def prepare(scene_path: Path, out_dir: Path, spacing_m: float = 5.0,
         used_keys.extend(terrain["triangle_material_keys"])
     resolve_materials(scene, used_keys)
     out_dir.mkdir(parents=True, exist_ok=False)
-    groups = export_buildings(scene, out_dir) + export_terrain(scene, out_dir)
+    topology = {}
+    groups = (export_buildings(scene, out_dir, diagnostics=topology)
+              + export_terrain(scene, out_dir, diagnostics=topology))
+    _topology_gate(topology)
     if not groups:
         raise ValueError("No geometry triangles; refusing empty export")
     materials = resolve_materials(scene, [g["material_key"] for g in groups])
@@ -395,14 +615,31 @@ def prepare(scene_path: Path, out_dir: Path, spacing_m: float = 5.0,
         group["sha256"] = _sha256(out_dir / group["obj"])
     hashes = {g["obj"]: g["sha256"] for g in groups}
     hashes[ue_path.name] = _sha256(ue_path)
+    used_asset_ids = {instance["asset"] for instance in scene["instances"]}
+    source_names = {asset["source"] for asset in scene["assets"]
+                    if asset["id"] in used_asset_ids and isinstance(asset.get("source"), str)
+                    and asset["source"]}
+    source_names.update(material.source_record["source_scene"] for material in materials
+                        if isinstance(material.source_record.get("source_scene"), str)
+                        and material.source_record["source_scene"])
+    source_names = sorted(source_names)
+    from parcel_groups import parcel_records
     manifest = {
+        "parcels": parcel_records(scene),
+        "schema_version": 2, "source_names": source_names, "topology": topology,
+        "normals": {"source_winding_preserved": True, "face_normals": True,
+                    "flip_normals": False, "outward_orientation_verified": False,
+                    "winding_repaired": False},
+        "source_frequency_warnings": source_frequency_warnings(scene, materials),
         "source_scene": str(scene_path), "scene_sha256": hashlib.sha256(raw).hexdigest(),
         "extent_m": list(extent_m), "groups": groups, "materials": [vars(m) for m in materials],
         "ue_stats": ue_stats, "ue_candidates_sha256": hashes[ue_path.name], "artifact_sha256": hashes,
         "assumptions": [
             "Geometry is a synthetic planning layout, not a surveyed city.",
             "Region labels are planning roles, not measured population; UE candidates are a sounding grid, not active subscribers.",
-            "Source face winding preserved; no claim of outward normals or watertight meshes.",
+            "Source face winding preserved; no repair, tolerance welding, outward-normal proof or watertightness claim. Indexed adjacency diagnostics are not a full geometry validity proof.",
+            "Loader must use face_normals=True, flip_normals=False and remove_duplicate_vertices=False; native SceneObject(fname=...) otherwise flips normals by default in installed Sionna 2.2.",
+            "Material partitioning preserves exact tags but cannot represent native cross-material wedges. Consult strict diffraction and free-edge diffraction gates separately.",
             "Only building faces exactly coplanar with world z=0 are omitted to avoid duplicate ground surfaces; elevated local-z0 faces retained.",
             "Vegetation propagation is disabled and RT-enabled vegetation rejected; all vegetation footprints exclude UE candidates.",
             "Source material records are retained. Scattering translation is an explicit model assumption, not a validated source-equivalence claim.",

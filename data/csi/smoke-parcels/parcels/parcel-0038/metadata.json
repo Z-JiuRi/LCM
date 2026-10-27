@@ -1,0 +1,79 @@
+{
+  "index": 38,
+  "id": "parcel-0038",
+  "role": "midrise",
+  "footprint": {
+    "outer": [
+      [
+        687.808,
+        764.392
+      ],
+      [
+        691.64,
+        720.754
+      ],
+      [
+        691.64,
+        720.75
+      ],
+      [
+        691.643,
+        720.715
+      ],
+      [
+        691.644,
+        720.711
+      ],
+      [
+        695.402,
+        679.916
+      ],
+      [
+        621.055,
+        693.528
+      ],
+      [
+        615.586,
+        769.022
+      ],
+      [
+        619.404,
+        769.003
+      ],
+      [
+        678.879,
+        764.047
+      ],
+      [
+        679.014,
+        764.04
+      ],
+      [
+        680.574,
+        764.016
+      ],
+      [
+        680.71,
+        764.019
+      ],
+      [
+        687.808,
+        764.392
+      ]
+    ],
+    "holes": []
+  },
+  "group_index": 38,
+  "directory": "parcel-0038",
+  "kind": "parcel",
+  "ue_count": 0,
+  "usable_count": 0,
+  "shape": [
+    0,
+    2,
+    32,
+    64
+  ],
+  "invalid_csi_policy": "Zero placeholder; consult ue.npz feedback_usable, never interpret as measured zero channel.",
+  "sha256": "68f52fd5c5213bac3ccf72b8316791d9a74a8a52a65cac5d25acb028896e13e8"
+}

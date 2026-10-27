@@ -1,0 +1,59 @@
+{
+  "index": 1,
+  "id": "parcel-0001",
+  "role": "lowrise",
+  "footprint": {
+    "outer": [
+      [
+        154.54,
+        89.013
+      ],
+      [
+        165.191,
+        158.218
+      ],
+      [
+        228.079,
+        175.215
+      ],
+      [
+        241.785,
+        177.012
+      ],
+      [
+        236.738,
+        129.497
+      ],
+      [
+        236.737,
+        129.489
+      ],
+      [
+        231.337,
+        78.129
+      ],
+      [
+        230.514,
+        78.243
+      ],
+      [
+        154.54,
+        89.013
+      ]
+    ],
+    "holes": []
+  },
+  "group_index": 1,
+  "directory": "parcel-0001",
+  "kind": "parcel",
+  "ue_count": 0,
+  "usable_count": 0,
+  "shape": [
+    0,
+    2,
+    32,
+    64
+  ],
+  "invalid_csi_policy": "Zero placeholder; consult ue.npz feedback_usable, never interpret as measured zero channel.",
+  "sha256": "68f52fd5c5213bac3ccf72b8316791d9a74a8a52a65cac5d25acb028896e13e8"
+}

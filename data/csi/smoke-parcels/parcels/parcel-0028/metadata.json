@@ -1,0 +1,63 @@
+{
+  "index": 28,
+  "id": "parcel-0028",
+  "role": "fine",
+  "footprint": {
+    "outer": [
+      [
+        2.0,
+        549.772
+      ],
+      [
+        96.135,
+        555.826
+      ],
+      [
+        109.716,
+        516.268
+      ],
+      [
+        125.217,
+        470.587
+      ],
+      [
+        94.057,
+        467.003
+      ],
+      [
+        94.052,
+        467.002
+      ],
+      [
+        94.015,
+        466.998
+      ],
+      [
+        94.01,
+        466.997
+      ],
+      [
+        2.0,
+        455.926
+      ],
+      [
+        2.0,
+        549.772
+      ]
+    ],
+    "holes": []
+  },
+  "group_index": 28,
+  "directory": "parcel-0028",
+  "kind": "parcel",
+  "ue_count": 0,
+  "usable_count": 0,
+  "shape": [
+    0,
+    2,
+    32,
+    64
+  ],
+  "invalid_csi_policy": "Zero placeholder; consult ue.npz feedback_usable, never interpret as measured zero channel.",
+  "sha256": "68f52fd5c5213bac3ccf72b8316791d9a74a8a52a65cac5d25acb028896e13e8"
+}

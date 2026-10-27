@@ -1,6 +1,6 @@
 import './app.css';
-import { CityViewport } from './city-viewport';
-import type { CatalogEntry, CityData, InspectObject, Layer, UESampling } from './types';
+import { CityViewport, measureRTBatch } from './city-viewport';
+import type { AvailableRTManifest, CatalogEntry, CityData, InspectObject, Layer, RTBatch, RTManifest, UESampling } from './types';
 
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) =>
   document.querySelector<T>(selector)!;
@@ -122,6 +122,39 @@ async function start() {
         <p class="note">源植被为简化体，合成树非实测植被；蓝色 UE 点为候选采样位置，非真实订户或 RT 结果。</p>
       </section>
       <aside class="right">
+        <section class="rt-panel" aria-labelledby="rt-heading">
+          <h2 id="rt-heading">已计算 RT · 只读参考</h2>
+          <p class="note rt-scope">只显示已保存运行的采样结果，不代表全城传播、覆盖或容量已验证。</p>
+          <p id="rt-availability" class="note" role="status">等待场景加载…</p>
+          <div class="rt-controls">
+            <label class="rt-toggle"><input id="rt-paths" type="checkbox" disabled><span>显示全部已计算RT路径</span></label>
+            <label class="rt-sector">路径扇区<select id="rt-sector" disabled><option value="">全部已计算扇区</option></select></label>
+            <label class="rt-toggle"><input id="rt-coverage" type="checkbox" disabled><span>显示功率参考 · 仅采样点</span></label>
+          </div>
+          <div id="rt-run" class="note"></div>
+          <div id="rt-path-progress" hidden>
+            <progress id="rt-progress" value="0" max="1" aria-label="RT 批次加载进度"></progress>
+            <p id="rt-counts" class="note" role="status" aria-live="polite"></p>
+          </div>
+          <div id="rt-warning" class="rt-warning" hidden><p id="rt-warning-text"></p><button id="rt-continue">继续加载全部</button></div>
+          <button id="rt-focus" class="rt-focus" disabled>聚焦 RT 采样范围</button>
+          <div class="rt-legend" aria-label="RT 路径与采样图例">
+            <span><i class="rt-swatch diffraction"></i>绕射 · 橙</span><span><i class="rt-swatch reflection"></i>反射 · 红</span>
+            <span><i class="rt-swatch scatter"></i>散射 · 蓝</span><span><i class="rt-swatch transmit"></i>透射 · 紫</span>
+            <span><i class="rt-swatch neutral"></i>直达 / 混合 / 未知 · 灰</span>
+            <span><i class="rt-swatch tx"></i>TX 发射点 · 菱形</span><span><i class="rt-swatch rx"></i>RX 采样点 · 绿环</span>
+            <span><i class="rt-swatch candidate"></i>UE 候选位置 · 小蓝点（非 RT）</span>
+          </div>
+          <p class="note">单一机制路径按机制着色；混合路径用灰线与实际交互点颜色，不将整条路径误归为一种机制。TX / RX 标记置顶显示，线段遵循场景遮挡。</p>
+          <div id="rt-colorbar" hidden>
+            <strong>Serving path gain (dB)</strong>
+            <div class="rt-gradient" role="img" aria-label="采样增益从低到高的色标"></div>
+            <div class="rt-range"><span id="rt-min">—</span><span id="rt-max">—</span></div>
+            <p id="rt-coverage-note" class="note"></p>
+          </div>
+          <details id="rt-notes" hidden><summary>运行说明与边界</summary><ul></ul></details>
+          <p class="note">“全部”指所选范围内全部已存路径；无 Top-K、功率阈值或静默截断。关闭路径选项可取消加载并释放路径资源。</p>
+        </section>
         <h2>对象属性</h2><div id="inspector"></div>
         <section class="scene-info"><h2>场景信息</h2><div id="scene-info"></div></section>
         <p class="note">保留建筑与材料来源；来源许可审计待完成。本页面不计算射线追踪或信道。</p>
@@ -133,11 +166,192 @@ async function start() {
   let controller: AbortController | undefined;
   let version = 0;
   let top = false;
+  let rtManifest: AvailableRTManifest | undefined;
+  let rtController: AbortController | undefined;
+  let rtVersion = 0;
+  let rtState: 'off' | 'loading' | 'paused' | 'complete' | 'error' = 'off';
+  let rtDisplayBytes = 0;
+  const rtPaths = $<HTMLInputElement>('#rt-paths');
+  const rtCoverage = $<HTMLInputElement>('#rt-coverage');
+  const rtSector = $<HTMLSelectElement>('#rt-sector');
+  const displayBudgetStep = 64 * 1024 * 1024;
+
+  function updateRTProgress(message: string) {
+    const counts = viewport.rtDiagnostics();
+    const progress = $<HTMLProgressElement>('#rt-progress');
+    progress.max = Math.max(1, counts.rtBatchTotal);
+    progress.value = counts.rtBatchCount;
+    $('#rt-counts').textContent = `${message} · ${format(counts.rtBatchCount)} / ${format(counts.rtBatchTotal)} 批次 · ${format(counts.rtPathCount)} 路径 · ${format(counts.rtSegmentCount)} 线段`;
+    $('#rt-focus').toggleAttribute('disabled', counts.rtPathCount === 0 && counts.rtTXCount === 0 && counts.rtCoverageCount === 0);
+  }
+
+  function stopRTPaths() {
+    rtController?.abort();
+    rtController = undefined;
+    rtVersion++;
+    viewport.clearRTPaths();
+    rtState = 'off';
+    rtDisplayBytes = 0;
+    $('#rt-warning').hidden = true;
+    $('#rt-path-progress').hidden = true;
+    updateRTProgress('未启用');
+  }
+
+  function resetRT() {
+    stopRTPaths();
+    viewport.clearRTCoverage();
+    rtManifest = undefined;
+    rtPaths.checked = rtCoverage.checked = false;
+    rtPaths.disabled = rtCoverage.disabled = rtSector.disabled = true;
+    rtSector.innerHTML = '<option value="">全部已计算扇区</option>';
+    $('#rt-run').textContent = '';
+    $('#rt-colorbar').hidden = $('#rt-notes').hidden = true;
+    $('#rt-focus').toggleAttribute('disabled', true);
+    $('#rt-availability').textContent = '正在查询已计算 RT 结果…';
+  }
+
+  async function loadRTManifest(id: string, signal: AbortSignal, request: number) {
+    try {
+      const response = await fetch(`/scenes/${encodeURIComponent(id)}-rt.json`, { signal });
+      if (signal.aborted || request !== version) return;
+      if (response.status === 404) {
+        $('#rt-availability').textContent = '当前服务未提供 RT 结果接口（旧服务兼容）；三城几何查看不受影响。';
+        return;
+      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const manifest: RTManifest = await response.json();
+      if (signal.aborted || request !== version) return;
+      if (!manifest.available) {
+        $('#rt-availability').textContent = manifest.reason || '此城市没有可展示的已计算 RT 结果。';
+        return;
+      }
+      if (!Array.isArray(manifest.batches) || !manifest.coverage || !Array.isArray(manifest.coverage.positions) || !Array.isArray(manifest.coverage.gain_db) || !Array.isArray(manifest.notes)
+        || !Number.isSafeInteger(manifest.ue_count) || manifest.ue_count < 0 || !Number.isSafeInteger(manifest.sector_count) || manifest.sector_count < 0
+        || !manifest.batches.every(batch => typeof batch.url === 'string' && Number.isSafeInteger(batch.batch_index)))
+        throw new Error('RT 索引格式不匹配');
+      rtManifest = manifest;
+      const sectors = [...new Set(manifest.batches.map(batch => String(batch.sector_id)))];
+      rtSector.innerHTML = '<option value="">全部已计算扇区</option>' + sectors.map(id => `<option value="${escape(id)}">${escape(id)}</option>`).join('');
+      rtSector.disabled = manifest.batches.length === 0;
+      rtPaths.disabled = manifest.batches.length === 0;
+      rtCoverage.disabled = manifest.coverage.positions.length === 0;
+      $('#rt-availability').textContent = `已保存 ${format(manifest.batches.length)} 个批次；默认不加载路径。`;
+      $('#rt-run').innerHTML = `<strong>${escape(manifest.run_label)}</strong><br>运行范围：${escape(manifest.scope)}<br>${format(manifest.ue_count)} 个 RT 采样 UE / ${format(manifest.sector_count)} 个已计算扇区；不是全城结果。`;
+      $('#rt-notes').hidden = manifest.notes.length === 0;
+      $('#rt-notes ul').innerHTML = manifest.notes.map(note => `<li>${escape(note)}</li>`).join('');
+    } catch (error) {
+      if (signal.aborted || request !== version) return;
+      $('#rt-availability').textContent = `RT 索引暂不可用：${error instanceof Error ? error.message : String(error)}。几何展示不受影响。`;
+    }
+  }
+
+  function confirmMoreRT(bytes: number, signal: AbortSignal, load: number): Promise<boolean> {
+    rtState = 'paused';
+    $('#rt-warning').hidden = false;
+    $('#rt-warning-text').textContent = `显示数据估算将达 ${format(bytes / 1024 / 1024)} MiB（不含 JSON 解析等临时内存）。已暂停，尚未加载全部；继续可能增加内存占用。也可取消勾选路径释放资源。`;
+    updateRTProgress('等待确认，当前仅为部分路径');
+    return new Promise(resolve => {
+      const button = $<HTMLButtonElement>('#rt-continue');
+      const finish = (proceed: boolean) => {
+        signal.removeEventListener('abort', abort);
+        if (load === rtVersion) {
+          button.onclick = null;
+          $('#rt-warning').hidden = true;
+        }
+        resolve(proceed);
+      };
+      const abort = () => finish(false);
+      button.onclick = () => finish(true);
+      signal.addEventListener('abort', abort, { once: true });
+      if (signal.aborted) abort();
+    });
+  }
+
+  async function loadRTPaths() {
+    stopRTPaths();
+    const manifest = rtManifest;
+    if (!rtPaths.checked || !manifest) return;
+    const sector = rtSector.value;
+    const batches = manifest.batches.filter(batch => !sector || String(batch.sector_id) === sector);
+    rtController = new AbortController();
+    const { signal } = rtController;
+    const load = rtVersion;
+    const cityRequest = version;
+    const active = () => !signal.aborted && load === rtVersion && cityRequest === version && rtPaths.checked;
+    let budget = displayBudgetStep;
+    rtState = 'loading';
+    viewport.setRTBatchTotal(batches.length);
+    $('#rt-path-progress').hidden = false;
+    updateRTProgress('开始逐批加载，当前尚未完整');
+    try {
+      for (const descriptor of batches) {
+        if (!active()) return;
+        updateRTProgress(`加载 ${descriptor.sector_id} / 批次 ${descriptor.batch_index}，当前仅为部分路径`);
+        const batch = await json<RTBatch>(descriptor.url, signal);
+        if (!active()) return;
+        const measured = measureRTBatch(batch);
+        const nextBytes = rtDisplayBytes + measured.displayBytes;
+        if (nextBytes > budget) {
+          if (!await confirmMoreRT(nextBytes, signal, load) || !active()) return;
+          budget = nextBytes + displayBudgetStep;
+          rtState = 'loading';
+        }
+        viewport.appendRTBatch(batch);
+        rtDisplayBytes = nextBytes;
+        updateRTProgress('逐批加载中，当前仅为部分路径');
+        // Yield between batches; keep only the current JSON batch, not the whole run.
+        await new Promise<void>(resolve => setTimeout(resolve, 0));
+      }
+      if (!active()) return;
+      rtState = 'complete';
+      updateRTProgress(sector ? `已完整加载所选扇区 ${sector} 的全部已存路径（非全城）` : '已完整加载本次运行的全部已存路径（非全城）');
+    } catch (error) {
+      if (!active()) return;
+      rtState = 'error';
+      updateRTProgress(`加载中止，当前仅为部分结果：${error instanceof Error ? error.message : String(error)}；关闭后重开可重试`);
+    }
+  }
+
+  function showRTCoverage() {
+    viewport.clearRTCoverage();
+    $('#rt-colorbar').hidden = true;
+    if (rtCoverage.checked && rtManifest) {
+      try {
+        if (rtManifest.coverage.positions.length * 48 > displayBudgetStep && !window.confirm('采样功率图层显示数据估算超过 64 MiB。继续显示全部采样点？不插值，也不抽样截断。')) {
+          rtCoverage.checked = false;
+          return;
+        }
+        viewport.setRTCoverage(rtManifest.coverage);
+        const counts = viewport.rtDiagnostics();
+        $('#rt-colorbar').hidden = false;
+        $('#rt-min').textContent = counts.rtCoverageRange ? `${format(counts.rtCoverageRange[0])} dB` : '无有限值';
+        $('#rt-max').textContent = counts.rtCoverageRange ? `${format(counts.rtCoverageRange[1])} dB` : '无有限值';
+        $('.rt-gradient').hidden = counts.rtCoverageRange === null;
+        $('.rt-gradient').classList.toggle('constant', Boolean(counts.rtCoverageRange && counts.rtCoverageRange[0] === counts.rtCoverageRange[1]));
+        $('#rt-coverage-note').textContent = `${format(counts.rtCoverageCount)} 个运行采样位置，${format(counts.rtCoverageFiniteCount)} 个有限增益；灰色方点表示无有限增益。非相干、天线平均路径增益，非接收功率 dBm；只显示原采样点，不插值、不填充全城。色标按本次运行全部已计算扇区的 serving gain，不随路径扇区选择变化。${rtManifest.coverage.note}`;
+      } catch (error) {
+        rtCoverage.checked = false;
+        viewport.clearRTCoverage();
+        $('#rt-colorbar').hidden = false;
+        $('.rt-gradient').hidden = true;
+        $('#rt-min').textContent = $('#rt-max').textContent = '—';
+        $('#rt-coverage-note').textContent = `采样功率图层不可用：${error instanceof Error ? error.message : String(error)}`;
+      }
+    }
+    const counts = viewport.rtDiagnostics();
+    $('#rt-focus').toggleAttribute('disabled', counts.rtPathCount === 0 && counts.rtTXCount === 0 && counts.rtCoverageCount === 0);
+  }
+
+  rtPaths.onchange = () => void loadRTPaths();
+  rtSector.onchange = () => { if (rtPaths.checked) void loadRTPaths(); };
+  rtCoverage.onchange = showRTCoverage;
+  $('#rt-focus').onclick = () => viewport.focusRT();
 
   async function select(id: string) {
     const entry = catalog.find(item => item.id === id);
     if (!entry) return;
     controller?.abort();
+    resetRT();
     controller = new AbortController();
     const { signal } = controller;
     const request = ++version;
@@ -177,6 +391,7 @@ async function start() {
       ueToggle.disabled = !sampling;
       viewport.setLayer('ue', Boolean(sampling) && ueToggle.checked);
       $('#loading').hidden = true;
+      void loadRTManifest(entry.id, signal, request);
     } catch (error) {
       if (signal.aborted || request !== version) return;
       $('#loading').textContent = error instanceof Error ? error.message : String(error);
@@ -186,7 +401,14 @@ async function start() {
   }
 
   Object.defineProperty(window, '__LCM_SCENE_DIAGNOSTICS__', {
-    get: () => Object.freeze({ sceneId: current?.id, ...viewport.diagnostics() }),
+    get: () => Object.freeze({
+      sceneId: current?.id, ...viewport.diagnostics(),
+      rtAvailable: Boolean(rtManifest), rtRunLabel: rtManifest?.run_label,
+      rtScope: rtManifest?.scope, rtLoadState: rtState,
+      rtSelectedSector: rtSector.value || 'all', rtPathsEnabled: rtPaths.checked,
+      rtCoverageEnabled: rtCoverage.checked, rtDisplayBytes,
+      rtProgress: { loaded: viewport.rtDiagnostics().rtBatchCount, total: viewport.rtDiagnostics().rtBatchTotal },
+    }),
     configurable: true,
   });
   viewport.onSelect = inspector;
@@ -218,6 +440,7 @@ async function start() {
   };
   window.addEventListener('pagehide', () => {
     controller?.abort();
+    rtController?.abort();
     viewport.dispose();
   });
   await select(catalog[0].id);

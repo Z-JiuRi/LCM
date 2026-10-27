@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "scope": "bounded real RT, not convergence certified",
+  "free_space": {
+    "status": "passed",
+    "distances_m": [
+      10.0,
+      20.0
+    ],
+    "measured_amplitudes": [
+      0.0006816207896918058,
+      0.00034081036574207246
+    ],
+    "expected_friis_amplitudes": [
+      0.000681620737033849,
+      0.0003408103685169245
+    ],
+    "carrier_phase_formula_nmse": 4.8938110814345124e-11,
+    "native_cfr_check": {
+      "relative_squared_error": 2.2378656429955334e-14,
+      "max_absolute_error": 2.7340565922351345e-10,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    "versions": {
+      "sionna_rt": "2.2.0",
+      "mitsuba": "3.9.1"
+    },
+    "limitations": "Analytic LOS and same-path CFR checks only; no multipath convergence test"
+  },
+  "city_counts": {
+    "ue_candidates": 8,
+    "valid_path_ues": 4,
+    "positive_path_power_ues": 4,
+    "feedback_samples": 4,
+    "no_path_found_all_sectors": 4,
+    "zero_power_despite_valid_paths": 0,
+    "selected_cfr_unusable": 0,
+    "splits": {
+      "train": {
+        "count": 3,
+        "shape": [
+          3,
+          2,
+          32,
+          64
+        ],
+        "sha256": "899dd2c3e282e1761ff71f7291b2e3b3a107f75860c3a85fdf4b724d8be18817"
+      },
+      "val": {
+        "count": 0,
+        "shape": [
+          0,
+          2,
+          32,
+          64
+        ],
+        "sha256": "68f52fd5c5213bac3ccf72b8316791d9a74a8a52a65cac5d25acb028896e13e8"
+      },
+      "test": {
+        "count": 1,
+        "shape": [
+          1,
+          2,
+          32,
+          64
+        ],
+        "sha256": "cc4d004f39459c52f0b8a397b2203c79352e94477b990229a983b5ea720b9906"
+      }
+    }
+  },
+  "city_native_cfr_checks": [
+    {
+      "relative_squared_error": 4.694308205042088e-12,
+      "max_absolute_error": 3.6902075904558795e-13,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 7.703759083848649e-13,
+      "max_absolute_error": 2.392507025827939e-10,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 0.0,
+      "max_absolute_error": 0.0,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 0.0,
+      "max_absolute_error": 0.0,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 4.465456076851555e-12,
+      "max_absolute_error": 3.887366231865308e-14,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 5.053932620366633e-13,
+      "max_absolute_error": 3.9689937447739965e-10,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 0.0,
+      "max_absolute_error": 0.0,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    },
+    {
+      "relative_squared_error": 0.0,
+      "max_absolute_error": 0.0,
+      "reference": "Sionna Paths.cfr normalize_delays=False normalize=False; not independent RT"
+    }
+  ],
+  "seconds": 2.610499542002799,
+  "notes": [
+    "Low ray budget deliberately tests plumbing, not no-path classification or search convergence.",
+    "Native CFR comparison uses the same traced paths; it is not an independent RT oracle."
+  ]
+}

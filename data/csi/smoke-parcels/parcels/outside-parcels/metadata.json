@@ -1,0 +1,19 @@
+{
+  "group_index": 61,
+  "index": null,
+  "id": "outside-parcels",
+  "role": "roads/parks/unassigned",
+  "directory": "outside-parcels",
+  "kind": "outside",
+  "footprint": null,
+  "ue_count": 2,
+  "usable_count": 2,
+  "shape": [
+    2,
+    2,
+    32,
+    64
+  ],
+  "invalid_csi_policy": "Zero placeholder; consult ue.npz feedback_usable, never interpret as measured zero channel.",
+  "sha256": "00925a1c1eb65ae6befbd26d95ed31a2cb0322f32874105a00a17c13465a70d7"
+}

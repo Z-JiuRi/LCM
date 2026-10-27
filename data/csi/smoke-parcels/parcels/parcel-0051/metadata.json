@@ -1,0 +1,79 @@
+{
+  "index": 51,
+  "id": "parcel-0051",
+  "role": "towers",
+  "footprint": {
+    "outer": [
+      [
+        578.64,
+        998.0
+      ],
+      [
+        580.857,
+        883.328
+      ],
+      [
+        580.857,
+        883.323
+      ],
+      [
+        580.858,
+        883.283
+      ],
+      [
+        580.858,
+        883.278
+      ],
+      [
+        582.97,
+        796.187
+      ],
+      [
+        558.193,
+        796.312
+      ],
+      [
+        558.12,
+        796.311
+      ],
+      [
+        557.274,
+        796.285
+      ],
+      [
+        557.201,
+        796.281
+      ],
+      [
+        511.819,
+        793.166
+      ],
+      [
+        504.921,
+        881.594
+      ],
+      [
+        495.769,
+        998.0
+      ],
+      [
+        578.64,
+        998.0
+      ]
+    ],
+    "holes": []
+  },
+  "group_index": 51,
+  "directory": "parcel-0051",
+  "kind": "parcel",
+  "ue_count": 0,
+  "usable_count": 0,
+  "shape": [
+    0,
+    2,
+    32,
+    64
+  ],
+  "invalid_csi_policy": "Zero placeholder; consult ue.npz feedback_usable, never interpret as measured zero channel.",
+  "sha256": "68f52fd5c5213bac3ccf72b8316791d9a74a8a52a65cac5d25acb028896e13e8"
+}

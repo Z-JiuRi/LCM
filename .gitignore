@@ -5,3 +5,14 @@
 # 第三方公开代码：本地保留，不入库；来源与提交号见 codes/repositories.json
 docs/相关工作/codes/P*/
 __pycache__/
+.codex*
+
+# 可视化子目录规则
+/visualizer/**/node_modules/
+/visualizer/**/dist/
+/visualizer/**/__pycache__/
+/visualizer/**/*.py[cod]
+/visualizer/**/.venv/
+/visualizer/**/*.egg-info/
+
+/reference/DeepMIMO-v4/

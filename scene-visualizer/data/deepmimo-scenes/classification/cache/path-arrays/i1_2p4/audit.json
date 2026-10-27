@@ -1,7 +1,0 @@
-{
-  "name": "i1_2p4",
-  "date": "2026-10-25",
-  "source": "https://www.deepmimo.net/api/download/secure?filename=i1_2p4.zip",
-  "status": "unavailable",
-  "error": "HTTPError: HTTP Error 429: Too Many Requests"
-}

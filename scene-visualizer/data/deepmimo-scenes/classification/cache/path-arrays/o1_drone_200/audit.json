@@ -1,7 +1,0 @@
-{
-  "name": "o1_drone_200",
-  "date": "2026-10-25",
-  "source": "https://www.deepmimo.net/api/download/secure?filename=o1_drone_200.zip",
-  "status": "unavailable",
-  "error": "HTTPError: HTTP Error 429: Too Many Requests"
-}

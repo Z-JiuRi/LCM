@@ -1,6 +1,0 @@
-city-1km {'instance_count': 665, 'building_overlap_pairs': 0, 'outside_city_buildings': 0, 'outside_parcel_buildings': 0, 'buildings_intersecting_road_carriageways': 0, 'buildings_intersecting_parks': 0, 'scope': 'Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification.'}
-INTEGRATED 1000 435 assets 665 instances 30 materials
-city-2km {'instance_count': 2306, 'building_overlap_pairs': 0, 'outside_city_buildings': 0, 'outside_parcel_buildings': 0, 'buildings_intersecting_road_carriageways': 0, 'buildings_intersecting_parks': 0, 'scope': 'Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification.'}
-INTEGRATED 2000 890 assets 2306 instances 32 materials
-city-4km {'instance_count': 13838, 'building_overlap_pairs': 0, 'outside_city_buildings': 0, 'outside_parcel_buildings': 0, 'buildings_intersecting_road_carriageways': 0, 'buildings_intersecting_parks': 0, 'scope': 'Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification.'}
-INTEGRATED 4000 1317 assets 13838 instances 36 materials

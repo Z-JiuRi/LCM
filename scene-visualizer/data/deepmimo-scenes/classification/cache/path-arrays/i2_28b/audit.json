@@ -1,7 +1,0 @@
-{
-  "name": "i2_28b",
-  "date": "2026-10-25",
-  "source": "https://www.deepmimo.net/api/download/secure?filename=i2_28b.zip",
-  "status": "unavailable",
-  "error": "HTTPError: HTTP Error 429: Too Many Requests"
-}

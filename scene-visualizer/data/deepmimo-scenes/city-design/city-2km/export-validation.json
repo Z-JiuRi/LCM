@@ -1,9 +1,0 @@
-{
-  "instance_count": 2306,
-  "building_overlap_pairs": 0,
-  "outside_city_buildings": 0,
-  "outside_parcel_buildings": 0,
-  "buildings_intersecting_road_carriageways": 0,
-  "buildings_intersecting_parks": 0,
-  "scope": "Saved rounded 2D geometries; area threshold 0.01 m2; boundary tolerance 0.002 m. No 3D/RT verification."
-}

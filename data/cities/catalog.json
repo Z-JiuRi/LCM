@@ -1,0 +1,71 @@
+[
+  {
+    "id": "city-1km",
+    "title": "一公里紧凑混合城区",
+    "extent_m": [
+      0,
+      0,
+      1000,
+      1000
+    ],
+    "instance_count": 665,
+    "asset_count": 435,
+    "source_count": 30,
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "data_url": "/scenes/city-1km.json",
+    "ue_sampling": {
+      "count": 29726,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-1km-ue.f32"
+    }
+  },
+  {
+    "id": "city-2km",
+    "title": "两公里大学与商务城区",
+    "extent_m": [
+      0,
+      0,
+      2000,
+      2000
+    ],
+    "instance_count": 2306,
+    "asset_count": 890,
+    "source_count": 32,
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "data_url": "/scenes/city-2km.json",
+    "ue_sampling": {
+      "count": 114688,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-2km-ue.f32"
+    }
+  },
+  {
+    "id": "city-4km",
+    "title": "四公里完整混合城区",
+    "extent_m": [
+      0,
+      0,
+      4000,
+      4000
+    ],
+    "instance_count": 13838,
+    "asset_count": 1317,
+    "source_count": 36,
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "data_url": "/scenes/city-4km.json",
+    "ue_sampling": {
+      "count": 449988,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-4km-ue.f32"
+    }
+  }
+]

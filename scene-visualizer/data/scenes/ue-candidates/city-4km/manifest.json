@@ -1,0 +1,21 @@
+{
+  "count": 449988,
+  "spacing_m": 5.0,
+  "ue_height_m": 1.5,
+  "building_clearance_m": 2.0,
+  "vegetation_clearance_m": 1.0,
+  "positions_url": "/scenes/city-4km-ue.f32",
+  "format": "little-endian-float32-xyz",
+  "source_scene_sha256": "367a26cc0c583cb641c450a21de5b858a12db59139452e3db19e8d31f435fe1c",
+  "positions_sha256": "1c24d3b22a67394455908bc9e6b39e28d67055281417d87e5732b356fa0293cb",
+  "generator": "scripts/city_geometry.py:build_ue_grid",
+  "grid_stats": {
+    "grid_spacing_m": 5.0,
+    "grid_nodes_total": 640000,
+    "ue_candidates": 449988,
+    "building_clearance_m": 2.0,
+    "vegetation_clearance_m": 1.0,
+    "ue_height_m": 1.5
+  },
+  "status": "Candidate sounding positions only; no channels or serving-sector assignment computed."
+}

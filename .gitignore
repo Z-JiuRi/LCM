@@ -4,3 +4,4 @@
 
 # 第三方公开代码：本地保留，不入库；来源与提交号见 codes/repositories.json
 docs/相关工作/codes/P*/
+__pycache__/

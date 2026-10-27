@@ -1,0 +1,2274 @@
+{
+  "input_sha256": "d3fed7d1be734a8bff67f84c68912a2bc960ff4897691fb66e863ba204350e90",
+  "sites": [
+    {
+      "id": "BS-2K-001",
+      "position_m": [
+        124.5,
+        287.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        250.0,
+        250.0,
+        25.0
+      ],
+      "relocation_m": 130.84055181785195,
+      "clearance_m": 4.223134676124731,
+      "road_clearance_m": 11.214455481365246,
+      "sector_ids": [
+        "BS-2K-001-S1",
+        "BS-2K-001-S2",
+        "BS-2K-001-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "lowrise",
+        "fine",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 17.210780138177835,
+      "planning_peak_demand_mbps": 34.42156027635567,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 18.926121913971617,
+        "weekday_evening": 34.42156027635567,
+        "weekend": 28.735154549078498
+      },
+      "planning_radius_m": 329.9155194894596,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-002",
+      "position_m": [
+        699.5,
+        237.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        750.0,
+        250.0,
+        25.0
+      ],
+      "relocation_m": 52.146428449127754,
+      "clearance_m": 20.556483746631606,
+      "road_clearance_m": 11.94733590529797,
+      "sector_ids": [
+        "BS-2K-002-S1",
+        "BS-2K-002-S2",
+        "BS-2K-002-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "mixed",
+        "lowrise",
+        "midrise",
+        "park",
+        "open",
+        "road",
+        "fine"
+      ],
+      "planning_peak_active_ues": 29.994330914620598,
+      "planning_peak_demand_mbps": 59.988661829241195,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 53.208419456840744,
+        "weekday_evening": 57.68808286694159,
+        "weekend": 59.988661829241195
+      },
+      "planning_radius_m": 338.9605434265174,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-003",
+      "position_m": [
+        1299.5,
+        237.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1250.0,
+        250.0,
+        25.0
+      ],
+      "relocation_m": 51.178608812667036,
+      "clearance_m": 25.905856318044727,
+      "road_clearance_m": 10.173370414384891,
+      "sector_ids": [
+        "BS-2K-003-S1",
+        "BS-2K-003-S2",
+        "BS-2K-003-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "towers",
+        "mixed",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 43.67996241380307,
+      "planning_peak_demand_mbps": 87.35992482760614,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 81.88834347140101,
+        "weekday_evening": 87.35992482760614,
+        "weekend": 81.77083368696083
+      },
+      "planning_radius_m": 332.7074540794059,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-004",
+      "position_m": [
+        1824.5,
+        337.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1750.0,
+        250.0,
+        25.0
+      ],
+      "relocation_m": 114.53929456741035,
+      "clearance_m": 11.157831353007126,
+      "road_clearance_m": 43.00777334268082,
+      "sector_ids": [
+        "BS-2K-004-S1",
+        "BS-2K-004-S2",
+        "BS-2K-004-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "towers",
+        "midrise",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 39.356797724942126,
+      "planning_peak_demand_mbps": 78.71359544988425,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 60.56487787574495,
+        "weekday_evening": 78.71359544988425,
+        "weekend": 71.9695051413407
+      },
+      "planning_radius_m": 346.40186200423346,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-005",
+      "position_m": [
+        362.0,
+        762.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        500.0,
+        683.0127018922193,
+        25.0
+      ],
+      "relocation_m": 159.00626799710577,
+      "clearance_m": 6.32044036408594,
+      "road_clearance_m": 10.696160100797595,
+      "sector_ids": [
+        "BS-2K-005-S1",
+        "BS-2K-005-S2",
+        "BS-2K-005-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "fine",
+        "midrise",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 22.249179860574383,
+      "planning_peak_demand_mbps": 44.498359721148766,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 31.994482301098888,
+        "weekday_evening": 44.498359721148766,
+        "weekend": 41.522687081473414
+      },
+      "planning_radius_m": 348.0488471464889,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-006",
+      "position_m": [
+        1024.5,
+        787.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1000.0,
+        683.0127018922193,
+        25.0
+      ],
+      "relocation_m": 106.83448959842721,
+      "clearance_m": 21.973517568738913,
+      "road_clearance_m": 2.8880157681252525,
+      "sector_ids": [
+        "BS-2K-006-S1",
+        "BS-2K-006-S2",
+        "BS-2K-006-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "core",
+        "mixed",
+        "midrise",
+        "towers",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 263.10478119285546,
+      "planning_peak_demand_mbps": 526.2095623857109,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 526.2095623857109,
+        "weekday_evening": 244.3175196183801,
+        "weekend": 277.73989940468346
+      },
+      "planning_radius_m": 340.5058736644641,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-007",
+      "position_m": [
+        1412.0,
+        862.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1500.0,
+        683.0127018922193,
+        25.0
+      ],
+      "relocation_m": 199.4503769961931,
+      "clearance_m": 14.828367891392626,
+      "road_clearance_m": 14.548238374281535,
+      "sector_ids": [
+        "BS-2K-007-S1",
+        "BS-2K-007-S2",
+        "BS-2K-007-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "core",
+        "midrise",
+        "towers",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 268.2473676415189,
+      "planning_peak_demand_mbps": 536.4947352830378,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 536.4947352830378,
+        "weekday_evening": 255.85139510117617,
+        "weekend": 285.454507402247
+      },
+      "planning_radius_m": 322.70419891907204,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-008",
+      "position_m": [
+        187.0,
+        1162.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        250.0,
+        1116.0254037844386,
+        25.0
+      ],
+      "relocation_m": 77.9914322036973,
+      "clearance_m": 8.450273104186044,
+      "road_clearance_m": 9.083642422561578,
+      "sector_ids": [
+        "BS-2K-008-S1",
+        "BS-2K-008-S2",
+        "BS-2K-008-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "campus",
+        "fine",
+        "park",
+        "midrise",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 18.24574206741632,
+      "planning_peak_demand_mbps": 36.49148413483264,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 35.494082751174844,
+        "weekday_evening": 36.49148413483264,
+        "weekend": 34.316091704031706
+      },
+      "planning_radius_m": 349.01719155365396,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-009",
+      "position_m": [
+        897.140648,
+        1070.269597,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        750.0,
+        1116.0254037844386,
+        25.0
+      ],
+      "relocation_m": 154.0907659412296,
+      "clearance_m": 6.617504691162544,
+      "road_clearance_m": 4.14047465295988,
+      "sector_ids": [
+        "BS-2K-009-S1",
+        "BS-2K-009-S2",
+        "BS-2K-009-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "core",
+        "midrise",
+        "campus",
+        "open",
+        "road",
+        "fine",
+        "park"
+      ],
+      "planning_peak_active_ues": 227.72553124177503,
+      "planning_peak_demand_mbps": 455.45106248355006,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 455.45106248355006,
+        "weekday_evening": 212.9365095491783,
+        "weekend": 239.30366596523348
+      },
+      "planning_radius_m": 338.73744169548536,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-010",
+      "position_m": [
+        1196.754992,
+        1084.842602,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1250.0,
+        1116.0254037844386,
+        25.0
+      ],
+      "relocation_m": 61.704116589152015,
+      "clearance_m": 4.185559298088119,
+      "road_clearance_m": 1.3646164965524896,
+      "sector_ids": [
+        "BS-2K-010-S1",
+        "BS-2K-010-S2",
+        "BS-2K-010-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "core",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 256.33039383097287,
+      "planning_peak_demand_mbps": 512.6607876619457,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 512.6607876619457,
+        "weekday_evening": 219.82109026998373,
+        "weekend": 256.12128095452414
+      },
+      "planning_radius_m": 192.24363836301708,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-011",
+      "position_m": [
+        1837.0,
+        962.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1750.0,
+        1116.0254037844386,
+        25.0
+      ],
+      "relocation_m": 176.89778124939653,
+      "clearance_m": 11.920360970639212,
+      "road_clearance_m": 39.719672960311215,
+      "sector_ids": [
+        "BS-2K-011-S1",
+        "BS-2K-011-S2",
+        "BS-2K-011-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "midrise",
+        "secondary",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 46.4719325278388,
+      "planning_peak_demand_mbps": 92.9438650556776,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 60.08108088305099,
+        "weekday_evening": 92.9438650556776,
+        "weekend": 82.66118431752314
+      },
+      "planning_radius_m": 342.0716299256634,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-012",
+      "position_m": [
+        374.5,
+        1487.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        500.0,
+        1549.0381056766578,
+        25.0
+      ],
+      "relocation_m": 139.99634479495583,
+      "clearance_m": 10.922313198021023,
+      "road_clearance_m": 6.701333077570865,
+      "sector_ids": [
+        "BS-2K-012-S1",
+        "BS-2K-012-S2",
+        "BS-2K-012-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "campus",
+        "midrise",
+        "fine",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 80.99355953026274,
+      "planning_peak_demand_mbps": 161.9871190605255,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 161.9871190605255,
+        "weekday_evening": 99.49018500292077,
+        "weekend": 66.72121451347218
+      },
+      "planning_radius_m": 349.7059479048076,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-013",
+      "position_m": [
+        1024.5,
+        1387.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1000.0,
+        1549.0381056766578,
+        25.0
+      ],
+      "relocation_m": 163.87982698086947,
+      "clearance_m": 18.765077375005884,
+      "road_clearance_m": 8.154551668799222,
+      "sector_ids": [
+        "BS-2K-013-S1",
+        "BS-2K-013-S2",
+        "BS-2K-013-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "core",
+        "campus",
+        "midrise",
+        "road",
+        "open",
+        "secondary",
+        "park"
+      ],
+      "planning_peak_active_ues": 149.92948969326352,
+      "planning_peak_demand_mbps": 299.85897938652704,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 299.85897938652704,
+        "weekday_evening": 162.85639079621873,
+        "weekend": 162.3180217327257
+      },
+      "planning_radius_m": 313.12018459371154,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-014",
+      "position_m": [
+        1649.5,
+        1437.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1500.0,
+        1549.0381056766578,
+        25.0
+      ],
+      "relocation_m": 186.8228763390981,
+      "clearance_m": 18.551949769299156,
+      "road_clearance_m": 4.662119321268164,
+      "sector_ids": [
+        "BS-2K-014-S1",
+        "BS-2K-014-S2",
+        "BS-2K-014-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "secondary",
+        "midrise",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 102.58129656583795,
+      "planning_peak_demand_mbps": 205.1625931316759,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 205.1625931316759,
+        "weekday_evening": 108.38877870061488,
+        "weekend": 131.84751888012627
+      },
+      "planning_radius_m": 344.22993768700593,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-015",
+      "position_m": [
+        224.5,
+        1787.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        250.0,
+        1982.0508075688772,
+        25.0
+      ],
+      "relocation_m": 196.7106187608365,
+      "clearance_m": 10.494185808965447,
+      "road_clearance_m": 16.627651229011228,
+      "sector_ids": [
+        "BS-2K-015-S1",
+        "BS-2K-015-S2",
+        "BS-2K-015-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "campus",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 50.49334830124517,
+      "planning_peak_demand_mbps": 100.98669660249034,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 100.98669660249034,
+        "weekday_evening": 62.15049592830458,
+        "weekend": 41.77316923053802
+      },
+      "planning_radius_m": 329.3087457083398,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-016",
+      "position_m": [
+        687.0,
+        1812.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        750.0,
+        1982.0508075688772,
+        25.0
+      ],
+      "relocation_m": 181.345739279497,
+      "clearance_m": 15.240436183389017,
+      "road_clearance_m": 28.451627848942785,
+      "sector_ids": [
+        "BS-2K-016-S1",
+        "BS-2K-016-S2",
+        "BS-2K-016-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "campus",
+        "midrise",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 58.16352646414944,
+      "planning_peak_demand_mbps": 116.32705292829888,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 116.32705292829888,
+        "weekday_evening": 76.68735120295655,
+        "weekend": 52.76418761883196
+      },
+      "planning_radius_m": 289.5047495292607,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-017",
+      "position_m": [
+        1237.0,
+        1812.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1250.0,
+        1982.0508075688772,
+        25.0
+      ],
+      "relocation_m": 170.54699397769315,
+      "clearance_m": 3.627659639723051,
+      "road_clearance_m": 26.345782270651846,
+      "sector_ids": [
+        "BS-2K-017-S1",
+        "BS-2K-017-S2",
+        "BS-2K-017-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "midrise",
+        "park",
+        "secondary",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 28.954864364468946,
+      "planning_peak_demand_mbps": 57.90972872893789,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 30.62130026256087,
+        "weekday_evening": 52.81282418568053,
+        "weekend": 57.90972872893789
+      },
+      "planning_radius_m": 308.56603831270866,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-018",
+      "position_m": [
+        1749.5,
+        1837.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1750.0,
+        1982.0508075688772,
+        25.0
+      ],
+      "relocation_m": 145.0516693333222,
+      "clearance_m": 11.850616910708194,
+      "road_clearance_m": 8.854195515386227,
+      "sector_ids": [
+        "BS-2K-018-S1",
+        "BS-2K-018-S2",
+        "BS-2K-018-S3"
+      ],
+      "planning_reason": "基础覆盖：500m参考尺度初始化，经需求加权调整",
+      "served_region_roles": [
+        "midrise",
+        "secondary",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 33.681420191864035,
+      "planning_peak_demand_mbps": 67.36284038372807,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 44.79715539094489,
+        "weekday_evening": 67.36284038372807,
+        "weekend": 59.87932799814637
+      },
+      "planning_radius_m": 345.67940349404677,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-019",
+      "position_m": [
+        1599.5,
+        337.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1599.5,
+        337.0,
+        25.0
+      ],
+      "relocation_m": 0.0,
+      "clearance_m": 10.24655161733044,
+      "road_clearance_m": 24.892509531863006,
+      "sector_ids": [
+        "BS-2K-019-S1",
+        "BS-2K-019-S2",
+        "BS-2K-019-S3"
+      ],
+      "planning_reason": "空间补点：需求网格到最近站超过规划距离阈值（非RF覆盖盲区判定）",
+      "served_region_roles": [
+        "towers",
+        "midrise",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 32.03300386455748,
+      "planning_peak_demand_mbps": 64.06600772911496,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 59.22502832270272,
+        "weekday_evening": 64.06600772911496,
+        "weekend": 54.28153679325526
+      },
+      "planning_radius_m": 321.00506226537925,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-020",
+      "position_m": [
+        712.0,
+        62.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        712.0,
+        62.0,
+        25.0
+      ],
+      "relocation_m": 0.0,
+      "clearance_m": 11.656322316388538,
+      "road_clearance_m": 9.817091210014617,
+      "sector_ids": [
+        "BS-2K-020-S1",
+        "BS-2K-020-S2",
+        "BS-2K-020-S3"
+      ],
+      "planning_reason": "空间补点：需求网格到最近站超过规划距离阈值（非RF覆盖盲区判定）",
+      "served_region_roles": [
+        "mixed",
+        "lowrise",
+        "park",
+        "open",
+        "road"
+      ],
+      "planning_peak_active_ues": 23.872630457844473,
+      "planning_peak_demand_mbps": 47.745260915688945,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 43.28078586995709,
+        "weekday_evening": 44.017325620396015,
+        "weekend": 47.745260915688945
+      },
+      "planning_radius_m": 339.0250728191058,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-021",
+      "position_m": [
+        360.191764,
+        548.975789,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        360.191764,
+        548.975789,
+        25.0
+      ],
+      "relocation_m": 0.0,
+      "clearance_m": 5.177894600776617,
+      "road_clearance_m": 22.553419479813947,
+      "sector_ids": [
+        "BS-2K-021-S1",
+        "BS-2K-021-S2",
+        "BS-2K-021-S3"
+      ],
+      "planning_reason": "空间补点：需求网格到最近站超过规划距离阈值（非RF覆盖盲区判定）",
+      "served_region_roles": [
+        "fine",
+        "midrise",
+        "lowrise",
+        "mixed",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 14.805641615003323,
+      "planning_peak_demand_mbps": 29.611283230006645,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 20.976876664451794,
+        "weekday_evening": 29.611283230006645,
+        "weekend": 25.938356535093526
+      },
+      "planning_radius_m": 343.7051051579016,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-022",
+      "position_m": [
+        1049.5,
+        1037.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1049.5,
+        1037.0,
+        25.0
+      ],
+      "relocation_m": 0.0,
+      "clearance_m": 5.136859394917703,
+      "road_clearance_m": 4.606912513885012,
+      "sector_ids": [
+        "BS-2K-022-S1",
+        "BS-2K-022-S2",
+        "BS-2K-022-S3"
+      ],
+      "planning_reason": "需求补点：分时需求超过假设单站预算（非实测容量不足）",
+      "served_region_roles": [
+        "core",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 285.56525165372983,
+      "planning_peak_demand_mbps": 571.1305033074597,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 571.1305033074597,
+        "weekday_evening": 244.6501008306933,
+        "weekend": 285.12905520713053
+      },
+      "planning_radius_m": 140.3362034544187,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    },
+    {
+      "id": "BS-2K-023",
+      "position_m": [
+        1374.5,
+        1137.0,
+        25.0
+      ],
+      "ground_elevation_m": 0.0,
+      "mount": "ground-pole",
+      "nominal_position_m": [
+        1374.5,
+        1137.0,
+        25.0
+      ],
+      "relocation_m": 0.0,
+      "clearance_m": 7.7936053250656245,
+      "road_clearance_m": 1.0834699621901365,
+      "sector_ids": [
+        "BS-2K-023-S1",
+        "BS-2K-023-S2",
+        "BS-2K-023-S3"
+      ],
+      "planning_reason": "需求补点：分时需求超过假设单站预算（非实测容量不足）",
+      "served_region_roles": [
+        "core",
+        "secondary",
+        "midrise",
+        "open",
+        "road",
+        "park"
+      ],
+      "planning_peak_active_ues": 223.29725942033713,
+      "planning_peak_demand_mbps": 446.59451884067425,
+      "planning_demand_by_time_mbps": {
+        "weekday_day": 446.59451884067425,
+        "weekday_evening": 211.2341278308043,
+        "weekend": 238.4455733710585
+      },
+      "planning_radius_m": 292.222945710976,
+      "provenance": "New synthetic city demand-aware site plan; no source BS copied; not operator deployment."
+    }
+  ],
+  "sectors": [
+    {
+      "id": "BS-2K-001-S1",
+      "site_id": "BS-2K-001",
+      "position_m": [
+        124.5,
+        287.0,
+        25.0
+      ],
+      "azimuth_deg": 69.217259,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-001-S2",
+      "site_id": "BS-2K-001",
+      "position_m": [
+        124.5,
+        287.0,
+        25.0
+      ],
+      "azimuth_deg": 189.217259,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-001-S3",
+      "site_id": "BS-2K-001",
+      "position_m": [
+        124.5,
+        287.0,
+        25.0
+      ],
+      "azimuth_deg": 309.217259,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-002-S1",
+      "site_id": "BS-2K-002",
+      "position_m": [
+        699.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 66.407575,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-002-S2",
+      "site_id": "BS-2K-002",
+      "position_m": [
+        699.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 186.407575,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-002-S3",
+      "site_id": "BS-2K-002",
+      "position_m": [
+        699.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 306.407575,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-003-S1",
+      "site_id": "BS-2K-003",
+      "position_m": [
+        1299.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 64.775495,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-003-S2",
+      "site_id": "BS-2K-003",
+      "position_m": [
+        1299.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 184.775495,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-003-S3",
+      "site_id": "BS-2K-003",
+      "position_m": [
+        1299.5,
+        237.0,
+        25.0
+      ],
+      "azimuth_deg": 304.775495,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-004-S1",
+      "site_id": "BS-2K-004",
+      "position_m": [
+        1824.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 97.430701,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-004-S2",
+      "site_id": "BS-2K-004",
+      "position_m": [
+        1824.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 217.430701,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-004-S3",
+      "site_id": "BS-2K-004",
+      "position_m": [
+        1824.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 337.430701,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-005-S1",
+      "site_id": "BS-2K-005",
+      "position_m": [
+        362.0,
+        762.0,
+        25.0
+      ],
+      "azimuth_deg": 51.606443,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-005-S2",
+      "site_id": "BS-2K-005",
+      "position_m": [
+        362.0,
+        762.0,
+        25.0
+      ],
+      "azimuth_deg": 171.606443,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-005-S3",
+      "site_id": "BS-2K-005",
+      "position_m": [
+        362.0,
+        762.0,
+        25.0
+      ],
+      "azimuth_deg": 291.606443,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-006-S1",
+      "site_id": "BS-2K-006",
+      "position_m": [
+        1024.5,
+        787.0,
+        25.0
+      ],
+      "azimuth_deg": 46.554626,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-006-S2",
+      "site_id": "BS-2K-006",
+      "position_m": [
+        1024.5,
+        787.0,
+        25.0
+      ],
+      "azimuth_deg": 166.554626,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-006-S3",
+      "site_id": "BS-2K-006",
+      "position_m": [
+        1024.5,
+        787.0,
+        25.0
+      ],
+      "azimuth_deg": 286.554626,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-007-S1",
+      "site_id": "BS-2K-007",
+      "position_m": [
+        1412.0,
+        862.0,
+        25.0
+      ],
+      "azimuth_deg": 55.625356,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-007-S2",
+      "site_id": "BS-2K-007",
+      "position_m": [
+        1412.0,
+        862.0,
+        25.0
+      ],
+      "azimuth_deg": 175.625356,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-007-S3",
+      "site_id": "BS-2K-007",
+      "position_m": [
+        1412.0,
+        862.0,
+        25.0
+      ],
+      "azimuth_deg": 295.625356,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-008-S1",
+      "site_id": "BS-2K-008",
+      "position_m": [
+        187.0,
+        1162.0,
+        25.0
+      ],
+      "azimuth_deg": 105.530645,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-008-S2",
+      "site_id": "BS-2K-008",
+      "position_m": [
+        187.0,
+        1162.0,
+        25.0
+      ],
+      "azimuth_deg": 225.530645,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-008-S3",
+      "site_id": "BS-2K-008",
+      "position_m": [
+        187.0,
+        1162.0,
+        25.0
+      ],
+      "azimuth_deg": 345.530645,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-009-S1",
+      "site_id": "BS-2K-009",
+      "position_m": [
+        897.140648,
+        1070.269597,
+        25.0
+      ],
+      "azimuth_deg": 29.886989,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-009-S2",
+      "site_id": "BS-2K-009",
+      "position_m": [
+        897.140648,
+        1070.269597,
+        25.0
+      ],
+      "azimuth_deg": 149.886989,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-009-S3",
+      "site_id": "BS-2K-009",
+      "position_m": [
+        897.140648,
+        1070.269597,
+        25.0
+      ],
+      "azimuth_deg": 269.886989,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-010-S1",
+      "site_id": "BS-2K-010",
+      "position_m": [
+        1196.754992,
+        1084.842602,
+        25.0
+      ],
+      "azimuth_deg": 119.180472,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-010-S2",
+      "site_id": "BS-2K-010",
+      "position_m": [
+        1196.754992,
+        1084.842602,
+        25.0
+      ],
+      "azimuth_deg": 239.180472,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-010-S3",
+      "site_id": "BS-2K-010",
+      "position_m": [
+        1196.754992,
+        1084.842602,
+        25.0
+      ],
+      "azimuth_deg": 359.180472,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-011-S1",
+      "site_id": "BS-2K-011",
+      "position_m": [
+        1837.0,
+        962.0,
+        25.0
+      ],
+      "azimuth_deg": 48.587987,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-011-S2",
+      "site_id": "BS-2K-011",
+      "position_m": [
+        1837.0,
+        962.0,
+        25.0
+      ],
+      "azimuth_deg": 168.587987,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-011-S3",
+      "site_id": "BS-2K-011",
+      "position_m": [
+        1837.0,
+        962.0,
+        25.0
+      ],
+      "azimuth_deg": 288.587987,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-012-S1",
+      "site_id": "BS-2K-012",
+      "position_m": [
+        374.5,
+        1487.0,
+        25.0
+      ],
+      "azimuth_deg": 28.617731,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-012-S2",
+      "site_id": "BS-2K-012",
+      "position_m": [
+        374.5,
+        1487.0,
+        25.0
+      ],
+      "azimuth_deg": 148.617731,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-012-S3",
+      "site_id": "BS-2K-012",
+      "position_m": [
+        374.5,
+        1487.0,
+        25.0
+      ],
+      "azimuth_deg": 268.617731,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-013-S1",
+      "site_id": "BS-2K-013",
+      "position_m": [
+        1024.5,
+        1387.0,
+        25.0
+      ],
+      "azimuth_deg": 116.292407,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-013-S2",
+      "site_id": "BS-2K-013",
+      "position_m": [
+        1024.5,
+        1387.0,
+        25.0
+      ],
+      "azimuth_deg": 236.292407,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-013-S3",
+      "site_id": "BS-2K-013",
+      "position_m": [
+        1024.5,
+        1387.0,
+        25.0
+      ],
+      "azimuth_deg": 356.292407,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-014-S1",
+      "site_id": "BS-2K-014",
+      "position_m": [
+        1649.5,
+        1437.0,
+        25.0
+      ],
+      "azimuth_deg": 10.315604,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-014-S2",
+      "site_id": "BS-2K-014",
+      "position_m": [
+        1649.5,
+        1437.0,
+        25.0
+      ],
+      "azimuth_deg": 130.315604,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-014-S3",
+      "site_id": "BS-2K-014",
+      "position_m": [
+        1649.5,
+        1437.0,
+        25.0
+      ],
+      "azimuth_deg": 250.315604,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-015-S1",
+      "site_id": "BS-2K-015",
+      "position_m": [
+        224.5,
+        1787.0,
+        25.0
+      ],
+      "azimuth_deg": 20.130022,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-015-S2",
+      "site_id": "BS-2K-015",
+      "position_m": [
+        224.5,
+        1787.0,
+        25.0
+      ],
+      "azimuth_deg": 140.130022,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-015-S3",
+      "site_id": "BS-2K-015",
+      "position_m": [
+        224.5,
+        1787.0,
+        25.0
+      ],
+      "azimuth_deg": 260.130022,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-016-S1",
+      "site_id": "BS-2K-016",
+      "position_m": [
+        687.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 112.090385,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-016-S2",
+      "site_id": "BS-2K-016",
+      "position_m": [
+        687.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 232.090385,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-016-S3",
+      "site_id": "BS-2K-016",
+      "position_m": [
+        687.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 352.090385,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-017-S1",
+      "site_id": "BS-2K-017",
+      "position_m": [
+        1237.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 32.065014,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-017-S2",
+      "site_id": "BS-2K-017",
+      "position_m": [
+        1237.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 152.065014,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-017-S3",
+      "site_id": "BS-2K-017",
+      "position_m": [
+        1237.0,
+        1812.0,
+        25.0
+      ],
+      "azimuth_deg": 272.065014,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-018-S1",
+      "site_id": "BS-2K-018",
+      "position_m": [
+        1749.5,
+        1837.0,
+        25.0
+      ],
+      "azimuth_deg": 39.335201,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-018-S2",
+      "site_id": "BS-2K-018",
+      "position_m": [
+        1749.5,
+        1837.0,
+        25.0
+      ],
+      "azimuth_deg": 159.335201,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-018-S3",
+      "site_id": "BS-2K-018",
+      "position_m": [
+        1749.5,
+        1837.0,
+        25.0
+      ],
+      "azimuth_deg": 279.335201,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-019-S1",
+      "site_id": "BS-2K-019",
+      "position_m": [
+        1599.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 21.233441,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-019-S2",
+      "site_id": "BS-2K-019",
+      "position_m": [
+        1599.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 141.233441,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-019-S3",
+      "site_id": "BS-2K-019",
+      "position_m": [
+        1599.5,
+        337.0,
+        25.0
+      ],
+      "azimuth_deg": 261.233441,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-020-S1",
+      "site_id": "BS-2K-020",
+      "position_m": [
+        712.0,
+        62.0,
+        25.0
+      ],
+      "azimuth_deg": 97.002914,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-020-S2",
+      "site_id": "BS-2K-020",
+      "position_m": [
+        712.0,
+        62.0,
+        25.0
+      ],
+      "azimuth_deg": 217.002914,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-020-S3",
+      "site_id": "BS-2K-020",
+      "position_m": [
+        712.0,
+        62.0,
+        25.0
+      ],
+      "azimuth_deg": 337.002914,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-021-S1",
+      "site_id": "BS-2K-021",
+      "position_m": [
+        360.191764,
+        548.975789,
+        25.0
+      ],
+      "azimuth_deg": 96.078862,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-021-S2",
+      "site_id": "BS-2K-021",
+      "position_m": [
+        360.191764,
+        548.975789,
+        25.0
+      ],
+      "azimuth_deg": 216.078862,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-021-S3",
+      "site_id": "BS-2K-021",
+      "position_m": [
+        360.191764,
+        548.975789,
+        25.0
+      ],
+      "azimuth_deg": 336.078862,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-022-S1",
+      "site_id": "BS-2K-022",
+      "position_m": [
+        1049.5,
+        1037.0,
+        25.0
+      ],
+      "azimuth_deg": 41.581117,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-022-S2",
+      "site_id": "BS-2K-022",
+      "position_m": [
+        1049.5,
+        1037.0,
+        25.0
+      ],
+      "azimuth_deg": 161.581117,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-022-S3",
+      "site_id": "BS-2K-022",
+      "position_m": [
+        1049.5,
+        1037.0,
+        25.0
+      ],
+      "azimuth_deg": 281.581117,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-023-S1",
+      "site_id": "BS-2K-023",
+      "position_m": [
+        1374.5,
+        1137.0,
+        25.0
+      ],
+      "azimuth_deg": 7.386339,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-023-S2",
+      "site_id": "BS-2K-023",
+      "position_m": [
+        1374.5,
+        1137.0,
+        25.0
+      ],
+      "azimuth_deg": 127.386339,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    },
+    {
+      "id": "BS-2K-023-S3",
+      "site_id": "BS-2K-023",
+      "position_m": [
+        1374.5,
+        1137.0,
+        25.0
+      ],
+      "azimuth_deg": 247.386339,
+      "azimuth_convention": "Counterclockwise from east in local XY; not bearing from north.",
+      "downtilt_deg": 10,
+      "antenna_model": "planned-sector-not-yet-RT",
+      "carrier_frequency_hz": 3500000000.0,
+      "status": "Orientation metadata rotated toward aggregate demand; no radiation pattern, power, per-sector load or RT mapping."
+    }
+  ],
+  "summary": {
+    "city_size_m": 2000,
+    "strategy": "land-use-demand-500m",
+    "nominal_isd_m": 500,
+    "site_count": 23,
+    "sector_count": 69,
+    "installation_height_agl_m": 25,
+    "nearest_neighbor_m": {
+      "min": 154.8319968063786,
+      "median": 277.54504138968144,
+      "max": 475.16444521870534
+    },
+    "max_relocation_m": 199.4503769961931,
+    "candidate_count": 3187,
+    "coverage_validated": false,
+    "capacity_validated": false,
+    "full_city_demand_served": false,
+    "planning_status": "outdoor-proxy-satisfied-indoor-pending",
+    "demand_summary": {
+      "weekday_day": {
+        "present_population": 175816.62778627579,
+        "operator_ues": 52744.988335882736,
+        "active_ues": 6338.821023354109,
+        "demand_mbps": 12677.642046708217,
+        "outdoor_network_active_ues": 2236.9610831179016,
+        "outdoor_network_demand_mbps": 4473.922166235803,
+        "pending_indoor_active_ues": 4101.859940236207,
+        "pending_indoor_demand_mbps": 8203.719880472414
+      },
+      "weekday_evening": {
+        "present_population": 79469.30516327191,
+        "operator_ues": 23840.791548981575,
+        "active_ues": 3593.898311442366,
+        "demand_mbps": 7187.796622884732,
+        "outdoor_network_active_ues": 1294.1855491563038,
+        "outdoor_network_demand_mbps": 2588.3710983126075,
+        "pending_indoor_active_ues": 2299.712762286062,
+        "pending_indoor_demand_mbps": 4599.425524572124
+      },
+      "weekend": {
+        "present_population": 87594.69132346292,
+        "operator_ues": 26278.407397038874,
+        "active_ues": 3700.6430949201767,
+        "demand_mbps": 7401.2861898403535,
+        "outdoor_network_active_ues": 1342.1682117806708,
+        "outdoor_network_demand_mbps": 2684.3364235613417,
+        "pending_indoor_active_ues": 2358.474883139506,
+        "pending_indoor_demand_mbps": 4716.949766279012
+      }
+    },
+    "planning_proxy": {
+      "distance_target_m": 350.0,
+      "site_budget_mbps": 600,
+      "minimum_neighbor_floor_m": 150.0,
+      "spatial_max_distance_m": 349.7059479048076,
+      "spatial_p95_distance_m": 305.07248020524884,
+      "max_assigned_demand_mbps": 571.1305033074597,
+      "constraints_satisfied": true,
+      "unresolved": [],
+      "redundant_sites_removed": 1,
+      "meaning": "Euclidean distance to 50m cell centers and assumed site budget under nearest-site association. NOT RF coverage/capacity. Only assumed outdoor-network share is constrained; pending indoor demand NOT served or validated.",
+      "constraint_scope": "outdoor-network assumed traffic only, not full city demand"
+    },
+    "fixed_layout_sensitivity": {
+      "low": {
+        "demand_multiplier": 0.5,
+        "max_assigned_demand_mbps": 285.56525165372983,
+        "sites_above_assumed_budget": 0,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "medium": {
+        "demand_multiplier": 1.0,
+        "max_assigned_demand_mbps": 571.1305033074597,
+        "sites_above_assumed_budget": 0,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "high": {
+        "demand_multiplier": 1.5,
+        "max_assigned_demand_mbps": 856.6957549611896,
+        "sites_above_assumed_budget": 6,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "all_building_traffic_to_outdoor": {
+        "max_assigned_demand_mbps": 1631.4295386954539,
+        "sites_above_assumed_budget": 7,
+        "note": "Same layout with 100% building traffic assigned to outdoor BS; no indoor offload assumed; not a separate optimized plan."
+      }
+    },
+    "limitations": [
+      "All UE/population/traffic values are synthetic expectations, not measured counts; land uses are assigned roles.",
+      "500m is a soft initialization scale, not mandatory spacing or a standard requirement.",
+      "No UE/RX positions, trajectories, scheduling, power, antenna pattern, SINR, throughput or new RT computed.",
+      "600Mbps/site is an assumed planning budget, NOT a predicted radio capacity.",
+      "Euclidean nearest-site association ignores blockage/indoor penetration/interference; indoor provision remains unresolved.",
+      "25m poles need not be above nearby roofs; physical permissions/power/backhaul unvalidated.",
+      "No external neighbor sites or boundary interference; high demand may exceed the fixed-layout budget."
+    ]
+  },
+  "demand_model": {
+    "assumptions": {
+      "status": "Synthetic planning assumptions, not measured population or verified building functions",
+      "grid_size_m": 50,
+      "floor_height_m": 3.3,
+      "usable_floor_fraction": 0.7,
+      "residential_usable_m2_per_person": 35,
+      "employment_usable_m2_per_person": 20,
+      "operator_share": 0.3,
+      "connected_devices_per_person": 1.0,
+      "building_activity_fraction": [
+        0.12,
+        0.15,
+        0.14
+      ],
+      "outdoor_activity_fraction": [
+        0.18,
+        0.22,
+        0.2
+      ],
+      "active_ue_demand_mbps": 2.0,
+      "park_present_people_per_km2": [
+        600,
+        1200,
+        2200
+      ],
+      "road_present_people_per_km2": [
+        200,
+        300,
+        250
+      ],
+      "other_open_present_people_per_km2": [
+        80,
+        100,
+        120
+      ],
+      "indoor_building_demand_included": true,
+      "building_traffic_fraction_assigned_to_outdoor_network": 0.35,
+      "indoor_service_solution_validated": false,
+      "service_split_note": "35% of building traffic assigned to outdoor BS planning as an explicit scenario assumption; remaining 65% requires a separate indoor/WiFi solution and is NOT claimed served. All park/road/open demand assigned to outdoor network.",
+      "population_method": "Each building footprint * max(1,floor(height/3.3)) * 0.70; split residential/employment floor shares; disjoint floor areas, then time presence factors. Visitors represented only by outdoor area densities, not a second indoor population.",
+      "uncertainty_multipliers": {
+        "low": 0.5,
+        "medium": 1.0,
+        "high": 1.5
+      },
+      "role_profiles": {
+        "lowrise": {
+          "residential_floor_share": 0.9,
+          "resident_presence": [
+            0.4,
+            0.95,
+            0.8
+          ],
+          "employment_presence": [
+            0.9,
+            0.1,
+            0.15
+          ]
+        },
+        "fine": {
+          "residential_floor_share": 0.75,
+          "resident_presence": [
+            0.45,
+            0.9,
+            0.8
+          ],
+          "employment_presence": [
+            0.95,
+            0.2,
+            0.35
+          ]
+        },
+        "midrise": {
+          "residential_floor_share": 0.8,
+          "resident_presence": [
+            0.4,
+            0.95,
+            0.8
+          ],
+          "employment_presence": [
+            0.95,
+            0.15,
+            0.2
+          ]
+        },
+        "towers": {
+          "residential_floor_share": 0.65,
+          "resident_presence": [
+            0.4,
+            0.95,
+            0.8
+          ],
+          "employment_presence": [
+            0.95,
+            0.15,
+            0.2
+          ]
+        },
+        "mixed": {
+          "residential_floor_share": 0.45,
+          "resident_presence": [
+            0.5,
+            0.9,
+            0.8
+          ],
+          "employment_presence": [
+            0.95,
+            0.45,
+            0.65
+          ]
+        },
+        "core": {
+          "residential_floor_share": 0.15,
+          "resident_presence": [
+            0.45,
+            0.9,
+            0.75
+          ],
+          "employment_presence": [
+            0.95,
+            0.25,
+            0.35
+          ]
+        },
+        "secondary": {
+          "residential_floor_share": 0.2,
+          "resident_presence": [
+            0.45,
+            0.9,
+            0.75
+          ],
+          "employment_presence": [
+            0.95,
+            0.25,
+            0.4
+          ]
+        },
+        "campus": {
+          "residential_floor_share": 0.25,
+          "resident_presence": [
+            0.45,
+            0.9,
+            0.7
+          ],
+          "employment_presence": [
+            0.9,
+            0.3,
+            0.2
+          ]
+        },
+        "employment": {
+          "residential_floor_share": 0.05,
+          "resident_presence": [
+            0.4,
+            0.9,
+            0.75
+          ],
+          "employment_presence": [
+            0.95,
+            0.1,
+            0.15
+          ]
+        }
+      }
+    },
+    "cell_count": 1600,
+    "summary": {
+      "weekday_day": {
+        "present_population": 175816.62778627579,
+        "operator_ues": 52744.988335882736,
+        "active_ues": 6338.821023354109,
+        "demand_mbps": 12677.642046708217,
+        "outdoor_network_active_ues": 2236.9610831179016,
+        "outdoor_network_demand_mbps": 4473.922166235803,
+        "pending_indoor_active_ues": 4101.859940236207,
+        "pending_indoor_demand_mbps": 8203.719880472414
+      },
+      "weekday_evening": {
+        "present_population": 79469.30516327191,
+        "operator_ues": 23840.791548981575,
+        "active_ues": 3593.898311442366,
+        "demand_mbps": 7187.796622884732,
+        "outdoor_network_active_ues": 1294.1855491563038,
+        "outdoor_network_demand_mbps": 2588.3710983126075,
+        "pending_indoor_active_ues": 2299.712762286062,
+        "pending_indoor_demand_mbps": 4599.425524572124
+      },
+      "weekend": {
+        "present_population": 87594.69132346292,
+        "operator_ues": 26278.407397038874,
+        "active_ues": 3700.6430949201767,
+        "demand_mbps": 7401.2861898403535,
+        "outdoor_network_active_ues": 1342.1682117806708,
+        "outdoor_network_demand_mbps": 2684.3364235613417,
+        "pending_indoor_active_ues": 2358.474883139506,
+        "pending_indoor_demand_mbps": 4716.949766279012
+      }
+    },
+    "ue_positions_generated": false,
+    "spatial_semantics": "Cell centers are demand aggregation/nearest-site planning probes, may lie indoors; NOT physical RX positions or simultaneous scheduled UEs."
+  },
+  "demand_report": "ue-demand.json"
+}

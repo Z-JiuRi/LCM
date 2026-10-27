@@ -1,0 +1,168 @@
+[
+  {
+    "id": "test-4buildings",
+    "title": "四建筑接缝测试",
+    "extent_m": [
+      -40,
+      -25,
+      40,
+      25
+    ],
+    "instance_count": 4,
+    "asset_count": 4,
+    "source_count": 0,
+    "data_url": "/scenes/verified-street.json",
+    "kind": "verified",
+    "status": "已有小规模RT/CSI测试结果"
+  },
+  {
+    "id": "city-1km",
+    "title": "一公里紧凑混合城区",
+    "extent_m": [
+      0,
+      0,
+      1000,
+      1000
+    ],
+    "instance_count": 665,
+    "asset_count": 435,
+    "source_count": 30,
+    "data_url": "/scenes/city-1km-environment.json",
+    "kind": "city",
+    "resource_kind": "environment-enhanced",
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境＋需求驱动BS规划",
+        "data_url": "/scenes/city-1km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-1km-baseline.json"
+      }
+    ],
+    "ue_sampling": {
+      "count": 29726,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-1km-ue.f32",
+      "format": "little-endian-float32-xyz",
+      "source_scene_sha256": "e742cfd38883645df98ad8656f06fa467d7b8afa6bd74e2b96757901848f9f75",
+      "positions_sha256": "3aebe15f44fcba37d023236f58ae458af072aeae5e1673482324b7b10df6bcc2",
+      "generator": "scripts/city_geometry.py:build_ue_grid",
+      "grid_stats": {
+        "grid_spacing_m": 5.0,
+        "grid_nodes_total": 40000,
+        "ue_candidates": 29726,
+        "building_clearance_m": 2.0,
+        "vegetation_clearance_m": 1.0,
+        "ue_height_m": 1.5
+      },
+      "status": "Candidate sounding positions only; no channels or serving-sector assignment computed."
+    }
+  },
+  {
+    "id": "city-2km",
+    "title": "两公里大学与商务城区",
+    "extent_m": [
+      0,
+      0,
+      2000,
+      2000
+    ],
+    "instance_count": 2306,
+    "asset_count": 890,
+    "source_count": 32,
+    "data_url": "/scenes/city-2km-environment.json",
+    "kind": "city",
+    "resource_kind": "environment-enhanced",
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境＋需求驱动BS规划",
+        "data_url": "/scenes/city-2km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-2km-baseline.json"
+      }
+    ],
+    "ue_sampling": {
+      "count": 114688,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-2km-ue.f32",
+      "format": "little-endian-float32-xyz",
+      "source_scene_sha256": "d3fed7d1be734a8bff67f84c68912a2bc960ff4897691fb66e863ba204350e90",
+      "positions_sha256": "708da2e394fdccb89785beb1574be59ff3d99c536d2c8683df9a5c23e1d37914",
+      "generator": "scripts/city_geometry.py:build_ue_grid",
+      "grid_stats": {
+        "grid_spacing_m": 5.0,
+        "grid_nodes_total": 160000,
+        "ue_candidates": 114688,
+        "building_clearance_m": 2.0,
+        "vegetation_clearance_m": 1.0,
+        "ue_height_m": 1.5
+      },
+      "status": "Candidate sounding positions only; no channels or serving-sector assignment computed."
+    }
+  },
+  {
+    "id": "city-4km",
+    "title": "四公里完整混合城区",
+    "extent_m": [
+      0,
+      0,
+      4000,
+      4000
+    ],
+    "instance_count": 13838,
+    "asset_count": 1317,
+    "source_count": 36,
+    "data_url": "/scenes/city-4km-environment.json",
+    "kind": "city",
+    "resource_kind": "environment-enhanced",
+    "status": "500m参考 · 区域需求驱动BS规划；RF未验证",
+    "variants": [
+      {
+        "id": "environment",
+        "title": "环境＋需求驱动BS规划",
+        "data_url": "/scenes/city-4km-environment.json"
+      },
+      {
+        "id": "baseline",
+        "title": "正式建筑基线",
+        "data_url": "/scenes/city-4km-baseline.json"
+      }
+    ],
+    "ue_sampling": {
+      "count": 449988,
+      "spacing_m": 5.0,
+      "ue_height_m": 1.5,
+      "building_clearance_m": 2.0,
+      "vegetation_clearance_m": 1.0,
+      "positions_url": "/scenes/city-4km-ue.f32",
+      "format": "little-endian-float32-xyz",
+      "source_scene_sha256": "367a26cc0c583cb641c450a21de5b858a12db59139452e3db19e8d31f435fe1c",
+      "positions_sha256": "1c24d3b22a67394455908bc9e6b39e28d67055281417d87e5732b356fa0293cb",
+      "generator": "scripts/city_geometry.py:build_ue_grid",
+      "grid_stats": {
+        "grid_spacing_m": 5.0,
+        "grid_nodes_total": 640000,
+        "ue_candidates": 449988,
+        "building_clearance_m": 2.0,
+        "vegetation_clearance_m": 1.0,
+        "ue_height_m": 1.5
+      },
+      "status": "Candidate sounding positions only; no channels or serving-sector assignment computed."
+    }
+  }
+]

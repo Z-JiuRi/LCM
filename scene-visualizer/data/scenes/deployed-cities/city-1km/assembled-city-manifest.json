@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-26",
+  "seed": 26102601,
+  "units": "m",
+  "extent_m": [
+    0,
+    0,
+    1000,
+    1000
+  ],
+  "coordinate_system": "local Cartesian; X east, Y north, Z up",
+  "status": "Environment city with synthetic land-use-demand BS plan; no RF coverage/capacity validation or new channels.",
+  "reference": "../README.md; original 4 km city retained unchanged",
+  "layout": "Independent metric road/park/parcel design; source buildings are not scaled.",
+  "transform": "world_xyz = Rz(rotation_z_deg) @ asset_local_xyz + position_m; no scaling",
+  "source_snapshot_date": "2026-10-25",
+  "source_license_status": "Original terms apply; full reuse/redistribution audit pending.",
+  "synthetic_components": [
+    "roads",
+    "parks",
+    "ground",
+    "parcels",
+    "instance placement"
+  ],
+  "excluded_components": [
+    "source terrain",
+    "source materials",
+    "TX/RX",
+    "channels"
+  ],
+  "asset_count": 435,
+  "instance_count": 665,
+  "source_usage": {
+    "city_1_losangeles_3p5": 58,
+    "city_18_denver_3p5": 65,
+    "city_38_toronto_3p5": 19,
+    "city_11_santaclara_3p5": 19,
+    "city_21_taito_city_3p5": 44,
+    "city_14_charlotte_3p5": 10,
+    "city_41_kyoto_3p5": 12,
+    "city_6_miami_3p5": 12,
+    "city_8_dallas_3p5": 12,
+    "city_0_newyork_3p5": 39,
+    "city_43_cape_town_3p5": 15,
+    "city_55_madrid_3p5": 41,
+    "city_100_bogotá_3p5": 43,
+    "city_27_rio_de_janeiro_3p5": 31,
+    "city_28_mumbai_3p5": 31,
+    "city_24_cairo_3p5": 13,
+    "city_98_guangzhou_3p5": 32,
+    "city_10_austin_3p5": 62,
+    "city_2_chicago_3p5": 3,
+    "city_50_edinburgh_3p5": 6,
+    "city_56_montreal_3p5": 3,
+    "city_15_indianapolis_3p5": 28,
+    "city_69_warszawa_3p5": 31,
+    "city_53_sankt-peterburg_3p5": 8,
+    "city_17_seattle_3p5": 2,
+    "city_102_huanggang_3p5": 5,
+    "city_99_shanghai_3p5": 6,
+    "city_30_singapore_3p5": 2,
+    "city_92_sãopaulo_3p5": 2,
+    "boston5g_3p5": 11
+  },
+  "placement_counts": {
+    "source-neighborhood": 404,
+    "recomposed-infill": 250,
+    "preserved-source-group": 11
+  },
+  "rejected_source_objects": {
+    "size_gate": 146,
+    "duplicate_source_object": 1449,
+    "non_single_valid_footprint": 18
+  },
+  "preserved_groups": [
+    {
+      "source": "boston5g_3p5",
+      "source_center_m": [
+        154.31565856933594,
+        37.867835998535156
+      ],
+      "target_center_m": [
+        570,
+        550
+      ],
+      "rotation_z_deg": -12,
+      "overlapping_source_objects_excluded": [
+        52,
+        20,
+        41,
+        16,
+        25,
+        50,
+        65,
+        34,
+        55,
+        35,
+        38
+      ],
+      "selection_note": "Whole-building compact subset within target window [400,395,750,705] m; not the full Boston group.",
+      "retained_object_count": 11
+    }
+  ],
+  "validation": {
+    "building_overlap_pairs": 0,
+    "outside_parcel_buildings": 0,
+    "buildings_intersecting_road_carriageways": 0,
+    "buildings_intersecting_parks": 0,
+    "building_footprint_area_km2": 0.1678,
+    "road_carriageway_union_km2": 0.1808,
+    "large_park_area_excluding_carriageways_km2": 0.0806,
+    "role_areas": {
+      "lowrise": {
+        "parcel_area_km2": 0.04746004509836687,
+        "building_area_km2": 0.011258701989508802,
+        "parcels": 5
+      },
+      "mixed": {
+        "parcel_area_km2": 0.09904087112553545,
+        "building_area_km2": 0.024027803568907498,
+        "parcels": 11
+      },
+      "midrise": {
+        "parcel_area_km2": 0.2522773367376998,
+        "building_area_km2": 0.055730108472803276,
+        "parcels": 27
+      },
+      "fine": {
+        "parcel_area_km2": 0.08599270853342068,
+        "building_area_km2": 0.023968897884135493,
+        "parcels": 12
+      },
+      "towers": {
+        "parcel_area_km2": 0.07517947179869566,
+        "building_area_km2": 0.01775314780957736,
+        "parcels": 5
+      },
+      "core": {
+        "parcel_area_km2": 0.07653425326511423,
+        "building_area_km2": 0.03504532264877247,
+        "parcels": 1
+      }
+    },
+    "scope": "2D complete-footprint placement and overlap checks only; no RT, watertight mesh, road routing or electromagnetic validation.",
+    "outside_city_buildings": 0
+  },
+  "resource_kind": "environment-enhanced",
+  "integration_date": "2026-10-25T23:29:42.549256+00:00",
+  "preview_snapshot_sha256": "5bc8392d2939a12635bd2a0843f2d2a89e3fd5dc4d4ff2567dc3529410e3fb95",
+  "official_matched_asset_count": 435,
+  "official_material_count": 30,
+  "official_match_max_vertex_error_m": 8.178115574545779e-05,
+  "official_match_tolerance_m": 0.002,
+  "channel_status": "Not recomputed. Earlier 1km trial used preview/assumed materials and is not attached to this resource version.",
+  "environment_seed": 261026103,
+  "baseline_sha256": "4995caef254971182264260e83a29ce450d2b21a7552b12d43f706107b9bdaef",
+  "environment_summary": {
+    "source_terrain_count": 36,
+    "source_terrain_all_flat": true,
+    "elevation_range_m": [
+      0,
+      0
+    ],
+    "source_vegetation_candidates": 19,
+    "source_vegetation_retained": 5,
+    "source_vegetation_rejected": 14,
+    "synthetic_tree_count": 155,
+    "terrain_triangles": 2973,
+    "terrain_role_area_m2": {
+      "road": 180815.6518971918,
+      "park": 80566.56918431395,
+      "other": 738617.7789184942
+    },
+    "buildings_xy_z_unchanged": true,
+    "vegetation_rt_enabled": false,
+    "limitations": [
+      "No elevation relief exists in downloaded terrain; do not invent source hills",
+      "Boston vegetation objects are simplified 25m volumes with concrete source binding",
+      "Synthetic trees are visual/design geometry; foliage RT model not assigned",
+      "Ground material placement is synthetic design; asphalt source is labelled at 1GHz",
+      "No new channel calculation; original RT trial not attached"
+    ]
+  },
+  "radio_deployment_summary": {
+    "city_size_m": 1000,
+    "strategy": "land-use-demand-500m",
+    "nominal_isd_m": 500,
+    "site_count": 6,
+    "sector_count": 18,
+    "installation_height_agl_m": 25,
+    "nearest_neighbor_m": {
+      "min": 235.8495283014151,
+      "median": 241.41509894784957,
+      "max": 429.57100693598954
+    },
+    "max_relocation_m": 90.66007941756945,
+    "candidate_count": 803,
+    "coverage_validated": false,
+    "capacity_validated": false,
+    "full_city_demand_served": false,
+    "planning_status": "outdoor-proxy-satisfied-indoor-pending",
+    "demand_summary": {
+      "weekday_day": {
+        "present_population": 36354.97662618714,
+        "operator_ues": 10906.492987856142,
+        "active_ues": 1311.122214835717,
+        "demand_mbps": 2622.244429671434,
+        "outdoor_network_active_ues": 463.46173496381596,
+        "outdoor_network_demand_mbps": 926.9234699276319,
+        "pending_indoor_active_ues": 847.660479871901,
+        "pending_indoor_demand_mbps": 1695.320959743802
+      },
+      "weekday_evening": {
+        "present_population": 17345.644485374418,
+        "operator_ues": 5203.693345612325,
+        "active_ues": 784.9221694490641,
+        "demand_mbps": 1569.8443388981282,
+        "outdoor_network_active_ues": 283.6463017047701,
+        "outdoor_network_demand_mbps": 567.2926034095402,
+        "pending_indoor_active_ues": 501.275867744294,
+        "pending_indoor_demand_mbps": 1002.551735488588
+      },
+      "weekend": {
+        "present_population": 19640.347805871297,
+        "operator_ues": 5892.104341761389,
+        "active_ues": 830.1317159182722,
+        "demand_mbps": 1660.2634318365444,
+        "outdoor_network_active_ues": 301.89316806003166,
+        "outdoor_network_demand_mbps": 603.7863361200633,
+        "pending_indoor_active_ues": 528.2385478582405,
+        "pending_indoor_demand_mbps": 1056.477095716481
+      }
+    },
+    "planning_proxy": {
+      "distance_target_m": 350.0,
+      "site_budget_mbps": 600,
+      "minimum_neighbor_floor_m": 150.0,
+      "spatial_max_distance_m": 343.2845030000626,
+      "spatial_p95_distance_m": 288.301922595187,
+      "max_assigned_demand_mbps": 362.4225199202924,
+      "constraints_satisfied": true,
+      "unresolved": [],
+      "redundant_sites_removed": 1,
+      "meaning": "Euclidean distance to 50m cell centers and assumed site budget under nearest-site association. NOT RF coverage/capacity. Only assumed outdoor-network share is constrained; pending indoor demand NOT served or validated.",
+      "constraint_scope": "outdoor-network assumed traffic only, not full city demand"
+    },
+    "fixed_layout_sensitivity": {
+      "low": {
+        "demand_multiplier": 0.5,
+        "max_assigned_demand_mbps": 181.2112599601462,
+        "sites_above_assumed_budget": 0,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "medium": {
+        "demand_multiplier": 1.0,
+        "max_assigned_demand_mbps": 362.4225199202924,
+        "sites_above_assumed_budget": 0,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "high": {
+        "demand_multiplier": 1.5,
+        "max_assigned_demand_mbps": 543.6337798804386,
+        "sites_above_assumed_budget": 0,
+        "note": "Fixed-layout demand sensitivity, not a separate optimized deployment or RF validation."
+      },
+      "all_building_traffic_to_outdoor": {
+        "max_assigned_demand_mbps": 1029.862624848817,
+        "sites_above_assumed_budget": 3,
+        "note": "Same layout with 100% building traffic assigned to outdoor BS; no indoor offload assumed; not a separate optimized plan."
+      }
+    },
+    "limitations": [
+      "All UE/population/traffic values are synthetic expectations, not measured counts; land uses are assigned roles.",
+      "500m is a soft initialization scale, not mandatory spacing or a standard requirement.",
+      "No UE/RX positions, trajectories, scheduling, power, antenna pattern, SINR, throughput or new RT computed.",
+      "600Mbps/site is an assumed planning budget, NOT a predicted radio capacity.",
+      "Euclidean nearest-site association ignores blockage/indoor penetration/interference; indoor provision remains unresolved.",
+      "25m poles need not be above nearby roofs; physical permissions/power/backhaul unvalidated.",
+      "No external neighbor sites or boundary interference; high demand may exceed the fixed-layout budget."
+    ]
+  }
+}
